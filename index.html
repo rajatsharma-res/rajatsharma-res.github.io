@@ -604,6 +604,51 @@
 					}
 				});
 			});
+
+			// Research grid and publication filtering
+			document.addEventListener('DOMContentLoaded', () => {
+				const researchCards = document.querySelectorAll('.research-card');
+				const publicationItems = document.querySelectorAll('.publication-item');
+				const resetButton = document.getElementById('reset-filter');
+
+				// Function to filter publications based on category
+				const filterByCategory = (category) => {
+					publicationItems.forEach(item => {
+						if (item.getAttribute('data-category') === category) {
+							item.style.display = 'block';
+							item.style.opacity = '1';
+							item.style.transform = 'translateY(0)';
+						} else {
+							item.style.display = 'none';
+							item.style.opacity = '0';
+							item.style.transform = 'translateY(20px)';
+						}
+					});
+				};
+
+				// Show all publications by default
+				publicationItems.forEach(item => {
+					item.style.display = 'block';
+					item.style.opacity = '1';
+				});
+
+				// Add click event listeners to research cards
+				researchCards.forEach(card => {
+					card.addEventListener('click', () => {
+						const category = card.getAttribute('data-category');
+						filterByCategory(category);
+					});
+				});
+
+				// Reset to show all publications
+				resetButton.addEventListener('click', () => {
+					publicationItems.forEach(item => {
+						item.style.display = 'block';
+						item.style.opacity = '1';
+						item.style.transform = 'translateY(0)';
+					});
+				});
+			});
 		</script>
 	</body>
 </html>
