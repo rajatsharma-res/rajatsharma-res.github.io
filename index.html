@@ -5,7 +5,6 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        
 		<style>
 			:root {
 				--bg: #f0f2f5; /* Cool light gray */
@@ -289,39 +288,135 @@
 				background: var(--secondary);
 			}
 
+			/* Mobile-specific styles */
 			@media (max-width: 768px) {
-				.hero {
+				.header {
 					flex-direction: column;
-					text-align: center;
-					padding: 4rem 0;
+					align-items: flex-start;
+					padding: 1rem 0;
 				}
 
-				.profile-img {
-					margin-top: 2rem;
+				.header h1 {
+					font-size: 1.5rem;
+					margin-bottom: 1rem;
 				}
 
 				.nav {
-					display: none;
+					display: none; /* Hide the nav by default on mobile */
+					flex-direction: column;
+					gap: 1rem;
+					width: 100%;
 				}
-			}
 
-			/* Animation styles */
-			.fade-in {
-				opacity: 0;
-				transform: translateY(20px);
-				transition: opacity 0.6s ease, transform 0.6s ease;
-			}
+				.nav.active {
+					display: flex; /* Show the nav when active */
+				}
 
-			.fade-in.visible {
-				opacity: 1;
-				transform: translateY(0);
+				.nav a {
+					padding: 0.5rem;
+					font-size: 1rem;
+				}
+
+				/* Hamburger menu */
+				.menu-toggle {
+					display: block; /* Show on mobile */
+					font-size: 1.5rem;
+					cursor: pointer;
+					position: absolute;
+					top: 1rem;
+					right: 1rem;
+				}
+
+				/* Hero section adjustments */
+				.hero {
+					flex-direction: column;
+					text-align: center;
+					padding: 2rem 0;
+				}
+
+				.hero-content {
+					max-width: 100%;
+				}
+
+				.hero h2 {
+					font-size: 2rem;
+				}
+
+				.hero p {
+					font-size: 1rem;
+					padding-left: 0;
+				}
+
+				.hero p::before {
+					display: none; /* Remove the vertical line */
+				}
+
+				.profile-img {
+					width: 200px;
+					height: 200px;
+					margin-top: 1rem;
+				}
+
+				/* Research grid adjustments */
+				.research-grid {
+					grid-template-columns: 1fr; /* Single column for mobile */
+					gap: 1rem;
+				}
+
+				.research-card {
+					padding: 1rem;
+				}
+
+				.research-card h3 {
+					font-size: 1.2rem;
+				}
+
+				.research-card p {
+					font-size: 1rem;
+				}
+
+				/* Publications section adjustments */
+				.publication-item {
+					padding: 1rem;
+				}
+
+				.publication-item h4 {
+					font-size: 1.2rem;
+				}
+
+				.publication-item p {
+					font-size: 1rem;
+				}
+
+				/* Footer adjustments */
+				.footer {
+					flex-direction: column;
+					text-align: center;
+					padding: 2rem 0;
+				}
+
+				.footer h3 {
+					font-size: 1.2rem;
+				}
+
+				.footer p {
+					font-size: 1rem;
+				}
+
+				.footer button {
+					width: 100%;
+					margin-top: 1rem;
+				}
 			}
 		</style>
 	</head>
 	<body>
 		<div class="container">
 			<header class="header">
-				<h1 style="font-size: 25px;">Rajat Sharma</h1>
+				<h1>Rajat Sharma</h1>
+				<div class="menu-toggle" onclick="toggleMenu()">
+					<i class="fas fa-bars"></i>
+				</div>
 				<nav class="nav">
 					<a href="#research">Research</a>
 					<a href="#publications">Publications</a>
@@ -332,7 +427,7 @@
 
 			<section class="hero">
 				<div class="hero-content">
-					<h2 style="font-size: 36px;">Doctoral Researcher (PhD)</h2>
+					<h2>Doctoral Researcher (PhD)</h2>
 					<p>
 						<a>Civil Engineering</a><br>
 						<a href="https://clear-doc.univ-gustave-eiffel.fr/about/a-cofund-programme" target="_blank" style="text-decoration: none; color: inherit;">Marie Skłodowska Curie - CLEARDoc Fellow</a><br>
@@ -409,6 +504,12 @@
 		</div>
 
 		<script>
+			// Toggle mobile menu
+			function toggleMenu() {
+				const nav = document.querySelector('.nav');
+				nav.classList.toggle('active');
+			}
+
 			// Intersection Observer for fade-in animation
 			const animateOnScroll = () => {
 				const observer = new IntersectionObserver((entries) => {
