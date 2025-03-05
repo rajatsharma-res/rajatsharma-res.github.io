@@ -245,9 +245,96 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Mobile-specific styles */
         @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 0;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
             .nav {
-                display: none;
+                display: none; /* Hide the nav by default on mobile */
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .nav.active {
+                display: flex; /* Show the nav when active */
+            }
+
+            .nav a {
+                padding: 0.5rem;
+                font-size: 1rem;
+            }
+
+            /* Hamburger menu */
+            .menu-toggle {
+                display: block; /* Show on mobile */
+                font-size: 1.5rem;
+                cursor: pointer;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+
+            /* Projects intro */
+            .projects-intro h2 {
+                font-size: 2.5rem;
+            }
+
+            .projects-intro p {
+                font-size: 1rem;
+            }
+
+            /* Projects grid */
+            .projects-grid {
+                grid-template-columns: 1fr; /* Single column for mobile */
+                gap: 1rem;
+            }
+
+            .project-card {
+                padding: 1rem;
+            }
+
+            .project-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .project-card p {
+                font-size: 0.9rem;
+            }
+
+            .project-card .links {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+
+            /* Footer */
+            footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 0;
+            }
+
+            footer h3 {
+                font-size: 1.2rem;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+            }
+
+            footer button {
+                width: 100%;
+                margin-top: 1rem;
             }
         }
     </style>
@@ -258,6 +345,9 @@
 
     <header class="header">
         <h1 style="font-size: 25px;">Rajat Sharma</h1>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
         <nav class="nav">
             <a href="index.html">Home</a>
             <a href="index.html#research">Research</a>
@@ -277,7 +367,7 @@
         <div class="project-card">
             <img src="images/1726324848647.jfif" alt="DUDE Initiative">
             <h3>DUDE Initiative</h3>
-            <p class="truncated-text"> EU TalentOn Competition! 🚀 Proud to have represented The 𝗗𝗨𝗗𝗘 𝗜𝗻𝗶𝘁𝗶𝗮𝘁𝗶𝘃𝗲 (c𝗶𝘁𝗶𝘇𝗲𝗻-D𝗿𝗶𝘃𝗲𝗻, U𝗽𝘀𝗰𝗮𝗹𝗮𝗯𝗹𝗲, 𝗮𝗻𝗱 D𝗶𝗴𝗶𝘁𝗮𝗹 E𝗰𝗼𝗰𝗶𝘁𝗶𝗲𝘀) alongside an amazing team. 🌍💡 
+            <p class="truncated-text"> EU TalentOn Competition! 🚀 Proud to have represented The 𝗗𝘂𝗱𝗲 𝗜𝗻𝗶𝘁𝗶𝗮𝘁𝗶𝘃𝗲 (c𝗶𝘁𝗶𝘇𝗲𝗻-D𝗿𝗶𝘃𝗲𝗻, U𝗽𝘀𝗰𝗮𝗹𝗮𝗯𝗹𝗲, 𝗮𝗻𝗱 D𝗶𝗴𝗶𝘁𝗮𝗹 E𝗰𝗼𝗰𝗶𝘁𝗶𝗲𝘀) alongside an amazing team. 🌍💡 
 .</p>
             <div class="links">
                 <a href="#" onclick="openPopup('dude')">Read More <i class="fas fa-arrow-right"></i></a>
@@ -337,6 +427,12 @@
 </div>
 
 <script>
+    // Toggle mobile menu
+    function toggleMenu() {
+        const nav = document.querySelector('.nav');
+        nav.classList.toggle('active');
+    }
+
     // Popup functionality
     function openPopup(project) {
         const modal = document.getElementById("popup-modal");
@@ -359,9 +455,6 @@
                 content = `Sharing the Journey of my InCITIES Program! Reflecting on this incredible journey fills me with excitement! Alongside a truly inspiring cohort, we delved deep into crucial topics such as sustainable mobility, urban planning, air quality, and transportation infrastructure resilience. <br><br>
                 One major highlight for me was our hands-on approach to tackling real-world issues, particularly in enhancing sustainable mobility around St. Gorazde Elementary School and Kindergarten. Collaborating with Žilina's esteemed architecture bureau, we not only collected valuable data but also brainstormed innovative approaches to address the challenges at hand. <br><br>
                 I am profoundly grateful for the guidance and mentorship provided by Yannick Cornet, Tibor Petrov, Christina Georgouli, Lienka, Andry Rico RAZAKAMANANTSOA, Agnes JULLIEN, Virginie Etienne and GERS - Gustave Eiffel University, Laboratoire GIE (Univ Eiffel), Université Gustave Eiffel. Their support has been instrumental in shaping our journey.`;
-                break;
-                
-            
                 break;
         }
 
