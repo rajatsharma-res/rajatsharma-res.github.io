@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Projects | Rajat Sharma</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #f0f2f5;
+            --surface: #e8ecef;
+            --primary: #2a4066;
+            --secondary: #1e8759;
+            --accent: #d4a017;
+            --text: #1a1c20;
+            --shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            background: var(--bg);
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .projects-intro {
+            text-align: center;
+            margin: 4rem 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .projects-intro h2 {
+            font-size: 3.5rem;
+            color: var(--primary);
+        }
+
+        .projects-intro p {
+            font-size: 1.2rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--text);
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .project-card a {
+            color: var(--primary);
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .project-card a:hover {
+            color: var(--secondary);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--primary);
+            margin-top: 4rem;
+        }
+
+        footer h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        footer p, footer a {
+            color: var(--text);
+            opacity: 0.8;
+            text-decoration: none;
+        }
+
+        footer button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        footer button:hover {
+            background: var(--secondary);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header class="header">
+        <h1 style="font-size: 25px;">Rajat Sharma</h1>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="index.html#research">Research</a>
+            <a href="index.html#publications">Publications</a>
+            <a href="projects.html">Projects</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="projects-intro">
+        <h2>Projects</h2>
+        <p>Explore my key research projects contributing to air quality monitoring, environmental modeling, and sustainable cities.</p>
+    </section>
+
+    <section class="projects-grid">
+        <div class="project-card">
+            <img src="images/dude_project.jpg" alt="DUDE Initiative">
+            <h3>DUDE Initiative</h3>
+            <p>A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior.</p>
+            <a href="#" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="project-card">
+            <img src="images/madagascar_project.jpg" alt="Madagascar Emission Inventory">
+            <h3>Emission Inventory for Madagascar</h3>
+            <p>First regional emission inventory using field surveys, satellite data, and community vehicle counts.</p>
+            <a href="#" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="project-card">
+            <img src="images/sensor_calibration.jpg" alt="Sensor Calibration">
+            <h3>Low-Cost Sensor Calibration</h3>
+            <p>Developing AI-powered calibration models to enhance accuracy of low-cost air quality sensors.</p>
+            <a href="#" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <h3>Connect</h3>
+            <p>rajat.sharma@univ-eiffel.fr</p>
+            <button>Download CV</button>
+        </div>
+        <div>
+            <h3>Network</h3>
+            <a href="https://scholar.google.com/citations?user=OKQOyz4AAAAJ&hl=en" target="_blank">Google Scholar</a><br>
+            <a href="https://www.linkedin.com/in/rajat-sharma-89421718b/" target="_blank">LinkedIn</a>
+            <p>Nantes campus, Allée des ponts et haussées - CS 5004, F-44344 Bouguenais Cedex, France</p>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>

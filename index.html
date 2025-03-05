@@ -1,0 +1,481 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Rajat Sharma | Doctoral Researcher (PhD)</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        
+		<style>
+			:root {
+				--bg: #f0f2f5; /* Cool light gray */
+				--surface: #e8ecef; /* Light, neutral gray-blue as a texture base */
+				--primary: #2a4066; /* Deep blue */
+				--secondary: #1e8759; /* Forest green */
+				--accent: #d4a017; /* Warm gold */
+				--text: #1a1c20; /* Near-black */
+				--shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+				--transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+			}
+			.surface-element {
+				background-color: var(--surface);
+				box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05); /* Inner shadow for depth */
+				position: relative;
+			}
+			.surface-element::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: url('path/to/paper-texture.jpg');
+				opacity: 0.1; /* Faint texture overlay */
+				pointer-events: none;
+			}
+
+			@keyframes fadeIn {
+				from { opacity: 0; transform: translateY(20px); }
+				to { opacity: 1; transform: translateY(0); }
+			}
+
+			@keyframes float {
+				0%, 100% { transform: translateY(0); }
+				50% { transform: translateY(-10px); }
+			}
+
+			@keyframes gradientBackground {
+				0% { background-position: 0% 50%; }
+				50% { background-position: 100% 50%; }
+				100% { background-position: 0% 50%; }
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: 'Inter', sans-serif;
+			}
+
+			body {
+				background: var(--bg);
+				color: var(--text);
+				line-height: 1.6;
+				overflow-x: hidden;
+			}
+
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 2rem;
+			}
+
+			.header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 2rem 0;
+				position: sticky;
+				top: 0;
+				background: var(--bg);
+				z-index: 1000;
+			}
+
+			.nav {
+				display: flex;
+				gap: 2rem;
+			}
+
+			.nav a {
+				color: var(--text);
+				text-decoration: none;
+				position: relative;
+				padding: 0.5rem 0;
+				transition: var(--transition);
+			}
+
+			.nav a::after {
+				content: '';
+				position: absolute;
+				width: 0;
+				height: 2px; /* Adjusted for a thinner underline */
+				bottom: 0;
+				left: 0;
+				background: var(--primary);
+				transition: var(--transition);
+			}
+
+			.nav a:hover::after {
+				width: 100%;
+			}
+
+			.hero {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 6rem 5%;
+				position: relative;
+				overflow: hidden;
+				background: linear-gradient(135deg, rgba(72, 61, 139, 0.2), rgba(0, 206, 158, 0.2));
+				background-size: 200% 200%;
+				animation: gradientBackground 15s ease-in-out infinite alternate;
+				border-radius: 16px;
+			}
+
+			.hero-content {
+				max-width: 600px;
+				animation: fadeIn 1s ease-in-out;
+			}
+
+			.hero h1 {
+				font-size: 3.5rem;
+				margin-bottom: 1rem;
+				color: var(--primary);
+			}
+
+			.hero p {
+				font-size: 1.2rem;
+				color: var(--text);
+				margin-bottom: 2rem;
+				position: relative;
+				padding-left: 20px;
+			}
+
+			.hero p::before {
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 2px;
+				height: 100%;
+				background-color: #000;
+				margin-right: 10px;
+			}
+
+			.hero button {
+				background: var(--primary);
+				border: none;
+				color: white;
+				padding: 0.75rem 1.75rem;
+				border-radius: 4px;
+				cursor: pointer;
+				transition: var(--transition);
+				font-weight: 500;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			}
+
+			.hero button:hover {
+				background: var(--secondary);
+				transform: scale(1.02);
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+			}
+
+			.hero button:active {
+				transform: scale(0.98);
+			}
+
+			.profile-img {
+				width: 300px;
+				height: 300px;
+				border-radius: 50%;
+				object-fit: cover;
+				box-shadow: var(--shadow);
+				animation: float 4s ease-in-out infinite;
+			}
+
+			.research-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				margin: 4rem 0;
+			}
+
+			.research-card {
+				background: var(--surface);
+				padding: 2rem;
+				border-radius: 10px;
+				box-shadow: var(--shadow);
+				transition: var(--transition);
+				text-align: center;
+				cursor: pointer; /* Indicate interactivity */
+			}
+
+			.research-card i {
+				font-size: 2rem;
+				color: var(--primary);
+				margin-bottom: 1rem;
+			}
+
+			.research-card h3 {
+				color: var(--primary);
+				margin-bottom: 1rem;
+			}
+
+			.research-card p {
+				color: var(--text);
+			}
+
+			.research-card:hover {
+				transform: translateY(-10px);
+				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+			}
+
+			.publication-list {
+				list-style: none;
+			}
+
+			.publication-item {
+				background: var(--surface);
+				padding: 2rem;
+				border-radius: 10px;
+				box-shadow: var(--shadow);
+				margin-bottom: 1.5rem;
+				transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+			}
+
+			.publication-item:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+			}
+
+			.publication-item h4 {
+				color: var(--primary);
+				margin-bottom: 1rem;
+			}
+
+			.publication-item p {
+				color: var(--text);
+				margin-bottom: 1rem;
+			}
+
+			.publication-item a {
+				text-decoration: none;
+				color: var(--primary);
+				font-weight: bold;
+			}
+
+			.footer {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 4rem 0;
+				border-top: 1px solid var(--primary);
+			}
+
+			.footer h3 {
+				color: var(--primary);
+				margin-bottom: 1rem;
+			}
+
+			.footer p {
+				color: var(--text);
+				margin-bottom: 1rem;
+			}
+
+			.footer button {
+				background: var(--primary);
+				border: none;
+				color: white;
+				padding: 0.8rem 2rem;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: var(--transition);
+			}
+
+			.footer button:hover {
+				background: var(--secondary);
+			}
+
+			@media (max-width: 768px) {
+				.hero {
+					flex-direction: column;
+					text-align: center;
+					padding: 4rem 0;
+				}
+
+				.profile-img {
+					margin-top: 2rem;
+				}
+
+				.nav {
+					display: none;
+				}
+			}
+
+			/* Animation styles */
+			.fade-in {
+				opacity: 0;
+				transform: translateY(20px);
+				transition: opacity 0.6s ease, transform 0.6s ease;
+			}
+
+			.fade-in.visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<header class="header">
+				<h1 style="font-size: 25px;">Rajat Sharma</h1>
+				<nav class="nav">
+					<a href="#research">Research</a>
+					<a href="#publications">Publications</a>
+					<a href="projects.html">Projects</a>
+					<a href="#contact">Contact</a>
+				</nav>
+			</header>
+
+			<section class="hero">
+				<div class="hero-content">
+					<h2 style="font-size: 36px;">Doctoral Researcher (PhD)</h2>
+					<p>
+						<a>Civil Engineering</a><br>
+						<a href="https://clear-doc.univ-gustave-eiffel.fr/about/a-cofund-programme" target="_blank" style="text-decoration: none; color: inherit;">Marie Skłodowska Curie - CLEARDoc Fellow</a><br>
+						<a href="https://gie.univ-gustave-eiffel.fr/" target="_blank" style="text-decoration: none; color: inherit;">GERS - (GIE) Geomaterials and Environmental Interaction</a><br>
+						<a href="https://www.univ-gustave-eiffel.fr/" target="_blank" style="text-decoration: none; color: inherit;">University Gustave Eiffel, France</a>
+					</p>
+					<button> <a href="https://scholar.google.com/citations?user=OKQOyz4AAAAJ&hl=en" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: ; color: white; text-decoration: none; border-radius: 5px;">
+    Explore My Work
+</a></button>
+				</div>
+				<img src="images/picme.jpeg" alt="Rajat Sharma" class="profile-img">
+			</section>
+
+			<section id="research" class="research-grid">
+				<div class="research-card" data-category="air-quality">
+					<i class="fas fa-brain"></i>
+					<h3>Air Quality</h3>
+					<p>Monitoring and Modelling</p>
+				</div>
+				<div class="research-card" data-category="low-cost-sensors">
+					<i class="fas fa-atom"></i>
+					<h3>Low Cost Sensors</h3>
+					<p>Next-gen environmental monitoring systems</p>
+				</div>
+				<div class="research-card" data-category="aerosols-exposure">
+					<i class="fas fa-wind"></i>
+					<h3>Aerosols and Exposure</h3>
+					<p>Particulate emissions and behavior in urban environments</p>
+				</div>
+			</section>
+
+			<section id="publications">
+				<h2>Publication List</h2>
+				<button id="reset-filter" style="margin-top: 20px; padding: 10px 20px; background-color: var(--primary); color: white; border: none; border-radius: 5px; cursor: pointer;">
+					Show All Publications
+				</button>
+				<ul class="publication-list">
+					<li class="publication-item" data-category="air-quality">
+						<h4>Analysis of seasonal and spatial distribution of particulate matters and gaseous pollutants around an open cast coal mining area of Odisha, India</h4>
+						<p>Environmental Science and Pollution Research • 2023</p>
+						<a href="https://link.springer.com/article/10.1007/s11356-022-25034-w" target="_blank">View Paper →</a>
+					</li>
+					<li class="publication-item" data-category="aerosols-exposure">
+						<h4>Determinants of quantification of tourism waste in the hilly terrain of Himalayas: A spatial approach</h4>
+						<p>Waste Management • 2023</p>
+						<a href="https://www.sciencedirect.com/science/article/abs/pii/S0956053X23003306" target="_blank">View Paper →</a>
+					</li>
+					<li class="publication-item" data-category="low-cost-sensors">
+						<h4>Spatial and temporal variation of cooking-emitted particles in distinct zones using scanning mobility particle sizer and a network of low-cost sensors</h4>
+						<p>Indoor Environments • 2024</p>
+						<a href="https://www.sciencedirect.com/science/article/pii/S2950362024000055" target="_blank">View Paper →</a>
+					</li>
+					<li class="publication-item" data-category="aerosols-exposure">
+						<h4>Enumerating and Modelling the Seasonal alterations of Surface Urban Heat and Cool Island: A Case Study over Indian Cities</h4>
+						<p>Urban Science • 2023</p>
+						<a href="https://www.mdpi.com/2413-8851/7/2/38" target="_blank">View Paper →</a>
+					</li>
+				</ul>
+			</section>
+
+			<footer class="footer" id="contact">
+				<div>
+					<h3>Connect</h3>
+					<p>rajat.sharma@univ-eiffel.fr</p>
+					<button>Download CV</button>
+				</div>
+				<div>
+					<h3>Network</h3>
+					<a href="https://scholar.google.com/citations?user=OKQOyz4AAAAJ&hl=en" target="_blank">Google Scholar</a>
+					<a href="https://www.linkedin.com/in/rajat-sharma-89421718b/" target="_blank">LinkedIn</a>
+                    <p>Nantes campus<br> Allée des ponts et haussées - CS 5004 <br> F-44344 Bouguenais Cedex • FRANCE<br> univ-gustave-eiffel.fr</p>
+				</div>
+			</footer>
+		</div>
+
+		<script>
+			// Intersection Observer for fade-in animation
+			const animateOnScroll = () => {
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('visible');
+							observer.unobserve(entry.target); // Stop observing after animation
+						}
+					});
+				}, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+				document.querySelectorAll('.research-card, .publication-item').forEach((el) => {
+					el.classList.add('fade-in'); // Add initial styles via CSS
+					observer.observe(el);
+				});
+			};
+
+			// Filter Publications on Click
+			const filterPublications = () => {
+				const researchCards = document.querySelectorAll('.research-card');
+				const publicationItems = document.querySelectorAll('.publication-item');
+				const resetButton = document.getElementById('reset-filter');
+
+				// Function to filter publications based on category
+				const filterByCategory = (category) => {
+					publicationItems.forEach(item => {
+						if (item.getAttribute('data-category') === category) {
+							item.style.display = 'block';
+							item.style.opacity = '1';
+							item.style.transform = 'translateY(0)';
+						} else {
+							item.style.display = 'none';
+							item.style.opacity = '0';
+							item.style.transform = 'translateY(20px)';
+						}
+					});
+				};
+
+				// Show all publications by default
+				publicationItems.forEach(item => {
+					item.style.display = 'block';
+					item.style.opacity = '1';
+				});
+
+				// Add click event listeners to research cards
+				researchCards.forEach(card => {
+					card.addEventListener('click', () => {
+						const category = card.getAttribute('data-category');
+						filterByCategory(category);
+					});
+				});
+
+				// Reset to show all publications
+				resetButton.addEventListener('click', () => {
+					publicationItems.forEach(item => {
+						item.style.display = 'block';
+						item.style.opacity = '1';
+						item.style.transform = 'translateY(0)';
+					});
+				});
+			};
+
+			// Initialize functions
+			document.addEventListener('DOMContentLoaded', () => {
+				animateOnScroll();
+				filterPublications();
+			});
+		</script>
+	</body>
+</html>
