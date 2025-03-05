@@ -183,6 +183,7 @@
 				object-fit: cover;
 				box-shadow: var(--shadow);
 				animation: float 4s ease-in-out infinite;
+				cursor: pointer;
 			}
 
 			.research-grid {
@@ -286,6 +287,52 @@
 
 			.footer button:hover {
 				background: var(--secondary);
+			}
+
+			/* Popup Styles */
+			.about-me-popup {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.7);
+				z-index: 1000;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.popup-content {
+				background: var(--surface);
+				padding: 2rem;
+				border-radius: 10px;
+				max-width: 600px;
+				width: 90%;
+				max-height: 80vh;
+				overflow-y: auto;
+				position: relative;
+				box-shadow: var(--shadow);
+			}
+
+			.close-popup {
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+				font-size: 1.5rem;
+				cursor: pointer;
+				color: var(--primary);
+			}
+
+			.popup-content h3 {
+				color: var(--primary);
+				margin-bottom: 1rem;
+			}
+
+			.popup-content p {
+				color: var(--text);
+				margin-bottom: 1rem;
+				line-height: 1.6;
 			}
 
 			/* Mobile-specific styles */
@@ -435,10 +482,39 @@
 						<a href="https://www.univ-gustave-eiffel.fr/" target="_blank" style="text-decoration: none; color: inherit;">University Gustave Eiffel, France</a>
 					</p>
 					<button> <a href="https://scholar.google.com/citations?user=OKQOyz4AAAAJ&hl=en" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: ; color: white; text-decoration: none; border-radius: 5px;">
-    Explore My Work
-</a></button>
+						Explore My Work
+					</a></button>
 				</div>
 				<img src="images/picme.jpeg" alt="Rajat Sharma" class="profile-img">
+				<!-- Popup HTML -->
+				<div class="about-me-popup">
+					<div class="popup-content">
+						<span class="close-popup">&times;</span>
+						<h3>About Me</h3>
+						<p>
+							<strong>His Background:</strong><br>
+							I hold both a Bachelor's and Master's degree in Civil and Environmental Engineering, specializing in environmental science and technology. Throughout my academic journey, I've gained valuable experience through involvement in key research projects and publications in internationally reputed environmental journals. My academic background has provided me with a strong foundation, propelling me towards the forefront of environmental research, where I explore the pressing need for robust air pollution monitoring methodologies especially focusing on low-cost air quality sensors. However, my focus lies not only in developing these methods but also in improving them and developing techniques so that the impact on human health can be reduced. My PhD thesis, titled 'Air Quality Evolution at the Local Scale, in the Absence of a Calibration Reference Point,' addresses this imperative by refining existing techniques and pioneering new approaches to ensure a healthier environment for all.
+						</p>
+						<p>
+							<strong>Research Experience:</strong><br>
+							- Junior Research Fellow, Indian Institute of Technology (IIT) Goa<br>
+							- Research Associate, Indian Institute of Tropical Meteorology (IITM)<br>
+							- Research Associate, Indian Institute of Technology (IIT) Mandi
+						</p>
+						<p>
+							<strong>Recognitions:</strong><br>
+							Honoured with the "Paryavaran Ratna Swarn Padak" (gold medal) for securing the first position in the country by the Indian Centre for Wildlife and Environmental Studies in the South Asia Region.
+						</p>
+						<p>
+							<strong>Summary of his thesis:</strong><br>
+							My Ph.D. thesis titled "Air Quality Evolution at the Local Scale, in the Absence of a Calibration Reference Point" addresses the critical issue of air pollution monitoring. The research proposes a collaborative initiative leveraging low-cost air quality sensors to comprehensively understand pollutant distribution and reliability across diverse geographical locations. Key methodologies include the integration of advanced machine learning techniques, satellite data, GIS, and remote sensing for calibration and monitoring. The study aims to enhance model performance through comparative analysis of retrospective data and real-time sensor deployment. Moreover, the research contributes valuable insights into air quality monitoring methodologies, aiming to develop effective mitigation strategies for environmental sustainability.
+						</p>
+						<p>
+							<strong>What's next?</strong><br>
+							"Sometimes it is the people no one can imagine anything of who do the things no one can imagine." With a firm resolve to uncover new insights in my research domain and a resolute commitment to discovering that pivotal "eureka moment," I stand ready to make a lasting and meaningful impact on the future of my research area, shaping it for the betterment of generations to come.
+						</p>
+					</div>
+				</div>
 			</section>
 
 			<section id="research" class="research-grid">
@@ -498,7 +574,7 @@
 					<h3>Network</h3>
 					<a href="https://scholar.google.com/citations?user=OKQOyz4AAAAJ&hl=en" target="_blank">Google Scholar</a>
 					<a href="https://www.linkedin.com/in/rajat-sharma-89421718b/" target="_blank">LinkedIn</a>
-                    <p>Nantes campus<br> Allée des ponts et haussées - CS 5004 <br> F-44344 Bouguenais Cedex • FRANCE<br> univ-gustave-eiffel.fr</p>
+					<p>Nantes campus<br> Allée des ponts et haussées - CS 5004 <br> F-44344 Bouguenais Cedex • FRANCE<br> univ-gustave-eiffel.fr</p>
 				</div>
 			</footer>
 		</div>
@@ -510,72 +586,23 @@
 				nav.classList.toggle('active');
 			}
 
-			// Intersection Observer for fade-in animation
-			const animateOnScroll = () => {
-				const observer = new IntersectionObserver((entries) => {
-					entries.forEach(entry => {
-						if (entry.isIntersecting) {
-							entry.target.classList.add('visible');
-							observer.unobserve(entry.target); // Stop observing after animation
-						}
-					});
-				}, { threshold: 0.1 }); // Trigger when 10% of the element is visible
-
-				document.querySelectorAll('.research-card, .publication-item').forEach((el) => {
-					el.classList.add('fade-in'); // Add initial styles via CSS
-					observer.observe(el);
-				});
-			};
-
-			// Filter Publications on Click
-			const filterPublications = () => {
-				const researchCards = document.querySelectorAll('.research-card');
-				const publicationItems = document.querySelectorAll('.publication-item');
-				const resetButton = document.getElementById('reset-filter');
-
-				// Function to filter publications based on category
-				const filterByCategory = (category) => {
-					publicationItems.forEach(item => {
-						if (item.getAttribute('data-category') === category) {
-							item.style.display = 'block';
-							item.style.opacity = '1';
-							item.style.transform = 'translateY(0)';
-						} else {
-							item.style.display = 'none';
-							item.style.opacity = '0';
-							item.style.transform = 'translateY(20px)';
-						}
-					});
-				};
-
-				// Show all publications by default
-				publicationItems.forEach(item => {
-					item.style.display = 'block';
-					item.style.opacity = '1';
-				});
-
-				// Add click event listeners to research cards
-				researchCards.forEach(card => {
-					card.addEventListener('click', () => {
-						const category = card.getAttribute('data-category');
-						filterByCategory(category);
-					});
-				});
-
-				// Reset to show all publications
-				resetButton.addEventListener('click', () => {
-					publicationItems.forEach(item => {
-						item.style.display = 'block';
-						item.style.opacity = '1';
-						item.style.transform = 'translateY(0)';
-					});
-				});
-			};
-
-			// Initialize functions
+			// Popup functionality (click-only)
 			document.addEventListener('DOMContentLoaded', () => {
-				animateOnScroll();
-				filterPublications();
+				const profileImg = document.querySelector('.profile-img');
+				const popup = document.querySelector('.about-me-popup');
+				const closePopup = document.querySelector('.close-popup');
+
+				// Show popup on click
+				profileImg.addEventListener('click', () => {
+					popup.style.display = 'flex';
+				});
+
+				// Hide popup when clicking outside or on close button
+				popup.addEventListener('click', (e) => {
+					if (e.target === popup || e.target === closePopup) {
+						popup.style.display = 'none';
+					}
+				});
 			});
 		</script>
 	</body>
