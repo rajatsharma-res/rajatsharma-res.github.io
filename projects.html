@@ -125,6 +125,21 @@
             color: var(--text);
             opacity: 0.9;
             margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-card .truncated-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .project-card .links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .project-card a {
@@ -143,6 +158,52 @@
         .project-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-content .close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        .modal-content h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            font-size: 1em;
+            color: var(--text);
+            line-height: 1.6;
         }
 
         footer {
@@ -208,31 +269,56 @@
 
     <section class="projects-intro">
         <h2>Projects</h2>
-        <p>Explore my key research projects contributing to air quality monitoring, environmental modeling, and sustainable cities.</p>
+        <p>Explore my additional activities and projects </p>
     </section>
 
     <section class="projects-grid">
+        <!-- DUDE Initiative -->
         <div class="project-card">
-            <img src="images/dude_project.jpg" alt="DUDE Initiative">
+            <img src="images/1726324848647.jfif" alt="DUDE Initiative">
             <h3>DUDE Initiative</h3>
-            <p>A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior.</p>
-            <a href="#" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
+            <p class="truncated-text"> EU TalentOn Competition! 🚀 Proud to have represented The 𝗗𝗨𝗗𝗘 𝗜𝗻𝗶𝘁𝗶𝗮𝘁𝗶𝘃𝗲 (c𝗶𝘁𝗶𝘇𝗲𝗻-D𝗿𝗶𝘃𝗲𝗻, U𝗽𝘀𝗰𝗮𝗹𝗮𝗯𝗹𝗲, 𝗮𝗻𝗱 D𝗶𝗴𝗶𝘁𝗮𝗹 E𝗰𝗼𝗰𝗶𝘁𝗶𝗲𝘀) alongside an amazing team. 🌍💡 
+.</p>
+            <div class="links">
+                <a href="#" onclick="openPopup('dude')">Read More <i class="fas fa-arrow-right"></i></a>
+                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-innovation-climatetech-activity-7240731230432890880-OeyR?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">More <i class="fas fa-arrow-right"></i></a>
+                <a href="https://www.linkedin.com/posts/eu-talenton_brightyoungminds-talenton-eutalenton2024-ugcPost-7241422798001258497-RHLJ?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">Peek <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
 
+        <!-- Madagascar Mobility Project -->
         <div class="project-card">
-            <img src="images/madagascar_project.jpg" alt="Madagascar Emission Inventory">
-            <h3>Emission Inventory for Madagascar</h3>
-            <p>First regional emission inventory using field surveys, satellite data, and community vehicle counts.</p>
-            <a href="#" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
+            <img src="images/1718628240852.jfif" alt="Madagascar Emission Inventory">
+            <h3>Madagascar Mobility Project</h3>
+            <p class="truncated-text">Culmination of an international project for my Ph.D. thesis, titled "Air Quality Evolution at the Local Scale in the Absence of a Calibration Reference Point." This ambitious endeavor was made possible through funding from the Department of GIE-GERS at Université Gustave Eiffel, the CLEAR-Doc COFUND, Université de Fianarantsoa,and Madatlas Madagascar.</p>
+            <div class="links">
+                <a href="#" onclick="openPopup('madagascar')">Read More <i class="fas fa-arrow-right"></i></a>
+                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-activity-7208449319253741568-jfPc?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
 
+        <!-- InCITIES Program -->
         <div class="project-card">
-            <img src="images/sensor_calibration.jpg" alt="Sensor Calibration">
-            <h3>Low-Cost Sensor Calibration</h3>
-            <p>Developing AI-powered calibration models to enhance accuracy of low-cost air quality sensors.</p>
-            <a href="#" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
+            <img src="images/1714509098299.jfif" alt="Sensor Calibration">
+            <h3>InCITIES Program</h3>
+            <p class="truncated-text">Sharing the Journey of my InCITIES Program! Reflecting on this incredible journey fills me with excitement! Alongside a truly inspiring cohort, we delved deep into crucial topics such as sustainable mobility, urban planning, air quality, and transportation infrastructure resilience.</p>
+            <div class="links">
+                <a href="#" onclick="openPopup('incities')">Read More <i class="fas fa-arrow-right"></i></a>
+                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_sharing-the-journey-of-my-incities-program-activity-7191300309850226688-t5Ti?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
+                 
+            </div>
         </div>
+        
     </section>
+
+    <!-- Popup Modals -->
+    <div id="popup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3 id="modal-title"></h3>
+            <p id="modal-content"></p>
+        </div>
+    </div>
 
     <footer>
         <div>
@@ -249,6 +335,53 @@
     </footer>
 
 </div>
+
+<script>
+    // Popup functionality
+    function openPopup(project) {
+        const modal = document.getElementById("popup-modal");
+        const modalTitle = document.getElementById("modal-title");
+        const modalContent = document.getElementById("modal-content");
+
+        let title, content;
+        switch (project) {
+            case 'dude':
+                title = "DUDE Initiative";
+                content = "A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior.Proud to have represented The 𝗗𝗨𝗗𝗘 𝗜𝗻𝗶𝘁𝗶𝗮𝘁𝗶𝘃𝗲 (c𝗶𝘁𝗶𝘇𝗲𝗻-D𝗿𝗶𝘃𝗲𝗻, U𝗽𝘀𝗰𝗮𝗹𝗮𝗯𝗹𝗲, 𝗮𝗻𝗱 D𝗶𝗴𝗶𝘁𝗮𝗹 E𝗰𝗼𝗰𝗶𝘁𝗶𝗲𝘀) alongside an amazing team. 🌍💡 Victoria Cotella, Faiz Iqbal and Luka. 𝗗𝗨𝗗𝗘 is about using tech and data to make sustainable living not just possible, but rewarding. Whether you’re a student, taxpayer, or part of a minority group, we’re building a future where your eco-friendly choices pay off—literally. 🌱 ";
+                break;
+            case 'madagascar':
+                title = "Madagascar Mobility Project";
+                content = `Culmination of an international project for my Ph.D. thesis, titled "Air Quality Evolution at the Local Scale in the Absence of a Calibration Reference Point." This ambitious endeavor was made possible through funding from the Department of GIE-GERS at Université Gustave Eiffel, the CLEAR-Doc COFUND, Université de Fianarantsoa, ​​and Madatlas Madagascar. <br><br>
+                Special thanks to Dr. Hasina Rakotonirainy, Dr. Hajalalaina Aimé Richard, my supervisors Andry Rico Razakamanantsoa and Agnes Jullien, and Erwann Rayssac for their support. We also thank Madatlas, the Municipality Office Fianarantsoa, Public Hospital Fianarantsoa, and Regional Transport Office Fianarantsoa for their contributions. The project's success was made possible by the dedication of student volunteers and the collaboration of various agencies.`;
+                break;
+            case 'incities':
+                title = "InCITIES Program";
+                content = `Sharing the Journey of my InCITIES Program! Reflecting on this incredible journey fills me with excitement! Alongside a truly inspiring cohort, we delved deep into crucial topics such as sustainable mobility, urban planning, air quality, and transportation infrastructure resilience. <br><br>
+                One major highlight for me was our hands-on approach to tackling real-world issues, particularly in enhancing sustainable mobility around St. Gorazde Elementary School and Kindergarten. Collaborating with Žilina's esteemed architecture bureau, we not only collected valuable data but also brainstormed innovative approaches to address the challenges at hand. <br><br>
+                I am profoundly grateful for the guidance and mentorship provided by Yannick Cornet, Tibor Petrov, Christina Georgouli, Lienka, Andry Rico RAZAKAMANANTSOA, Agnes JULLIEN, Virginie Etienne and GERS - Gustave Eiffel University, Laboratoire GIE (Univ Eiffel), Université Gustave Eiffel. Their support has been instrumental in shaping our journey.`;
+                break;
+                
+            
+                break;
+        }
+
+        modalTitle.innerHTML = title;
+        modalContent.innerHTML = content;
+        modal.style.display = "flex";
+    }
+
+    function closePopup() {
+        document.getElementById("popup-modal").style.display = "none";
+    }
+
+    // Close modal if clicked outside the content
+    window.onclick = function(event) {
+        const modal = document.getElementById("popup-modal");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+</script>
 
 </body>
 </html>
