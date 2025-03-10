@@ -5,6 +5,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        
 		<style>
 			:root {
 				--bg: #f0f2f5; /* Cool light gray */
@@ -183,7 +184,6 @@
 				object-fit: cover;
 				box-shadow: var(--shadow);
 				animation: float 4s ease-in-out infinite;
-				cursor: pointer;
 			}
 
 			.research-grid {
@@ -289,181 +289,39 @@
 				background: var(--secondary);
 			}
 
-			/* Popup Styles */
-			.about-me-popup {
-				display: none;
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background: rgba(0, 0, 0, 0.7);
-				z-index: 1000;
-				justify-content: center;
-				align-items: center;
-			}
-
-			.popup-content {
-				background: var(--surface);
-				padding: 2rem;
-				border-radius: 10px;
-				max-width: 600px;
-				width: 90%;
-				max-height: 80vh;
-				overflow-y: auto;
-				position: relative;
-				box-shadow: var(--shadow);
-			}
-
-			.close-popup {
-				position: absolute;
-				top: 1rem;
-				right: 1rem;
-				font-size: 1.5rem;
-				cursor: pointer;
-				color: var(--primary);
-			}
-
-			.popup-content h3 {
-				color: var(--primary);
-				margin-bottom: 1rem;
-			}
-
-			.popup-content p {
-				color: var(--text);
-				margin-bottom: 1rem;
-				line-height: 1.6;
-			}
-
-			/* Mobile-specific styles */
 			@media (max-width: 768px) {
-				.header {
-					flex-direction: column;
-					align-items: flex-start;
-					padding: 1rem 0;
-				}
-
-				.header h1 {
-					font-size: 1.5rem;
-					margin-bottom: 1rem;
-				}
-
-				.nav {
-					display: none; /* Hide the nav by default on mobile */
-					flex-direction: column;
-					gap: 1rem;
-					width: 100%;
-				}
-
-				.nav.active {
-					display: flex; /* Show the nav when active */
-				}
-
-				.nav a {
-					padding: 0.5rem;
-					font-size: 1rem;
-				}
-
-				/* Hamburger menu */
-				.menu-toggle {
-					display: block; /* Show on mobile */
-					font-size: 1.5rem;
-					cursor: pointer;
-					position: absolute;
-					top: 1rem;
-					right: 1rem;
-				}
-
-				/* Hero section adjustments */
 				.hero {
 					flex-direction: column;
 					text-align: center;
-					padding: 2rem 0;
-				}
-
-				.hero-content {
-					max-width: 100%;
-				}
-
-				.hero h2 {
-					font-size: 2rem;
-				}
-
-				.hero p {
-					font-size: 1rem;
-					padding-left: 0;
-				}
-
-				.hero p::before {
-					display: none; /* Remove the vertical line */
+					padding: 4rem 0;
 				}
 
 				.profile-img {
-					width: 200px;
-					height: 200px;
-					margin-top: 1rem;
+					margin-top: 2rem;
 				}
 
-				/* Research grid adjustments */
-				.research-grid {
-					grid-template-columns: 1fr; /* Single column for mobile */
-					gap: 1rem;
+				.nav {
+					display: none;
 				}
+			}
 
-				.research-card {
-					padding: 1rem;
-				}
+			/* Animation styles */
+			.fade-in {
+				opacity: 0;
+				transform: translateY(20px);
+				transition: opacity 0.6s ease, transform 0.6s ease;
+			}
 
-				.research-card h3 {
-					font-size: 1.2rem;
-				}
-
-				.research-card p {
-					font-size: 1rem;
-				}
-
-				/* Publications section adjustments */
-				.publication-item {
-					padding: 1rem;
-				}
-
-				.publication-item h4 {
-					font-size: 1.2rem;
-				}
-
-				.publication-item p {
-					font-size: 1rem;
-				}
-
-				/* Footer adjustments */
-				.footer {
-					flex-direction: column;
-					text-align: center;
-					padding: 2rem 0;
-				}
-
-				.footer h3 {
-					font-size: 1.2rem;
-				}
-
-				.footer p {
-					font-size: 1rem;
-				}
-
-				.footer button {
-					width: 100%;
-					margin-top: 1rem;
-				}
+			.fade-in.visible {
+				opacity: 1;
+				transform: translateY(0);
 			}
 		</style>
 	</head>
 	<body>
 		<div class="container">
 			<header class="header">
-				<h1>Rajat Sharma</h1>
-				<div class="menu-toggle" onclick="toggleMenu()">
-					<i class="fas fa-bars"></i>
-				</div>
+				<h1 style="font-size: 25px;">Rajat Sharma</h1>
 				<nav class="nav">
 					<a href="#research">Research</a>
 					<a href="#publications">Publications</a>
@@ -474,48 +332,18 @@
 
 			<section class="hero">
 				<div class="hero-content">
-					<h2>Doctoral Researcher (PhD)</h2>
+					<h2 style="font-size: 36px;">Doctoral Researcher (PhD)</h2>
 					<p>
 						<a>Civil Engineering</a><br>
-						<meta name="description" content="Rajat Sharma, PhD researcher at University Gustave Eiffel, France, specializing in air quality, low-cost sensors, and particulate emissions. Explore my research and publications.">
 						<a href="https://clear-doc.univ-gustave-eiffel.fr/about/a-cofund-programme" target="_blank" style="text-decoration: none; color: inherit;">Marie Skłodowska Curie - CLEARDoc Fellow</a><br>
 						<a href="https://gie.univ-gustave-eiffel.fr/" target="_blank" style="text-decoration: none; color: inherit;">GERS - (GIE) Geomaterials and Environmental Interaction</a><br>
 						<a href="https://www.univ-gustave-eiffel.fr/" target="_blank" style="text-decoration: none; color: inherit;">University Gustave Eiffel, France</a>
 					</p>
 					<button> <a href="https://scholar.google.com/citations?user=OKQOyz4AAAAJ&hl=en" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: ; color: white; text-decoration: none; border-radius: 5px;">
-						Explore My Work
-					</a></button>
+    Explore My Work
+</a></button>
 				</div>
 				<img src="images/picme.jpeg" alt="Rajat Sharma" class="profile-img">
-				<!-- Popup HTML -->
-				<div class="about-me-popup">
-					<div class="popup-content">
-						<span class="close-popup">&times;</span>
-						<h3>About Me</h3>
-						<p>
-							<strong>His Background:</strong><br>
-							I hold both a Bachelor's and Master's degree in Civil and Environmental Engineering, specializing in environmental science and technology. Throughout my academic journey, I've gained valuable experience through involvement in key research projects and publications in internationally reputed environmental journals. My academic background has provided me with a strong foundation, propelling me towards the forefront of environmental research, where I explore the pressing need for robust air pollution monitoring methodologies especially focusing on low-cost air quality sensors. However, my focus lies not only in developing these methods but also in improving them and developing techniques so that the impact on human health can be reduced. My PhD thesis, titled 'Air Quality Evolution at the Local Scale, in the Absence of a Calibration Reference Point,' addresses this imperative by refining existing techniques and pioneering new approaches to ensure a healthier environment for all.
-						</p>
-						<p>
-							<strong>Research Experience:</strong><br>
-							- Junior Research Fellow, Indian Institute of Technology (IIT) Goa<br>
-							- Research Associate, Indian Institute of Tropical Meteorology (IITM)<br>
-							- Research Associate, Indian Institute of Technology (IIT) Mandi
-						</p>
-						<p>
-							<strong>Recognitions:</strong><br>
-							Honoured with the "Paryavaran Ratna Swarn Padak" (gold medal) for securing the first position in the country by the Indian Centre for Wildlife and Environmental Studies in the South Asia Region.
-						</p>
-						<p>
-							<strong>Summary of his thesis:</strong><br>
-							My Ph.D. thesis titled "Air Quality Evolution at the Local Scale, in the Absence of a Calibration Reference Point" addresses the critical issue of air pollution monitoring. The research proposes a collaborative initiative leveraging low-cost air quality sensors to comprehensively understand pollutant distribution and reliability across diverse geographical locations. Key methodologies include the integration of advanced machine learning techniques, satellite data, GIS, and remote sensing for calibration and monitoring. The study aims to enhance model performance through comparative analysis of retrospective data and real-time sensor deployment. Moreover, the research contributes valuable insights into air quality monitoring methodologies, aiming to develop effective mitigation strategies for environmental sustainability.
-						</p>
-						<p>
-							<strong>What's next?</strong><br>
-							"Sometimes it is the people no one can imagine anything of who do the things no one can imagine." With a firm resolve to uncover new insights in my research domain and a resolute commitment to discovering that pivotal "eureka moment," I stand ready to make a lasting and meaningful impact on the future of my research area, shaping it for the betterment of generations to come.
-						</p>
-					</div>
-				</div>
 			</section>
 
 			<section id="research" class="research-grid">
@@ -565,55 +393,46 @@
 				</ul>
 			</section>
 
-			</section>
-
-			<section id="research" class="research-grid">
-				<div class="research-card" data-category="air-quality">
-					<i class="fas fa-brain"></i>
-					<h3>Air Quality</h3>
-					<p>Monitoring and Modelling</p>
-				</div>
-				<div class="research-card" data-category="low-cost-sensors">
-					<i class="fas fa-atom"></i>
-					<h3>Low Cost Sensors</h3>
-					<p>Next-gen environmental monitoring systems</p>
-				</div>
-				<div class="research-card" data-category="aerosols-exposure">
-					<i class="fas fa-wind"></i>
-					<h3>Aerosols and Exposure</h3>
-					<p>Particulate emissions and behavior in urban environments</p>
-				</div>
-			</section>
-		</div>
+			<footer class="footer" id="contact">
+    <div>
+        <h3>Connect</h3>
+        <p>rajat.sharma@univ-eiffel.fr</p>
+        <button>Download CV</button>
+    </div>
+    <div>
+        <h3>Network</h3>
+        <div style="display: flex; gap: 1rem;">
+            <a href="https://scholar.google.com/citations?user=OKQOyz4AAAAJ&hl=en" target="_blank" style="text-decoration: none; color: inherit;" title="Google Scholar">
+                <i class="fas fa-graduation-cap" style="font-size: 1.5rem;"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/rajat-sharma-89421718b/" target="_blank" style="text-decoration: none; color: inherit;" title="LinkedIn">
+                <i class="fab fa-linkedin" style="font-size: 1.5rem;"></i>
+            </a>
+        </div>
+        <p>Nantes campus<br> Allée des ponts et haussées - CS 5004 <br> F-44344 Bouguenais Cedex • FRANCE<br> univ-gustave-eiffel.fr</p>
+    </div>
+</footer>
 
 		<script>
-			// Toggle mobile menu
-			function toggleMenu() {
-				const nav = document.querySelector('.nav');
-				nav.classList.toggle('active');
-			}
+			// Intersection Observer for fade-in animation
+			const animateOnScroll = () => {
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('visible');
+							observer.unobserve(entry.target); // Stop observing after animation
+						}
+					});
+				}, { threshold: 0.1 }); // Trigger when 10% of the element is visible
 
-			// Popup functionality (click-only)
-			document.addEventListener('DOMContentLoaded', () => {
-				const profileImg = document.querySelector('.profile-img');
-				const popup = document.querySelector('.about-me-popup');
-				const closePopup = document.querySelector('.close-popup');
-
-				// Show popup on click
-				profileImg.addEventListener('click', () => {
-					popup.style.display = 'flex';
+				document.querySelectorAll('.research-card, .publication-item').forEach((el) => {
+					el.classList.add('fade-in'); // Add initial styles via CSS
+					observer.observe(el);
 				});
+			};
 
-				// Hide popup when clicking outside or on close button
-				popup.addEventListener('click', (e) => {
-					if (e.target === popup || e.target === closePopup) {
-						popup.style.display = 'none';
-					}
-				});
-			});
-
-			// Research grid and publication filtering
-			document.addEventListener('DOMContentLoaded', () => {
+			// Filter Publications on Click
+			const filterPublications = () => {
 				const researchCards = document.querySelectorAll('.research-card');
 				const publicationItems = document.querySelectorAll('.publication-item');
 				const resetButton = document.getElementById('reset-filter');
@@ -655,6 +474,12 @@
 						item.style.transform = 'translateY(0)';
 					});
 				});
+			};
+
+			// Initialize functions
+			document.addEventListener('DOMContentLoaded', () => {
+				animateOnScroll();
+				filterPublications();
 			});
 		</script>
 	</body>
