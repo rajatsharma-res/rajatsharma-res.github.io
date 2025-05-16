@@ -602,13 +602,13 @@
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => showCard(index));
     });
-  }); 
-	// Auto-rotate every 8 seconds
+	  // Auto-rotate every 8 seconds
   setInterval(() => {
     currentIndex = (currentIndex + 1) % items.length;
     showUpdate(currentIndex);
   }, 8000);
 });
+	
 </script>
 
 
