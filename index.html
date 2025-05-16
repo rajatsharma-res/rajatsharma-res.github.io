@@ -363,152 +363,223 @@
 				<img src="images/picme.jpeg" alt="Rajat Sharma" class="profile-img">
 			</section>
 <!-- Minimal What's New Section -->
-<!-- Compact Carousel Updates Section -->
-<section class="whats-new" style="
-    background: var(--surface);
-    padding: 1.5rem;
-    border-radius: 10px;
-    margin: 2rem 0;
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-    min-height: 160px;
-">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3 style="margin: 0; color: var(--primary); font-size: 1.2rem;">
-            <i class="fas fa-bell" style="color: var(--accent); margin-right: 0.5rem;"></i>
-            Latest Update
-        </h3>
-        <div style="display: flex; gap: 0.5rem;">
-            <button class="update-nav" data-direction="prev" style="
-                background: rgba(0,0,0,0.05);
-                border: none;
-                width: 28px;
-                height: 28px;
-                border-radius: 50%;
-                color: var(--primary);
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: var(--transition);
-            ">
-                <i class="fas fa-chevron-left" style="font-size: 0.8rem;"></i>
-            </button>
-            <button class="update-nav" data-direction="next" style="
-                background: rgba(0,0,0,0.05);
-                border: none;
-                width: 28px;
-                height: 28px;
-                border-radius: 50%;
-                color: var(--primary);
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: var(--transition);
-            ">
-                <i class="fas fa-chevron-right" style="font-size: 0.8rem;"></i>
-            </button>
-        </div>
+<section class="whats-new-minimal">
+  <div class="wn-header">
+    <h3>
+      <i class="fas fa-bell"></i>
+      Latest Update
+    </h3>
+    <div class="wn-nav">
+      <button class="wn-btn" data-direction="prev" aria-label="Previous update">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="wn-btn" data-direction="next" aria-label="Next update">
+        <i class="fas fa-chevron-right"></i>
+      </button>
     </div>
-    
-    <div id="update-container" style="position: relative; height: 100px;">
-        <!-- Update 1 -->
-        <div class="update-item active" style="
-            position: absolute;
-            width: 100%;
-            padding: 0.5rem 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            opacity: 1;
-            transform: translateX(0);
-        ">
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
-                <span style="
-                    background: var(--accent);
-                    color: white;
-                    font-size: 0.7rem;
-                    padding: 0.2rem 0.5rem;
-                    border-radius: 4px;
-                ">New Paper</span>
-                <span style="color: var(--secondary); font-size: 0.8rem;">May 2025</span>
-            </div>
-            <p style="margin: 0; color: var(--text); line-height: 1.4; font-size: 0.9rem;">
-                Published work on low-cost PM sensors and ML techniques in Atmospheric Environment: X
-            </p>
-            <a href="https://www.sciencedirect.com/science/article/pii/S2590162125000218?via%3Dihub" 
-               target="_blank" 
-               style="display: inline-block; margin-top: 0.5rem; color: var(--primary); font-size: 0.8rem;">
-                View publication →
-            </a>
-        </div>
-        
-        <!-- Update 2 -->
-        <div class="update-item" style="
-            position: absolute;
-            width: 100%;
-            padding: 0.5rem 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            opacity: 0;
-            transform: translateX(100%);
-        ">
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
-                <span style="
-                    background: var(--secondary);
-                    color: white;
-                    font-size: 0.7rem;
-                    padding: 0.2rem 0.5rem;
-                    border-radius: 4px;
-                ">Research Stay</span>
-                <span style="color: var(--secondary); font-size: 0.8rem;">Current</span>
-            </div>
-            <p style="margin: 0; color: var(--text); line-height: 1.4; font-size: 0.9rem;">
-                Collaborating with IIT Goa and IITM Pune on low-cost sensor deployment for air quality monitoring
-            </p>
-        </div>
-    </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const items = document.querySelectorAll('.update-item');
-            const navButtons = document.querySelectorAll('.update-nav');
-            let currentIndex = 0;
-            
-            function showUpdate(index) {
-                items.forEach((item, i) => {
-                    item.style.opacity = i === index ? '1' : '0';
-                    item.style.transform = i === index ? 'translateX(0)' : 
-                                          i < index ? 'translateX(-100%)' : 'translateX(100%)';
-                });
-            }
-            
-            navButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    if(this.dataset.direction === 'next') {
-                        currentIndex = (currentIndex + 1) % items.length;
-                    } else {
-                        currentIndex = (currentIndex - 1 + items.length) % items.length;
-                    }
-                    showUpdate(currentIndex);
-                });
-                
-                // Add hover effect
-                button.addEventListener('mouseenter', function() {
-                    this.style.background = 'rgba(0,0,0,0.1)';
-                });
-                button.addEventListener('mouseleave', function() {
-                    this.style.background = 'rgba(0,0,0,0.05)';
-                });
-            });
-            
-            // Auto-rotate every 8 seconds
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % items.length;
-                showUpdate(currentIndex);
-            }, 8000);
-        });
-    </script>
+  <div class="wn-carousel">
+    <!-- Update 1 -->
+    <div class="wn-item active">
+      <div class="wn-meta">
+        <span class="wn-badge wn-badge-accent">New Paper</span>
+        <span class="wn-date">May 2025</span>
+      </div>
+      <p>
+        Published work on low-cost PM sensors and ML techniques in Atmospheric Environment: X
+      </p>
+      <a href="https://www.sciencedirect.com/science/article/pii/S2590162125000218?via%3Dihub" target="_blank" class="wn-link">
+        View publication →
+      </a>
+    </div>
+    <!-- Update 2 -->
+    <div class="wn-item">
+      <div class="wn-meta">
+        <span class="wn-badge wn-badge-secondary">Research Stay</span>
+        <span class="wn-date">Current</span>
+      </div>
+      <p>
+        Collaborating with IIT Goa and IITM Pune on low-cost sensor deployment for air quality monitoring
+      </p>
+    </div>
+  </div>
 </section>
+
+<style>
+.whats-new-minimal {
+  --primary: #1a2233;
+  --accent: #3b82f6;
+  --secondary: #818cf8;
+  --text: #2d3748;
+  --surface: #fff;
+  --shadow: 0 2px 16px 0 rgba(60,60,80,0.06);
+  --transition: 0.2s cubic-bezier(.4,0,.2,1);
+  background: var(--surface);
+  border-radius: 1.1rem;
+  box-shadow: var(--shadow);
+  padding: 1.6rem 2rem;
+  margin: 2.5rem 0;
+  min-height: 140px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: visible;
+}
+
+.wn-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.wn-header h3 {
+  font-size: 1.08rem;
+  color: var(--primary);
+  margin: 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wn-header i {
+  color: var(--accent);
+  font-size: 1.15rem;
+}
+
+.wn-nav {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.wn-btn {
+  background: transparent;
+  border: none;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), box-shadow var(--transition);
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  font-size: 1rem;
+  position: relative;
+}
+.wn-btn:focus, .wn-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 8px 0 rgba(59,130,246,0.08);
+}
+
+.wn-carousel {
+  position: relative;
+  min-height: 80px;
+  margin-top: 0.1rem;
+}
+
+.wn-item {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  pointer-events: none;
+  transition: opacity 0.38s var(--transition), transform 0.38s var(--transition);
+  background: none;
+}
+
+.wn-item.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.wn-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.wn-badge {
+  font-size: 0.68rem;
+  padding: 0.18rem 0.48rem;
+  border-radius: 3px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  background: var(--secondary);
+  color: #fff;
+  opacity: 0.95;
+}
+.wn-badge-accent { background: var(--accent); }
+.wn-badge-secondary { background: var(--secondary); }
+
+.wn-date {
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+
+.wn-item p {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+.wn-link {
+  display: inline-block;
+  margin-top: 0.4rem;
+  color: var(--accent);
+  font-size: 0.87rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+.wn-link:hover, .wn-link:focus { color: var(--primary); text-decoration: underline; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const items = document.querySelectorAll('.wn-item');
+  const navButtons = document.querySelectorAll('.wn-btn');
+  let currentIndex = 0;
+
+  function showUpdate(index) {
+    items.forEach((item, i) => {
+      item.classList.toggle('active', i === index);
+    });
+  }
+
+  navButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      if(this.dataset.direction === 'next') {
+        currentIndex = (currentIndex + 1) % items.length;
+      } else {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+      }
+      showUpdate(currentIndex);
+    });
+  });
+
+  // Auto-rotate every 8 seconds
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % items.length;
+    showUpdate(currentIndex);
+  }, 8000);
+});
+</script>
+
 			<section id="research" class="research-grid">
 				<div class="research-card" data-category="air-quality">
 					<i class="fas fa-brain"></i>
