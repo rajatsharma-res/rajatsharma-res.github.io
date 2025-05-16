@@ -362,78 +362,83 @@
 				</div>
 				<img src="images/picme.jpeg" alt="Rajat Sharma" class="profile-img">
 			</section>
-<!-- Add this right after the hero section, before the research-grid -->
+<!-- Minimal What's New Section -->
 <section class="whats-new" style="
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    padding: 2rem;
-    border-radius: 16px;
+    background: var(--surface);
+    padding: 2.5rem;
+    border-radius: 12px;
     margin: 3rem 0;
     box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
 ">
-    <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
-    <div style="position: relative; z-index: 2;">
-        <h2 style="font-size: 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-            <span style="background: white; color: var(--primary); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-bolt"></i>
-            </span>
-            What's New in My Research
-        </h2>
-        
-        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-            <div class="update-item" style="
-                background: rgba(255,255,255,0.1);
-                padding: 1.5rem;
-                border-radius: 10px;
-                backdrop-filter: blur(5px);
-                border-left: 4px solid var(--accent);
-                animation: fadeIn 0.8s ease-in-out;
-            ">
-                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                    <i class="fas fa-file-alt" style="color: var(--accent);"></i>
-                    <h3 style="margin: 0;">New Publication</h3>
-                    <span style="margin-left: auto; background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.9rem;">
-                        May 2025
-                    </span>
-                </div>
-                <p style="margin: 0;">
-                    "Performance and Applicability of Low-Cost PM Sensors to assess Global Pollution Variability through Machine Learning Techniques" published in Atmospheric Environment: X
-                </p>
-                <a href="https://www.sciencedirect.com/science/article/pii/S2590162125000218?via%3Dihub" target="_blank" style="
+    <h2 style="
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    ">
+        <i class="fas fa-bell" style="color: var(--accent);"></i>
+        Research Updates
+    </h2>
+    
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+        <div class="update-item" style="
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            background: white;
+            transition: var(--transition);
+        ">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                <h3 style="margin: 0; color: var(--primary);">New Publication</h3>
+                <span style="
+                    margin-left: auto; 
+                    color: var(--secondary);
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                ">
+                    May 2025
+                </span>
+            </div>
+            <p style="margin: 0; color: var(--text); line-height: 1.6;">
+                "Performance and Applicability of Low-Cost PM Sensors to assess Global Pollution Variability through Machine Learning Techniques" published in Atmospheric Environment: X
+            </p>
+            <a href="https://www.sciencedirect.com/science/article/pii/S2590162125000218?via%3Dihub" 
+               target="_blank" 
+               style="
                     display: inline-block;
                     margin-top: 1rem;
-                    color: white;
+                    color: var(--primary);
                     text-decoration: none;
-                    font-weight: bold;
+                    font-weight: 500;
                     transition: var(--transition);
-                ">
-                    Read the paper <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
-                </a>
-            </div>
-            
-            <div class="update-item" style="
-                background: rgba(255,255,255,0.1);
-                padding: 1.5rem;
-                border-radius: 10px;
-                backdrop-filter: blur(5px);
-                border-left: 4px solid var(--accent);
-                animation: fadeIn 0.8s ease-in-out 0.2s;
-                animation-fill-mode: both;
             ">
-                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                    <i class="fas fa-microscope" style="color: var(--accent);"></i>
-                    <h3 style="margin: 0;">Research Update</h3>
-                    <span style="margin-left: auto; background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.9rem;">
-                        Ongoing
-                    </span>
-                </div>
-                <p style="margin: 0;">
-                     I have joined the Aerosol Particle Technology Laboratory at IIT Goa for a three-month research stay. During this period, we will focus on deploying low-cost air quality sensors across multiple locations to enable long-term ambient monitoring. This marks my second stint with the lab, building on previous collaborations.
-In addition, I will also be working closely with the Indian Institute of Tropical Meteorology (IITM), Pune, to further strengthen interdisciplinary research during this mobility period. 
-                </p>
+                Read paper →
+            </a>
+        </div>
+        
+        <div class="update-item" style="
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            background: white;
+            transition: var(--transition);
+        ">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                <h3 style="margin: 0; color: var(--primary);">Research Mobility</h3>
+                <span style="
+                    margin-left: auto; 
+                    color: var(--secondary);
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                ">
+                    Current
+                </span>
             </div>
+            <p style="margin: 0; color: var(--text); line-height: 1.6;">
+                Joined the Aerosol Particle Technology Laboratory at IIT Goa for a three-month research stay, focusing on deploying low-cost air quality sensors for long-term ambient monitoring. Collaborating with Indian Institute of Tropical Meteorology (IITM), Pune to strengthen interdisciplinary research.
+            </p>
         </div>
     </div>
 </section>
