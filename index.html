@@ -495,53 +495,6 @@
 			.wn-dot.active {
 				background: #3498db;
 			}
-			
-			.projects-section {
-				margin: 4rem 0;
-			}
-			
-			.projects-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-				gap: 2rem;
-				margin-top: 2rem;
-			}
-			
-			.project-card {
-				background: var(--surface);
-				border-radius: 8px;
-				padding: 1.5rem;
-				box-shadow: var(--shadow);
-				transition: var(--transition);
-			}
-			
-			.project-card:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-			}
-			
-			.project-card h3 {
-				color: var(--primary);
-				margin-bottom: 1rem;
-			}
-			
-			.project-card p {
-				color: var(--text);
-				margin-bottom: 1.5rem;
-			}
-			
-			.project-link {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.5rem;
-				color: var(--primary);
-				text-decoration: none;
-				font-weight: 500;
-			}
-			
-			.project-link:hover {
-				text-decoration: underline;
-			}
 
 			@media (max-width: 768px) {
 				.wn-card {
@@ -550,10 +503,6 @@
 				
 				.wn-title {
 					font-size: 1.3rem;
-				}
-				
-				.projects-grid {
-					grid-template-columns: 1fr;
 				}
 			}
 		</style>
@@ -565,7 +514,7 @@
 				<nav class="nav">
 					<a href="#research">Research</a>
 					<a href="#publications">Publications</a>
-					<a href="#projects">Projects</a>
+					<a href="projects.html">Projects</a>
 					<a href="#contact">Contact</a>
 				</nav>
 			</header>
@@ -742,7 +691,7 @@
 					});
 				}, { threshold: 0.1 }); // Trigger when 10% of the element is visible
 
-				document.querySelectorAll('.research-card, .publication-item, .project-card').forEach((el) => {
+				document.querySelectorAll('.research-card, .publication-item').forEach((el) => {
 					el.classList.add('fade-in'); // Add initial styles via CSS
 					observer.observe(el);
 				});
@@ -834,7 +783,7 @@
 			// Click animations
 			const initClickAnimations = () => {
 				const interactiveElements = document.querySelectorAll(
-					'button, .research-card, .nav a, .publication-item, .wn-nav-btn, .wn-dot, .project-card'
+					'button, .research-card, .nav a, .publication-item, .wn-nav-btn, .wn-dot'
 				);
 				
 				interactiveElements.forEach(el => {
