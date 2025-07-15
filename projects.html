@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -105,7 +106,16 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease-out forwards;
         }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
 
         .project-card img {
             width: 100%;
@@ -113,6 +123,11 @@
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
         }
 
         .project-card h3 {
@@ -149,10 +164,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            transition: var(--transition);
         }
 
         .project-card a:hover {
             color: var(--secondary);
+            transform: translateX(5px);
         }
 
         .project-card:hover {
@@ -172,6 +189,12 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
         }
 
         .modal-content {
@@ -183,6 +206,14 @@
             max-height: 80vh;
             overflow-y: auto;
             position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
         }
 
         .modal-content .close {
@@ -192,6 +223,11 @@
             font-size: 1.5em;
             cursor: pointer;
             color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .modal-content .close:hover {
+            color: var(--secondary);
         }
 
         .modal-content h3 {
@@ -242,6 +278,11 @@
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -469,7 +510,7 @@
                 break;
             case 'madagascar':
                 title = "Madagascar Mobility Project";
-                content = `Culmination of an international project for my Ph.D. thesis, titled "Air Quality Evolution at the Local Scale in the Absence of a Calibration Reference Point." This ambitious endeavor was made possible through funding from the Department of GIE-GERS at Université Gustave Eiffel, the CLEAR-Doc COFUND, Université de Fianarantsoa, ​​and Madatlas Madagascar. <br><br>
+                content = `Culmination of an international project for my Ph.D. thesis, titled "Air Quality Evolution at the Local Scale in the Absence of a Calibration Reference Point." This ambitious endeavor was made possible through funding from the Department of GIE-GERS at Université Gustave Eiffel, the CLEAR-Doc COFUND, Université de Fianarantsoa, and Madatlas Madagascar. <br><br>
                 Special thanks to Dr. Hasina Rakotonirainy, Dr. Hajalalaina Aimé Richard, my supervisors Andry Rico Razakamanantsoa and Agnes Jullien, and Erwann Rayssac for their support. We also thank Madatlas, the Municipality Office Fianarantsoa, Public Hospital Fianarantsoa, and Regional Transport Office Fianarantsoa for their contributions. The project's success was made possible by the dedication of student volunteers and the collaboration of various agencies.`;
                 break;
             case 'incities':
@@ -496,20 +537,24 @@ Huge thanks to hashtag #CLEARDoc, our mentors (Amandine Bugnicourt, PhD, Guillau
         modalTitle.innerHTML = title;
         modalContent.innerHTML = content;
         modal.style.display = "flex";
+        setTimeout(() => modal.classList.add('show'), 10);
     }
 
     function closePopup() {
-        document.getElementById("popup-modal").style.display = "none";
+        const modal = document.getElementById("popup-modal");
+        modal.classList.remove('show');
+        setTimeout(() => modal.style.display = "none", 400);
     }
 
     // Close modal if clicked outside the content
     window.onclick = function(event) {
         const modal = document.getElementById("popup-modal");
         if (event.target === modal) {
-            modal.style.display = "none";
+            closePopup();
         }
     };
 </script>
 
 </body>
 </html>
+```
