@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -30,6 +29,50 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative; /* Required for absolute positioning of animation */
+        }
+
+        /* Animated sakura petals background - Minimalist anime-inspired dynamic effect */
+        .petals {
+            position: fixed;
+            top: 0;
+            left: 0; /* Corrected from 100% to 0 to make it visible */
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            width: 8px;
+            height: 16px;
+            background: rgba(255, 182, 193, 0.4); /* Subtle light pink for sakura petals */
+            border-radius: 40% 40% 0 0;
+            transform: rotate(45deg);
+            opacity: 0.6;
+            animation: fall 12s linear infinite, sway 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-5vh) rotate(0deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sway {
+            0% {
+                transform: translateX(0) rotate(45deg);
+            }
+            100% {
+                transform: translateX(20px) rotate(45deg);
+            }
         }
 
         .container {
@@ -382,6 +425,8 @@
 </head>
 <body>
 
+<div class="petals"></div> <!-- Container for the animated petals -->
+
 <div class="container">
 
     <header class="header">
@@ -506,7 +551,7 @@
         switch (project) {
             case 'dude':
                 title = "DUDE Initiative";
-                content = "A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior.Proud to have represented The 𝗗𝗨𝗗𝗘 𝗜𝗻𝗶𝘁𝗶𝗮𝘁𝗶𝘃𝗲 (c𝗶𝘁𝗶𝘇𝗲𝗻-D�_r𝗶𝘃𝗲𝗻, U𝗽𝘀𝗰𝗮𝗹𝗮𝗯𝗹𝗲, 𝗮𝗻𝗱 D𝗶𝗴𝗶𝘁𝗮𝗹 E𝗰𝗼𝗰𝗶𝘁𝗶𝗲𝘀) alongside an amazing team. 🌍💡 Victoria Cotella, Faiz Iqbal and Luka. 𝗗𝗨𝗗𝗘 is about using tech and data to make sustainable living not just possible, but rewarding. Whether you’re a student, taxpayer, or part of a minority group, we’re building a future where your eco-friendly choices pay off—literally. 🌱 ";
+                content = "A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior.Proud to have represented The 𝗗𝗨𝗗𝗘 𝗜𝗻𝗶𝘁𝗶𝗮𝘁𝗶𝘃𝗲 (c𝗶𝘁𝗶𝘇𝗲𝗻-D�_r𝗶𝘃𝗲𝗻, U𝗽𝘀𝗰𝗮𝗹𝗮𝗯𝗹𝗲, 𝗮𝗻𝗱 D𝗶𝗴𝗶𝘁𝗮𝗹 E𝗰𝗼𝗰𝗼𝗰𝗶𝘁𝗶𝗲𝘀) alongside an amazing team. 🌍💡 Victoria Cotella, Faiz Iqbal and Luka. 𝗗𝗨𝗗𝗘 is about using tech and data to make sustainable living not just possible, but rewarding. Whether you’re a student, taxpayer, or part of a minority group, we’re building a future where your eco-friendly choices pay off—literally. 🌱 ";
                 break;
             case 'madagascar':
                 title = "Madagascar Mobility Project";
@@ -553,8 +598,25 @@ Huge thanks to hashtag #CLEARDoc, our mentors (Amandine Bugnicourt, PhD, Guillau
             closePopup();
         }
     };
+
+    // Create dynamic sakura petals for background animation
+    function createPetals() {
+        const petalsContainer = document.querySelector('.petals');
+        for (let i = 0; i < 20; i++) {  // Minimal number for subtlety
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = `${Math.random() * 100}%`;
+            petal.style.animationDelay = `${Math.random() * 12}s`;
+            petal.style.animationDuration = `${Math.random() * 6 + 8}s`;  // Vary speed for natural look
+            petal.style.width = `${Math.random() * 4 + 6}px`;  // Vary size slightly
+            petal.style.height = `${Math.random() * 8 + 12}px`;
+            petalsContainer.appendChild(petal);
+        }
+    }
+
+    // Run on load
+    window.addEventListener('load', createPetals);
 </script>
 
 </body>
 </html>
-```
