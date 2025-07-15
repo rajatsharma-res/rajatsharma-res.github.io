@@ -198,6 +198,10 @@
 				transform: scale(0.98);
 			}
 
+			.profile-container {
+				position: relative;
+			}
+
 			.profile-img {
 				width: 300px;
 				height: 300px;
@@ -206,6 +210,47 @@
 				box-shadow: var(--shadow);
 				animation: float 4s ease-in-out infinite;
 				max-width: 100%; /* Ensure it doesn't overflow on small screens */
+			}
+
+			.social-circle {
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background: rgba(0, 0, 0, 0.4);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				opacity: 0;
+				transform: scale(0);
+				transition: var(--transition);
+				font-size: 30px;
+				z-index: 30;
+				cursor: pointer;
+				text-decoration: none;
+			}
+
+			.social-circle:hover {
+				transform: scale(1.2) !important;
+			}
+
+			.instagram {
+				color: black;
+				top: -20%;
+				left: 40%;
+				transition-delay: 0s;
+			}
+
+			.linkedin {
+				color: black;
+				bottom: -10%;
+				right: 100%;
+				transition-delay: 0.1s;
+			}
+
+			.profile-container:hover .social-circle {
+				opacity: 1;
+				transform: scale(1);
 			}
 
 			.research-grid {
@@ -719,7 +764,11 @@
     Explore My Work
 </a></button>
 				</div>
-				<img src="images/picme.jpeg" alt="Profile photo of Rajat Sharma" class="profile-img">
+				<div class="profile-container">
+					<img src="images/picme.jpeg" alt="Profile photo of Rajat Sharma" class="profile-img">
+					<a href="https://www.instagram.com/murphys_serendipity/" target="_blank" class="social-circle instagram"><i class="fab fa-instagram"></i></a>
+					<a href="https://www.linkedin.com/in/rajat-sharma-89421718b/" target="_blank" class="social-circle linkedin"><i class="fab fa-linkedin"></i></a>
+				</div>
 			</section>
 
 			<!-- Enhanced What's New Section -->
