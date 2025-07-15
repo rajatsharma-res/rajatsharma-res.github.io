@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --bg: #f0f2f5;
-            --surface: #e8ecef;
-            --primary: #2a4066;
-            --secondary: #1e8759;
-            --accent: #d4a017;
-            --text: #1a1c20;
+            --bg: rgba(240, 242, 245, 0.9); /* Slightly transparent to show texture */
+            --surface: #e8ecef; /* Light, neutral gray-blue as a texture base */
+            --primary: #2a4066; /* Deep blue */
+            --secondary: #1e8759; /* Forest green */
+            --accent: #d4a017; /* Warm gold */
+            --text: #1a1c20; /* Near-black */
             --shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
@@ -25,60 +25,25 @@
         }
 
         body {
-            background: var(--bg);
+            background-color: var(--bg);
+            background-image: url('https://www.transparenttextures.com/patterns/clean-gray-paper.png'); /* Subtle paper texture for minimalist anime-inspired feel */
+            animation: subtleBackgroundMove 60s linear infinite;
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative; /* Required for absolute positioning of animation */
+            position: relative;
         }
 
-        /* Animated sakura petals background - Minimalist anime-inspired dynamic effect */
-        .petals {
-            position: fixed;
-            top: 0;
-            left: 0; /* Corrected from 100% to 0 to make it visible */
-            width: 100%;
-            height: 100vh;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .petal {
-            position: absolute;
-            width: 8px;
-            height: 16px;
-            background: rgba(255, 182, 193, 0.4); /* Subtle light pink for sakura petals */
-            border-radius: 40% 40% 0 0;
-            transform: rotate(45deg);
-            opacity: 0.6;
-            animation: fall 12s linear infinite, sway 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-5vh) rotate(0deg);
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(110vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes sway {
-            0% {
-                transform: translateX(0) rotate(45deg);
-            }
-            100% {
-                transform: translateX(20px) rotate(45deg);
-            }
+        @keyframes subtleBackgroundMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            background: transparent; /* Ensure no separate background; inherits website's body background */
         }
 
         .header {
@@ -86,7 +51,6 @@
             justify-content: space-between;
             align-items: center;
             padding: 2rem 0;
-            background: var(--bg);
             z-index: 1000;
         }
 
@@ -143,7 +107,7 @@
         }
 
         .project-card {
-            background: var(--surface);
+            background: transparent; /* No separate background; uses website's body background */
             padding: 2rem;
             border-radius: 10px;
             box-shadow: var(--shadow);
@@ -425,8 +389,6 @@
 </head>
 <body>
 
-<div class="petals"></div> <!-- Container for the animated petals -->
-
 <div class="container">
 
     <header class="header">
@@ -528,7 +490,7 @@
             <h3>Network</h3>
             <a href="https://scholar.google.com/citations?user=OKQOyz4AAAAJ&hl=en" target="_blank">Google Scholar</a><br>
             <a href="https://www.linkedin.com/in/rajat-sharma-89421718b/" target="_blank">LinkedIn</a>
-            <p>Nantes campus, Allée des ponts et haussées - CS 5004, F-44344 Bouguenais Cedex, France</p>
+            <p>Nantes campus, Allée des ponts et chausées - CS 5004, F-44344 Bouguenais Cedex, France</p>
         </div>
     </footer>
 
@@ -551,7 +513,7 @@
         switch (project) {
             case 'dude':
                 title = "DUDE Initiative";
-                content = "A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior.Proud to have represented The 𝗗𝗨𝗗𝗘 𝗜𝗻𝗶𝘁𝗶𝗮𝘁𝗶𝘃𝗲 (c𝗶𝘁𝗶𝘇𝗲𝗻-D�_r𝗶𝘃𝗲𝗻, U𝗽𝘀𝗰𝗮𝗹𝗮𝗯𝗹𝗲, 𝗮𝗻𝗱 D𝗶𝗴𝗶𝘁𝗮𝗹 E𝗰𝗼𝗰𝗼𝗰𝗶𝘁𝗶𝗲𝘀) alongside an amazing team. 🌍💡 Victoria Cotella, Faiz Iqbal and Luka. 𝗗𝗨𝗗𝗘 is about using tech and data to make sustainable living not just possible, but rewarding. Whether you’re a student, taxpayer, or part of a minority group, we’re building a future where your eco-friendly choices pay off—literally. 🌱 ";
+                content = "A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior.Proud to have represented The 𝗗𝗨𝗗𝗘 𝗜𝗻𝗶𝘁𝗶𝗮𝘁𝗶𝘃𝗲 (c𝗶𝘁𝗲𝗻-D𝗿𝗶𝘃𝗲𝗻, U𝗽𝘀𝗰𝗮𝗹𝗮𝗯𝗹𝗲, 𝗮𝗻𝗱 D𝗶𝗴𝗶𝘁𝗮𝗹 E𝗰𝗼𝗰𝗼𝗰𝗶𝘁𝗶𝗲𝘀) alongside an amazing team. 🌍💡 Victoria Cotella, Faiz Iqbal and Luka. 𝗗𝗨𝗗𝗘 is about using tech and data to make sustainable living not just possible, but rewarding. 🌱 ";
                 break;
             case 'madagascar':
                 title = "Madagascar Mobility Project";
@@ -562,7 +524,7 @@
                 title = "InCITIES Program";
                 content = `Sharing the Journey of my InCITIES Program! Reflecting on this incredible journey fills me with excitement! Alongside a truly inspiring cohort, we delved deep into crucial topics such as sustainable mobility, urban planning, air quality, and transportation infrastructure resilience. <br><br>
                 One major highlight for me was our hands-on approach to tackling real-world issues, particularly in enhancing sustainable mobility around St. Gorazde Elementary School and Kindergarten. Collaborating with Žilina's esteemed architecture bureau, we not only collected valuable data but also brainstormed innovative approaches to address the challenges at hand. <br><br>
-                I am profoundly grateful for the guidance and mentorship provided by Yannick Cornet, Tibor Petrov, Christina Georgouli, Lienka, Andry Rico RAZAKAMANANTSOA, Agnes JULLIEN, Virginie Etienne and GERS - Gustave Eiffel University, Laboratoire GIE (Univ Eiffel), Université Gustave Eiffel. Their support has been instrumental in shaping our journey.`;
+                I am profoundly grateful for the guidance and mentorship provided by Yannick Cornet, Tibor Petrov, Christina Georgouli, Lienka, Andry Rico RAZAKAMANANTSOA, Agnes JULLIEN, Virginie Etienne and GERS - Gustave Eiffel University, Laboratoire GIE (Univ Eiffel), Université Gustave Eiffel.`;
                 break;
             case 'CLEAR-Doc Entrepreneurship Bootcamp':
                 title = "CLEAR-Doc Entrepreneurship Bootcamp";
@@ -598,24 +560,6 @@ Huge thanks to hashtag #CLEARDoc, our mentors (Amandine Bugnicourt, PhD, Guillau
             closePopup();
         }
     };
-
-    // Create dynamic sakura petals for background animation
-    function createPetals() {
-        const petalsContainer = document.querySelector('.petals');
-        for (let i = 0; i < 20; i++) {  // Minimal number for subtlety
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            petal.style.left = `${Math.random() * 100}%`;
-            petal.style.animationDelay = `${Math.random() * 12}s`;
-            petal.style.animationDuration = `${Math.random() * 6 + 8}s`;  // Vary speed for natural look
-            petal.style.width = `${Math.random() * 4 + 6}px`;  // Vary size slightly
-            petal.style.height = `${Math.random() * 8 + 12}px`;
-            petalsContainer.appendChild(petal);
-        }
-    }
-
-    // Run on load
-    window.addEventListener('load', createPetals);
 </script>
 
 </body>
