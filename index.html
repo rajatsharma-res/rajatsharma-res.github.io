@@ -204,6 +204,7 @@
 				object-fit: cover;
 				box-shadow: var(--shadow);
 				animation: float 4s ease-in-out infinite;
+				max-width: 100%; /* Ensure it doesn't overflow on small screens */
 			}
 
 			.research-grid {
@@ -239,8 +240,8 @@
 			}
 
 			.research-card:hover {
-				transform: translateY(-10px);
-				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+				transform: translateY(-5px) scale(1.02);
+				box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
 			}
 
 			.publication-list {
@@ -253,12 +254,13 @@
 				border-radius: 10px;
 				box-shadow: var(--shadow);
 				margin-bottom: 1.5rem;
-				transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+				transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease; /* Smooth transition */
 			}
 
 			.publication-item:hover {
 				transform: translateY(-5px);
 				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+				background: linear-gradient(135deg, #f8f9fa, #e8ecef);
 			}
 
 			.publication-item h4 {
@@ -275,6 +277,10 @@
 				text-decoration: none;
 				color: var(--primary);
 				font-weight: bold;
+			}
+
+			.publication-item:hover a {
+				color: var(--secondary);
 			}
 
 			.footer {
@@ -309,23 +315,92 @@
 				background: var(--secondary);
 			}
 
+			.menu-toggle {
+				display: none;
+				background: none;
+				border: none;
+				font-size: 1.5rem;
+				cursor: pointer;
+				color: var(--text);
+			}
+
 			@media (max-width: 768px) {
+				.container {
+					padding: 1rem; /* Reduce padding for mobile */
+				}
+
 				.hero {
 					flex-direction: column;
 					text-align: center;
-					padding: 4rem 0;
+					padding: 4rem 1rem; /* Adjust padding */
+				}
+
+				.hero-content {
+					max-width: 100%;
+					margin-bottom: 2rem;
+				}
+
+				.hero h1 {
+					font-size: 2.5rem; /* Smaller heading on mobile */
+				}
+
+				.hero h2 {
+					font-size: 2rem; /* Adjust hero h2 */
+				}
+
+				.hero p {
+					font-size: 1rem; /* Smaller text */
+					padding-left: 0; /* Remove left padding for centered text */
+				}
+
+				.hero p::before {
+					display: none; /* Remove line on mobile for better centering */
+				}
+
+				.hero button {
+					padding: 0.6rem 1.2rem; /* Smaller button */
 				}
 
 				.profile-img {
+					width: 200px;
+					height: 200px;
 					margin-top: 2rem;
+				}
+
+				.menu-toggle {
+					display: block;
 				}
 
 				.nav {
 					display: none;
+					flex-direction: column;
+					position: absolute;
+					top: 100%;
+					left: 0;
+					width: 100%;
+					background: var(--bg);
+					padding: 1rem;
+					box-shadow: var(--shadow);
+					z-index: 999;
+				}
+
+				.nav.active {
+					display: flex;
+				}
+
+				.nav a {
+					padding: 1rem;
+					border-bottom: 1px solid var(--primary);
+					text-align: center;
 				}
 
 				.research-grid {
 					grid-template-columns: 1fr;
+					gap: 1.5rem; /* Smaller gap */
+				}
+
+				.research-card {
+					padding: 1.5rem; /* Smaller padding */
 				}
 
 				.publication-item {
@@ -335,10 +410,58 @@
 				.footer {
 					flex-direction: column;
 					text-align: center;
+					padding: 2rem 0; /* Reduce padding */
 				}
 
 				.footer button {
 					margin-top: 1rem;
+				}
+
+				.whats-new-enhanced {
+					padding: 0 1rem; /* Add padding for mobile */
+				}
+
+				.wn-title {
+					font-size: 1.3rem;
+				}
+
+				.wn-card {
+					padding: 1rem;
+				}
+
+				.wn-content {
+					font-size: 0.95rem; /* Slightly smaller text */
+				}
+			}
+
+			@media (max-width: 480px) {
+				.hero {
+					padding: 3rem 0.5rem; /* Even smaller padding for very small screens */
+				}
+
+				.hero h1 {
+					font-size: 2rem;
+				}
+
+				.hero h2 {
+					font-size: 1.8rem;
+				}
+
+				.profile-img {
+					width: 150px;
+					height: 150px;
+				}
+
+				.research-card h3 {
+					font-size: 1.2rem;
+				}
+
+				.publication-item h4 {
+					font-size: 1.1rem;
+				}
+
+				.footer p {
+					font-size: 0.9rem;
 				}
 			}
 
@@ -495,22 +618,13 @@
 			.wn-dot.active {
 				background: #3498db;
 			}
-
-			@media (max-width: 768px) {
-				.wn-card {
-					padding: 1rem;
-				}
-				
-				.wn-title {
-					font-size: 1.3rem;
-				}
-			}
 		</style>
 	</head>
 	<body>
 		<div class="container">
 			<header class="header">
 				<h1 style="font-size: 25px;">Rajat Sharma</h1>
+				<button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
 				<nav class="nav">
 					<a href="#research">Research</a>
 					<a href="#publications">Publications</a>
@@ -581,7 +695,6 @@
 					<p class="wn-content">
 					  Research Mobility Update: I have commenced a three-month research stay at the Aerosol Particle Technology Laboratory, IIT Goa, as part of a collaborative initiative between Université Gustave Eiffel, IIT Goa, and the Indian Institute of Tropical Meteorology (IITM) Pune.
 					</p>
-				  </div>
 				</div>
 				
 				<!-- Update 3 -->
@@ -796,12 +909,32 @@
 				});
 			};
 
+			// Mobile menu toggle
+			const initMobileMenu = () => {
+				const menuToggle = document.querySelector('.menu-toggle');
+				const nav = document.querySelector('.nav');
+				if (menuToggle && nav) {
+					menuToggle.addEventListener('click', () => {
+						nav.classList.toggle('active');
+						const icon = menuToggle.querySelector('i');
+						if (nav.classList.contains('active')) {
+							icon.classList.remove('fa-bars');
+							icon.classList.add('fa-times');
+						} else {
+							icon.classList.remove('fa-times');
+							icon.classList.add('fa-bars');
+						}
+					});
+				}
+			};
+
 			// Initialize everything
 			document.addEventListener('DOMContentLoaded', () => {
 				animateOnScroll();
 				filterPublications();
 				initCarousel();
 				initClickAnimations();
+				initMobileMenu();
 			});
 		</script>
 	</body>
