@@ -12,7 +12,7 @@
 				--bg: rgba(240, 242, 245, 0.9); /* Slightly transparent to show texture */
 				--surface: #e8ecef; /* Light, neutral gray-blue as a texture base */
 				--primary: #2a4066; /* Deep blue */
-				--secondary: #1e8759; /* Forest green */
+				--secondary: #008080; /* Forest green */
 				--accent: #d4a017; /* Warm gold */
 				--text: #1a1c20; /* Near-black */
 				--shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
@@ -131,72 +131,100 @@
 			}
 
 			.hero {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				padding: 6rem 5%;
-				position: relative;
-				overflow: hidden;
-				background: linear-gradient(135deg, rgba(72, 61, 139, 0.2), rgba(0, 206, 158, 0.2));
-				background-size: 200% 200%;
-				animation: gradientBackground 15s ease-in-out infinite alternate;
-				border-radius: 16px;
-			}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6rem 5%;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(72, 61, 139, 0.2), rgba(0, 206, 158, 0.2));
+    background-size: 200% 200%;
+    animation: gradientBackground 15s ease-in-out infinite alternate;
+    border-radius: 16px;
+}
 
-			.hero-content {
-				max-width: 600px;
-				animation: fadeIn 1s ease-in-out;
-			}
+.hero-content {
+    max-width: 600px;
+    animation: fadeIn 1s ease-in-out;
+}
 
-			.hero h1 {
-				font-size: 3.5rem;
-				margin-bottom: 1rem;
-				color: var(--primary);
-			}
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
 
-			.hero p {
-				font-size: 1.2rem;
-				color: var(--text);
-				margin-bottom: 2rem;
-				position: relative;
-				padding-left: 20px;
-			}
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 20px;
+}
 
-			.hero p::before {
-				content: "";
-				position: absolute;
-				left: 0;
-				top: 50%;
-				transform: translateY(-50%);
-				width: 2px;
-				height: 100%;
-				background-color: #000;
-				margin-right: 10px;
-			}
+.hero p::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 100%;
+    background-color: #000;
+    margin-right: 10px;
+}
 
-			.hero button {
-				background: var(--primary);
-				border: none;
-				color: white;
-				padding: 0.75rem 1.75rem;
-				border-radius: 4px;
-				cursor: pointer;
-				transition: var(--transition);
-				font-weight: 500;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-			}
+.hero button {
+    background: var(--primary);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;  /* Required for pseudo-elements */
+    overflow: hidden;    /* Hide overflow of ripples */
+}
 
-			.hero button:hover {
-				background: var(--secondary);
-				transform: scale(1.02);
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-			}
+.hero button::before {  /* Create a ripple layer */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);  /* White semi-transparent for wave effect */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+}
 
-			.hero button:active {
-				transform: scale(0.98);
-			}
+.hero button:hover::before {
+    width: 300px;  /* Expand size - adjust based on button size */
+    height: 300px;
+    opacity: 1;
+    animation: rippleWave 1s ease-out;  /* Add wave animation */
+}
+
+.hero button:hover {
+    background: var(--secondary);
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(95, 0, 0, 0.15);
+}
+
+.hero button:active {
+    transform: scale(0.98);
+}
+
+@keyframes rippleWave {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }  /* Fades out while expanding */
+}
 
 			.profile-container {
 				position: relative;
