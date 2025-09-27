@@ -63,14 +63,40 @@
     .instagram{color:#000;top:-20%;left:40%}
     .linkedin{color:#000;bottom:-10%;right:100%}
     .profile-container:hover .social-circle{opacity:1;transform:scale(1)}
+    
+    /* Updated Research Grid Styles with Blue-to-Orange Gradient Top Border Animation and Icon Effect */
     .research-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin:4rem 0}
-    .research-card{background:var(--surface);padding:2rem;border-radius:10px;box-shadow:var(--shadow);transition:var(--transition);text-align:center;cursor:pointer}
-    .research-card i{font-size:2rem;color:var(--primary);margin-bottom:1rem}
+    .research-card{background:var(--surface);padding:2rem;border-radius:10px;box-shadow:var(--shadow);transition:var(--transition);text-align:center;cursor:pointer; position: relative; overflow: hidden;}
+    .research-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: left 0.8s ease;
+    }
+    .research-card:hover::before { left: 100%; }
+    .research-card i{font-size:2rem;color:var(--primary);margin-bottom:1rem; transition: transform 0.3s ease, color 0.3s ease;}
+    .research-card:hover i { transform: scale(1.2) rotate(5deg); color: var(--secondary); }
     .research-card h3{color:var(--primary);margin-bottom:1rem}
     .research-card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 20px 50px rgba(0,0,0,.15)}
 
+    /* Updated Publication List Styles with Blue-to-Orange Gradient Side Border Animation */
     .publication-list{list-style:none}
-    .publication-item{background:var(--surface);padding:2rem;border-radius:10px;box-shadow:var(--shadow);margin-bottom:1.5rem;transition:opacity .3s ease,transform .3s ease,background .3s ease}
+    .publication-item{background:var(--surface);padding:2rem;border-radius:10px;box-shadow:var(--shadow);margin-bottom:1.5rem;transition:opacity .3s ease,transform .3s ease,background .3s ease; position: relative; overflow: hidden;}
+    .publication-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -100%;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      transition: top 0.8s ease;
+    }
+    .publication-item:hover::before { top: 100%; }
     .publication-item:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,.2);background:linear-gradient(135deg,#f8f9fa,#e8ecef)}
     .publication-item h4{color:var(--primary);margin-bottom:1rem}
     .publication-item a{text-decoration:none;color:var(--primary);font-weight:bold}
@@ -87,7 +113,7 @@
       .hero-content{max-width:100%;margin-bottom:2rem}
       .profile-img{width:200px;height:200px;margin-top:2rem}
       .menu-toggle{display:block}
-      .nav{display:none;flex-direction:column;position:absolute;top:100%;left:0;width:100%;background:var(--bg);padding:1rem;box-shadow:var(--shadow);z-index:999}
+      .nav{display:none;flex-direction:column;position:absolute;top:100%;left:0;width:100%;background:var(--bg);padding:1rem;box-shadow:var(--shadow);z-index:99999}
       .nav.active{display:flex}
       .nav a{padding:1rem;border-bottom:1px solid var(--primary);text-align:center}
       .research-grid{grid-template-columns:1fr;gap:1.5rem}
@@ -100,8 +126,8 @@
     /* Loader */
     #loader{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;opacity:1;transition:opacity .5s ease}
     #loader.hidden{opacity:0;pointer-events:none}
-    .loader-spinner{font-size:4rem;color:var(--primary);animation:spin 1s linear infinite,pulse 1.5s ease-in-out infinite}
-    @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+    .loader-spinner{font-size:4rem;int-color: var(--primary);animation:spin 1s linear infinite,pulse 1.5s ease-in-out infinite}
+    @keyframes spin{0%{transform:rotate(0)}100%{transform: rotate(360deg)}}
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.2)}}
     .loader-text{margin-top:1rem;font-size:1.2rem;color:var(--text);font-weight:500}
 
@@ -214,8 +240,8 @@
 
     <section class="hero">
       <div class="hero-content">
-        <h2 style="font-size:36px">Hi, I’m Rajat 👋</h2>
-        <p class="intro-small" style="font-size:1.2rem;color:var(--text);"> Glad you’re here! </p>
+        <h2 style="font-size:36px">Hey, I'm Rajat,</h2>
+        <p class="intro-small" style="font-size:1.2rem;color:var(--text);">Have a good time!</p>
         <div class="collapsible-section">
           <div class="trigger">
             <span class="trigger-text">This is me</span><span class="blinking-arrow">▶</span>
@@ -266,7 +292,7 @@
 </div>
     </section>
 
-    <!-- Your existing sections ... -->
+    <!-- Updated Research Grid Section -->
     <section id="research" class="research-grid">
       <div class="research-card surface-element" data-category="low-cost-sensors">
         <i class="fas fa-atom"></i><h3>Low Cost Sensors</h3><p>Next-gen environmental monitoring systems</p>
@@ -279,6 +305,7 @@
       </div>
     </section>
 
+    <!-- Updated Publications Section -->
     <section id="publications">
       <h2>Publication List</h2>
       <button id="reset-filter" style="margin-top:20px;padding:10px 20px;background-color:var(--primary);color:#fff;border:none;border-radius:5px;cursor:pointer">Show All Publications</button>
@@ -327,7 +354,7 @@
         <div id="coauthor-graph" role="img" aria-label="Force-directed graph of Rajat Sharma's co-author network"></div>
         <aside class="coauthor-side">
           <h3 class="side-title">Papers</h3>
-          <ul id="paper-list" class="paper-list"><!-- filled by JS --></ul>
+          <ul id="paper-list" class="paper-list"></ul>
           <p class="legend-caption">Thicker lines = more shared papers. Hulls pulse on hover.</p>
           <p class="legend-caption">Hover a paper to highlight its authors. Click to lock. Drag nodes!</p>
         </aside>
@@ -380,7 +407,7 @@
       }
     })();
 
-    // Publications filter (unchanged from your version)
+    // Publications filter
     (function(){
       const researchCards = document.querySelectorAll('.research-card');
       const publicationItems = document.querySelectorAll('.publication-item');
@@ -588,7 +615,7 @@
         authorPapers.forEach(p => p.authors.forEach(a => clusterAuthors.add(a)));
         highlightAuthors(Array.from(clusterAuthors), true);
         // Pulse the central node
-        node.filter(d => d.id === author.id).transition().duration(500).attr('r', nodeR(author.size) * 1.5).transition().attr('r', nodeR(author.size));
+        node.filter(d => d.id === author.id).transition().duration(500).attr('r', nodeR(author.size) * 1.5).transition().attr('r', nodeR(d.size));
       }
 
       function highlightAuthors(authors, persist = false){
@@ -643,4 +670,3 @@
   </script>
 </body>
 </html>
-
