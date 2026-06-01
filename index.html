@@ -185,6 +185,49 @@
     .publication-item a{text-decoration:none;color:var(--primary);font-weight:bold}
     .publication-item:hover a{color:var(--secondary)}
 
+    /* ===== Activity: Conferences / Events / Grants (tabbed) ===== */
+    .activity{margin:4rem 0}
+    .activity > h2{color:var(--primary);margin-bottom:1.25rem}
+    .tab-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+    .tab-btn{
+      background:var(--surface);border:1px solid #d8dde3;color:var(--primary);
+      padding:.6rem 1.1rem;border-radius:999px;cursor:pointer;font-weight:600;font-size:.9rem;
+      transition:var(--transition);display:inline-flex;align-items:center;gap:.5rem;
+    }
+    .tab-btn i{font-size:.95rem;transition:transform .3s ease}
+    .tab-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.08)}
+    .tab-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .tab-btn.active i{transform:scale(1.1)}
+    .tab-count{font-size:.72rem;background:rgba(0,0,0,.08);padding:.05rem .45rem;border-radius:999px}
+    .tab-btn.active .tab-count{background:rgba(255,255,255,.25)}
+
+    .tab-panel{display:none;animation:tabFade .4s ease}
+    .tab-panel.active{display:block}
+    @keyframes tabFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+    .activity-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.25rem}
+    .activity-item{
+      background:var(--surface);padding:1.25rem 1.4rem;border-radius:10px;box-shadow:var(--shadow);
+      transition:var(--transition);position:relative;overflow:hidden;
+    }
+    .activity-item::before{
+      content:'';position:absolute;left:0;top:-100%;width:4px;height:100%;
+      background:linear-gradient(180deg,var(--primary),var(--accent));transition:top .8s ease;
+    }
+    .activity-item:hover::before{top:100%}
+    .activity-item:hover{transform:translateY(-4px);box-shadow:0 15px 38px rgba(0,0,0,.16)}
+    .activity-item h4{color:var(--primary);font-size:1.02rem;margin-bottom:.3rem;display:flex;align-items:center;flex-wrap:wrap;gap:.5rem}
+    .activity-meta{font-size:.82rem;color:var(--text);opacity:.75;margin-bottom:.4rem}
+    .activity-desc{font-size:.88rem;color:var(--text);opacity:.92;font-style:italic;line-height:1.45}
+    .activity-item a{color:var(--primary);font-weight:700;text-decoration:none;font-size:.85rem}
+    .activity-item a:hover{color:var(--secondary)}
+    .pill{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.15rem .55rem;border-radius:999px;white-space:nowrap}
+    .pill-oral{background:#0f766e;color:#fff}
+    .pill-poster{background:#7c3aed;color:#fff}
+    .pill-talk{background:#2a4066;color:#fff}
+    .pill-done{background:#1e8759;color:#fff}
+    @media(max-width:680px){.activity-list{grid-template-columns:1fr}}
+
     .footer{display:flex;justify-content:space-between;align-items:center;padding:4rem 0;border-top:1px solid var(--primary)}
     .footer button{background:var(--primary);border:none;color:#fff;padding:.8rem 2rem;border-radius:5px;cursor:pointer;transition:var(--transition)}
     .footer button:hover{background:var(--secondary)}
@@ -292,6 +335,7 @@
         <a href="#highlights">News</a>
         <a href="#research">Research</a>
         <a href="#publications">Publications</a>
+        <a href="#activity">Activity</a>
         <a href="#coauthors">Co-authors</a>
         <a href="projects.html">Projects</a>
         <a href="#contact">Contact</a>
@@ -411,8 +455,8 @@
       <ul class="publication-list">
         <li class="publication-item surface-element" data-category="air-quality">
           <h4>A Hybrid Urban Gridded Inventory &amp; Sensor-based Approach for Source Apportionment (HUGISS)<span class="badge-new">New</span></h4>
-          <p>SSRN Working Paper • 2026</p>
-          <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6080570" target="_blank">View Paper →</a>
+          <p>City and Environmental Interactions (Under Review) &amp; SSRN • 2026</p>
+          <a href="https://dx.doi.org/10.2139/ssrn.6080570" target="_blank">View Paper →</a>
         </li>
         <li class="publication-item surface-element" data-category="air-quality">
           <h4>Analysis of seasonal and spatial distribution of particulate matters and gaseous pollutants around an open cast coal mining area of Odisha, India</h4>
@@ -445,6 +489,74 @@
           <a href="https://www.mdpi.com/2413-8851/7/2/38" target="_blank">View Paper →</a>
         </li>
       </ul>
+    </section>
+
+    <!-- ===== Activity: Conferences / Events / Grants ===== -->
+    <section id="activity" class="activity">
+      <h2>Conferences, Events &amp; Grants</h2>
+      <div class="tab-bar" role="tablist">
+        <button class="tab-btn active" data-tab="conferences"><i class="fas fa-chalkboard-user"></i> Conferences <span class="tab-count">3</span></button>
+        <button class="tab-btn" data-tab="events"><i class="fas fa-users-rectangle"></i> Events &amp; Workshops <span class="tab-count">2</span></button>
+        <button class="tab-btn" data-tab="grants"><i class="fas fa-award"></i> Grants <span class="tab-count">3</span></button>
+      </div>
+
+      <!-- Conferences -->
+      <div class="tab-panel active" id="tab-conferences">
+        <ul class="activity-list">
+          <li class="activity-item">
+            <h4>GEIA Conference (21st) <span class="pill pill-poster">Poster</span></h4>
+            <p class="activity-meta">Abidjan, Ivory Coast · July 2025</p>
+            <p class="activity-desc">Source-specific calibration of LCS using ML and emission inventories, Madagascar.</p>
+          </li>
+          <li class="activity-item">
+            <h4>EGU General Assembly 2026 <span class="pill pill-oral">Oral</span></h4>
+            <p class="activity-meta">Vienna, Austria · May 2026</p>
+            <p class="activity-desc">Regression-based apportionment with LCS using ML and emission inventories.</p>
+          </li>
+          <li class="activity-item">
+            <h4>Madatlas Feedback Days 2026 <span class="pill pill-poster">Poster</span></h4>
+            <p class="activity-meta">Paris · May 2026</p>
+            <p class="activity-desc">ML and emission-inventory based source apportionment from LCS, Madagascar.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Events & Workshops -->
+      <div class="tab-panel" id="tab-events">
+        <ul class="activity-list">
+          <li class="activity-item">
+            <h4>EU TalentOn 2024 <span class="pill pill-talk">Innovation</span></h4>
+            <p class="activity-meta">Poland · September 2024</p>
+            <p class="activity-desc">Participation with the DUDE initiative for citizen-driven eco-city solutions.</p>
+          </li>
+          <li class="activity-item">
+            <h4>Doctoriales 2024 <span class="pill pill-oral">Oral</span></h4>
+            <p class="activity-meta">France · October 2024</p>
+            <p class="activity-desc">Showcased initial results from the Madagascar field campaign.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Grants -->
+      <div class="tab-panel" id="tab-grants">
+        <ul class="activity-list">
+          <li class="activity-item">
+            <h4>ED SIS Mobility Grant 2024 <span class="pill pill-done">Completed</span></h4>
+            <p class="activity-meta">2024</p>
+            <p class="activity-desc">Funding for Madagascar mobility and research activities.</p>
+          </li>
+          <li class="activity-item">
+            <h4>Erasmus Mobility Grant <span class="pill pill-done">Completed</span></h4>
+            <p class="activity-meta">2024</p>
+            <p class="activity-desc">Support for Blended Intensive Programme (BIP) at UNIZA, Slovakia.</p>
+          </li>
+          <li class="activity-item">
+            <h4>EU Science is Wonderful! 2026 <span class="pill pill-done">Completed</span></h4>
+            <p class="activity-meta">2026</p>
+            <p class="activity-desc">Selection and funding for public booth representation.</p>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <!-- ===== Co-Author Network ===== -->
@@ -549,6 +661,17 @@
           }
         });
       }
+    })();
+
+    // Activity tabs (Conferences / Events / Grants)
+    (function(){
+      const btns = document.querySelectorAll('.tab-btn');
+      const panels = document.querySelectorAll('.tab-panel');
+      btns.forEach(btn => btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        btns.forEach(b => b.classList.toggle('active', b === btn));
+        panels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + target));
+      }));
     })();
 
     /* ===========================
