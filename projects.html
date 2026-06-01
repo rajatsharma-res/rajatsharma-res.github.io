@@ -65,6 +65,7 @@
         .project-card:nth-child(5) { animation-delay: 0.5s; }
         .project-card:nth-child(6) { animation-delay: 0.6s; }
         .project-card:nth-child(7) { animation-delay: 0.7s; }
+        .project-card:nth-child(8) { animation-delay: 0.8s; }
 
         .badge-new{position:absolute;top:1rem;right:1rem;z-index:5;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.2rem .6rem;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.2)}
 
@@ -146,9 +147,9 @@
         <div class="project-card">
             <span class="badge-new">Latest</span>
             <!-- 👇 CHANGE THE src BELOW to your own photo, e.g. images/phd-defense.jpg -->
-            <img src="images/phd.jpeg" alt="PhD Defense: 28 May 2026">
-            <h3>PhD Defense - 28 May 2026</h3>
-            <p class="truncated-text">Three continents, three different worlds: Madagascar (low-income), India (middle-income) and France (high-income). One question followed me everywhere - can low-cost air quality sensors actually tell people what they're breathing? On May 28th I successfully defended my PhD.</p>
+            <img src="images/REPLACE-phd-defense.jpg" alt="PhD Defense — 28 May 2026">
+            <h3>PhD Defense — 28 May 2026</h3>
+            <p class="truncated-text">Three continents, three different worlds: Madagascar (low-income), India (middle-income) and France (high-income). One question followed me everywhere — can low-cost air quality sensors actually tell people what they're breathing? On May 28th I successfully defended my PhD.</p>
             <div class="links">
                 <a href="#" onclick="openPopup('defense')">Read More <i class="fas fa-arrow-right"></i></a>
                 <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-cleardoc-phd-activity-7466417923214155777-3Lbg" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
@@ -159,12 +160,24 @@
         <div class="project-card">
             <span class="badge-new">New</span>
             <!-- 👇 CHANGE THE src BELOW to your own photo, e.g. images/egu-2026.jpg -->
-            <img src="images/egu.jpeg" alt="EGU 2026: Oral Presentation">
-            <h3>EGU 2026 - Oral Presentation</h3>
-            <p class="truncated-text">I gave my first big conference talk at the European Geosciences Union (EGU) 2026. A big room - professors, researchers, people who've spent decades on this - but somewhere in the middle I stopped being nervous, because I genuinely believe in what we've built: HUGISS, connecting air quality sensors with emission inventories for source apportionment.</p>
+            <img src="images/REPLACE-egu-2026.jpg" alt="EGU 2026 — Oral Presentation">
+            <h3>EGU 2026 — Oral Presentation</h3>
+            <p class="truncated-text">I gave my first big conference talk at the European Geosciences Union (EGU) 2026. A big room — professors, researchers, people who've spent decades on this — but somewhere in the middle I stopped being nervous, because I genuinely believe in what we've built: HUGISS, connecting air quality sensors with emission inventories for source apportionment.</p>
             <div class="links">
                 <a href="#" onclick="openPopup('egu')">Read More <i class="fas fa-arrow-right"></i></a>
                 <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-egu26-airquality-activity-7458815726192164864-he8a" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Science is Wonderful! 2026 -->
+        <div class="project-card">
+            <!-- 👇 CHANGE THE src BELOW to your own photo, e.g. images/science-wonderful.jpg -->
+            <img src="images/1773982553086.jfif" alt="Science is Wonderful! 2026 - Air Detectives booth">
+            <h3>Science is Wonderful! 2026</h3>
+            <p class="truncated-text">What happens when you take air pollution science out of the lab and into people's hands? At Science is Wonderful! (Marie Skłodowska-Curie Actions, European Commission), we turned air quality research into an interactive "Air Detectives" experience where visitors built their own cities and saw their choices change the air in real time.</p>
+            <div class="links">
+                <a href="#" onclick="openPopup('sciencewonderful')">Read More <i class="fas fa-arrow-right"></i></a>
+                <a href="https://marie-sklodowska-curie-actions.ec.europa.eu/science-is-wonderful" target="_blank">Event <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
 
@@ -219,8 +232,8 @@
             <img src="images/WhatsApp Image 2025-07-06 at 3.21.42 PM.jpeg" alt="MT180 Pitch">
             <h3>MT180</h3>
             <p class="truncated-text">🚀 One stage. Two bold ideas. One unforgettable week in Paris.
-🎓 Kicked things off with my MT180 thesis pitch - 180 seconds to distill months of research into something punchy and public-facing.
- Sharing a quick snippet below - hope it sparks your curiosity!</p>
+🎓 Kicked things off with my MT180 thesis pitch — 180 seconds to distill months of research into something punchy and public-facing.
+ Sharing a quick snippet below — hope it sparks your curiosity!</p>
             <div class="links">
                 <a href="#" onclick="openPopup('MT180 Pitch')">Read More <i class="fas fa-arrow-right"></i></a>
                 <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-innovation-entrepreneurship-activity-7347620211220488193-i2Kz?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
@@ -268,25 +281,35 @@
         let title, content;
         switch (project) {
             case 'defense':
-                title = "PhD Defense - 28 May 2026";
+                title = "PhD Defense — 28 May 2026";
                 content = `🌍 Three continents. Three different worlds: Madagascar (low-income), India (middle-income), and France (high-income). One question followed me everywhere: can low-cost air quality sensors actually tell people what they're breathing?<br><br>
-                On May 28th, I successfully defended my PhD 🎓 answering that question. <strong>Thesis title:</strong> "Modeling Urban PM Source Contributions Using Integrated Low-Cost Air Quality Sensors and Emission Inventories Across Diverse Environments." The core shift of this work was moving from passive monitoring to active interpretation - turning raw sensor data into meaningful insights about pollution sources.<br><br>
+                On May 28th, I successfully defended my PhD 🎓 answering that question. <strong>Thesis title:</strong> "Modeling Urban PM Source Contributions Using Integrated Low-Cost Air Quality Sensors and Emission Inventories Across Diverse Environments." The core shift of this work was moving from passive monitoring to active interpretation — turning raw sensor data into meaningful insights about pollution sources.<br><br>
                 The research came in three parts:<br>
-                <strong>1. Sensor Reliability</strong> - methods to know exactly when to trust (and when not to trust) low-cost sensors across vastly different climates and environments.<br>
-                <strong>2. Data Scarcity & Economic Weighting</strong> - robust frameworks built from the ground up for resource-limited settings.<br>
-                <strong>3. HUGISS Model</strong> - a new hybrid approach fusing emission inventories with low-cost sensor networks to enable source apportionment using affordable technology.<br><br>
+                <strong>1. Sensor Reliability</strong> — methods to know exactly when to trust (and when not to trust) low-cost sensors across vastly different climates and environments.<br>
+                <strong>2. Data Scarcity & Economic Weighting</strong> — robust frameworks built from the ground up for resource-limited settings.<br>
+                <strong>3. HUGISS Model</strong> — a new hybrid approach fusing emission inventories with low-cost sensor networks to enable source apportionment using affordable technology.<br><br>
                 🙏 Deep thanks to my supervisors Dr. Andry Rico Razakamanantsoa and Dr. Agnes Jullien, along with Erwann Rayssac, and to Virginie Etienne, Cerise Randon and the entire CLEARDoc team. Grateful to MADATLAS Université de Fianarantsoa, IIT Goa and the Indian Institute of Tropical Meteorology Pune for their support during my international mobility periods, and to my Doctoral Committee for their valuable feedback. And to Laboratoire GIE, Université Gustave Eiffel, AtmoTrack, GERS and CLEARDoc for making it possible. ✨`;
                 break;
             case 'egu':
-                title = "EGU 2026 - Oral Presentation";
-                content = `I gave my first big conference talk at the European Geosciences Union (EGU) 2026 this week. I was nervous - it's a big room: professors, researchers, people who've spent decades on this. But somewhere in the middle of it I stopped being nervous, because I realised I genuinely believe in what we've built.<br><br>
-                We've been trying to answer a simple question that turns out to be really hard: source apportionment through air quality sensors. Air quality sensors tell you the air is bad. Emission inventories tell you what's being emitted. But they've never really been connected - not in a way that gives you actual numbers at the local scale. That's what <strong>HUGISS</strong> (A Hybrid Urban Gridded Inventory &amp; Sensor-based Approach for Source Apportionment) does. Seeing people whose work I've read for years genuinely engage with it was something I'll carry for a long time.<br><br>
+                title = "EGU 2026 — Oral Presentation";
+                content = `I gave my first big conference talk at the European Geosciences Union (EGU) 2026 this week. I was nervous — it's a big room: professors, researchers, people who've spent decades on this. But somewhere in the middle of it I stopped being nervous, because I realised I genuinely believe in what we've built.<br><br>
+                We've been trying to answer a simple question that turns out to be really hard: source apportionment through air quality sensors. Air quality sensors tell you the air is bad. Emission inventories tell you what's being emitted. But they've never really been connected — not in a way that gives you actual numbers at the local scale. That's what <strong>HUGISS</strong> (A Hybrid Urban Gridded Inventory &amp; Sensor-based Approach for Source Apportionment) does. Seeing people whose work I've read for years genuinely engage with it was something I'll carry for a long time.<br><br>
                 I'm especially grateful to the session conveners (Sebastian Diez, Nicole Cowell, Miriam Chacón Mateos, Kwabena Fosu-Amankwah) of "Low-cost air quality sensors: challenges, opportunities, and collaborative strategies across the world," and to session chairs Francis Pope and Nuria Castell for the engaging exchange during my presentation.<br><br>
-                Thank you to my supervisors Andry Rico Razakamanantsoa and Agnes Jullien, and co-author Erwann Rayssac - this is as much yours as mine 🙏. And to Laboratoire GIE, Université Gustave Eiffel, AtmoTrack, GERS, CLEARDoc and Allin-Wayra for making it possible. ✨`;
+                Thank you to my supervisors Andry Rico Razakamanantsoa and Agnes Jullien, and co-author Erwann Rayssac — this is as much yours as mine 🙏. And to Laboratoire GIE, Université Gustave Eiffel, AtmoTrack, GERS, CLEARDoc and Allin-Wayra for making it possible. ✨`;
+                break;
+            case 'sciencewonderful':
+                title = "Science is Wonderful! 2026";
+                content = `<strong>What happens when you take air pollution science out of the lab and into people's hands?</strong> Curiosity beats complexity. Every time.<br><br>
+                At Science is Wonderful! (Marie Skłodowska-Curie Actions, European Commission), we turned air quality research into an interactive experience. Through our "Air Detectives" setup, participants built their own "cities" — making choices on transport, cooking, industries and waste — and instantly saw how those decisions affected air quality:<br><br>
+                &#8226; Lifestyle choices &rarr; measurable pollution changes<br>
+                &#8226; "Clean vs polluted lungs" in real time<br>
+                &#8226; Insights linked to data from Madagascar, India and Europe<br><br>
+                All measured using low-cost sensors (AtmoTrack) alongside reference-grade instruments. What stood out wasn't the technology — it was the curiosity and the questions. Science only creates impact when it connects with society.<br><br>
+                Proud to represent Université Gustave Eiffel, International | Université Gustave Eiffel and Laboratoire GIE (Univ Eiffel). Grateful to the organising team, and to an amazing team effort with Erwann Rayssac, Louis Baptist and Andry Rico Razakamanantsoa.`;
                 break;
             case 'dude':
                 title = "DUDE Initiative";
-                content = "A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior. Proud to have represented The DUDE Initiative (citizen-Driven, Upscalable, and Digital Ecocities) alongside an amazing team - Victoria Cotella, Faiz Iqbal and Luka. DUDE is about using tech and data to make sustainable living not just possible, but rewarding. 🌱";
+                content = "A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior. Proud to have represented The DUDE Initiative (citizen-Driven, Upscalable, and Digital Ecocities) alongside an amazing team — Victoria Cotella, Faiz Iqbal and Luka. DUDE is about using tech and data to make sustainable living not just possible, but rewarding. 🌱";
                 break;
             case 'madagascar':
                 title = "Madagascar Mobility Project";
@@ -309,8 +332,8 @@ Huge thanks to #CLEARDoc, our mentors (Amandine Bugnicourt, PhD, Guillaume Berte
             case 'MT180 Pitch':
                 title = "MT180 Pitch";
                 content = `🚀 One stage. Two bold ideas. One unforgettable week in Paris.
-🎓 Kicked things off with my MT180 thesis pitch - 180 seconds to distill months of research into something punchy and public-facing.
- Sharing a quick snippet below - hope it sparks your curiosity!`;
+🎓 Kicked things off with my MT180 thesis pitch — 180 seconds to distill months of research into something punchy and public-facing.
+ Sharing a quick snippet below — hope it sparks your curiosity!`;
                 break;
         }
 
