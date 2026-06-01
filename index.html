@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Rajat Sharma | Doctoral Researcher (PhD)</title>
+  <title>Dr. Rajat Sharma | Air Quality Researcher</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -63,8 +63,75 @@
     .instagram{color:#000;top:-20%;left:40%}
     .linkedin{color:#000;bottom:-10%;right:100%}
     .profile-container:hover .social-circle{opacity:1;transform:scale(1)}
-    
-    /* Updated Research Grid Styles with Blue-to-Orange Gradient Top Border Animation and Icon Effect */
+
+    /* Status badge for new/recent items */
+    .badge-new{display:inline-block;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.15rem .5rem;border-radius:999px;margin-left:.5rem;vertical-align:middle}
+
+    /* Highlights — horizontal research-journey timeline */
+    .highlights{margin:3.5rem 0}
+    .highlights-head{text-align:center;margin-bottom:2.5rem}
+    .highlights-head h2{color:var(--primary);font-size:1.75rem;margin-bottom:.2rem}
+    .highlights-head p{color:var(--text);opacity:.7;font-size:.95rem}
+
+    .timeline{position:relative;display:flex;justify-content:space-between;gap:1rem;padding:0 1rem;max-width:900px;margin:0 auto}
+    /* the track line */
+    .timeline::before{
+      content:'';position:absolute;left:1rem;right:1rem;top:50%;height:3px;transform:translateY(-50%);
+      background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));
+      border-radius:999px;opacity:.55;
+    }
+    .tl-item{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;min-width:0}
+
+    /* node */
+    .tl-node{
+      position:relative;z-index:2;width:48px;height:48px;border-radius:50%;background:var(--surface);
+      border:3px solid var(--primary);display:flex;align-items:center;justify-content:center;
+      color:var(--primary);font-size:1.15rem;box-shadow:var(--shadow);cursor:default;
+      transition:var(--transition);
+    }
+    .tl-node::after{
+      content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--accent);
+      opacity:0;transform:scale(.8);transition:opacity .35s ease,transform .35s ease;
+    }
+    .tl-item:hover .tl-node{transform:scale(1.12);border-color:var(--secondary);color:var(--secondary)}
+    .tl-item:hover .tl-node::after{opacity:1;transform:scale(1);animation:tlPulse 1.8s ease-in-out infinite}
+    @keyframes tlPulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.18);opacity:.2}}
+
+    .tl-date{margin-top:.7rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--secondary)}
+    .tl-title{margin-top:.25rem;font-size:.92rem;font-weight:600;color:var(--primary);line-height:1.3}
+
+    /* hover detail panel */
+    .tl-detail{
+      position:absolute;bottom:calc(100% + 14px);left:50%;transform:translateX(-50%) translateY(8px);
+      width:230px;max-width:78vw;background:var(--surface);border-radius:10px;padding:.85rem 1rem;
+      box-shadow:0 14px 34px rgba(0,0,0,.16);opacity:0;pointer-events:none;
+      transition:opacity .3s ease,transform .3s ease;z-index:5;overflow:hidden;
+    }
+    .tl-detail::before{
+      content:'';position:absolute;top:0;left:-100%;width:100%;height:3px;
+      background:linear-gradient(90deg,var(--primary),var(--accent));transition:left .8s ease;
+    }
+    .tl-detail::after{
+      content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
+      border:7px solid transparent;border-top-color:var(--surface);
+    }
+    .tl-item:hover .tl-detail{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+    .tl-item:hover .tl-detail::before{left:100%}
+    .tl-detail p{font-size:.82rem;color:var(--text);opacity:.9;line-height:1.45;margin-bottom:.55rem}
+    .tl-detail a{text-decoration:none;color:var(--primary);font-weight:700;font-size:.8rem;display:inline-flex;align-items:center;gap:5px;transition:var(--transition)}
+    .tl-detail a:hover{color:var(--secondary);transform:translateX(4px)}
+
+    @media(max-width:680px){
+      .timeline{flex-direction:column;gap:2rem;padding-left:2rem;max-width:none}
+      .timeline::before{left:calc(2rem + 23px);right:auto;top:1rem;bottom:1rem;width:3px;height:auto;transform:none}
+      .tl-item{flex-direction:row;align-items:flex-start;text-align:left;gap:1rem}
+      .tl-text{display:flex;flex-direction:column}
+      .tl-date{margin-top:.15rem}
+      .tl-detail{position:static;transform:none;width:auto;max-width:none;opacity:1;pointer-events:auto;margin-top:.5rem;box-shadow:0 8px 20px rgba(0,0,0,.08)}
+      .tl-detail::after{display:none}
+      .tl-item:hover .tl-detail{transform:none}
+    }
+
     .research-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin:4rem 0}
     .research-card{background:var(--surface);padding:2rem;border-radius:10px;box-shadow:var(--shadow);transition:var(--transition);text-align:center;cursor:pointer; position: relative; overflow: hidden;}
     .research-card::before {
@@ -83,7 +150,6 @@
     .research-card h3{color:var(--primary);margin-bottom:1rem}
     .research-card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 20px 50px rgba(0,0,0,.15)}
 
-    /* Updated Publication List Styles with Blue-to-Orange Gradient Side Border Animation */
     .publication-list{list-style:none}
     .publication-item{background:var(--surface);padding:2rem;border-radius:10px;box-shadow:var(--shadow);margin-bottom:1.5rem;transition:opacity .3s ease,transform .3s ease,background .3s ease; position: relative; overflow: hidden;}
     .publication-item::before {
@@ -131,7 +197,7 @@
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.2)}}
     .loader-text{margin-top:1rem;font-size:1.2rem;color:var(--text);font-weight:500}
 
-    /* ===== Co-Author Network (enhanced layout) ===== */
+    /* ===== Co-Author Network ===== */
     .coauthor-wrap{background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(232,236,239,.8));border-radius:16px;box-shadow:var(--shadow);padding:1.5rem;margin:3rem 0;position:relative}
     .coauthor-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
     .coauthor-title{font-size:1.6rem;font-weight:700;color:var(--primary);margin:0}
@@ -165,7 +231,7 @@
     @keyframes pulseHull{0%,100%{fill-opacity:.15; stroke-opacity:.4} 50%{fill-opacity:.25; stroke-opacity:.6}}
     .edge-highlight{stroke: var(--accent) !important; opacity:1 !important}
 
-    /* New styles for collapsible hero section */
+    /* collapsible hero section */
     .collapsible-section { position: relative; margin-bottom: 2rem; }
     .trigger { cursor: pointer; height: 1.2rem; position: relative; display: flex; align-items: center; padding-left: 10px; }
     .trigger::before {
@@ -178,10 +244,7 @@
       height: 100%;
       background: #000;
     }
-    .trigger-text {
-      font-weight: bold;
-      margin-right: 5px;
-    }
+    .trigger-text { font-weight: bold; margin-right: 5px; }
     .blinking-arrow {
       position: relative;
       font-size: 1.2rem;
@@ -189,33 +252,12 @@
       transition: transform 0.3s ease;
       animation: blink 1s infinite;
     }
-    @keyframes blink {
-      0% { opacity: 0; }
-      50% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-    .content {
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-      max-height: 0;
-      position: relative;
-      padding-left: 20px;
-    }
-    .content::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 2px;
-      height: 100%;
-      background: #000;
-    }
+    @keyframes blink { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+    .content { overflow: hidden; transition: max-height 0.5s ease; max-height: 0; position: relative; padding-left: 20px; }
+    .content::before { content: ""; position: absolute; left: 0; top: 0; width: 2px; height: 100%; background: #000; }
     .content-inner { margin: 0; }
-    .collapsible-section.expanded .content { max-height: 500px; /* Adjust as needed */ }
-    .collapsible-section.expanded .blinking-arrow {
-      transform: rotate(90deg);
-      animation: none;
-    }
+    .collapsible-section.expanded .content { max-height: 500px; }
+    .collapsible-section.expanded .blinking-arrow { transform: rotate(90deg); animation: none; }
   </style>
 </head>
 <body>
@@ -227,9 +269,10 @@
 
   <div class="container">
     <header class="header">
-      <h1 style="font-size:25px">Rajat Sharma</h1>
+      <h1 style="font-size:25px">Dr. Rajat Sharma</h1>
       <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
       <nav class="nav">
+        <a href="#highlights">News</a>
         <a href="#research">Research</a>
         <a href="#publications">Publications</a>
         <a href="#coauthors">Co-authors</a>
@@ -248,9 +291,9 @@
           </div>
           <div class="content">
             <div class="content-inner">
-              <h3 style="font-size:1.5rem; margin-bottom:0.5rem; color:var(--primary);">Doctoral Researcher (PhD)</h3>
+              <h3 style="font-size:1.5rem; margin-bottom:0.5rem; color:var(--primary);">PhD in Civil Engineering · Air Quality Researcher</h3>
               <p style="font-size:1.2rem;color:var(--text);margin-bottom:2rem;">
-                Civil Engineering<br>
+                Defended May 28, 2026<br>
                 <a href="https://clear-doc.univ-gustave-eiffel.fr/about/a-cofund-programme" target="_blank" style="text-decoration:none;color:inherit">Marie Skłodowska Curie - CLEARDoc Fellow</a><br>
                 <a href="https://gie.univ-gustave-eiffel.fr/" target="_blank" style="text-decoration:none;color:inherit">GERS - (GIE) Geomaterials and Environmental Interaction</a><br>
                 <a href="https://www.univ-gustave-eiffel.fr/" target="_blank" style="text-decoration:none;color:inherit">University Gustave Eiffel, France</a>
@@ -275,14 +318,8 @@
       <textPath href="#curve" startOffset="70%" text-anchor="middle">
         <tspan>
           Hover for Socials
-          <animate attributeName="startOffset" 
-                  values="70%;110%;70%" 
-                  dur="4s" 
-                  repeatCount="indefinite"/>
-          <animate attributeName="fill" 
-                  values="#E6E6FA;#D4F1F4;#E6E6FA" 
-                  dur="2s" 
-                  repeatCount="indefinite"/>
+          <animate attributeName="startOffset" values="70%;110%;70%" dur="4s" repeatCount="indefinite"/>
+          <animate attributeName="fill" values="#E6E6FA;#D4F1F4;#E6E6FA" dur="2s" repeatCount="indefinite"/>
         </tspan>
       </textPath>
     </text>
@@ -292,7 +329,52 @@
 </div>
     </section>
 
-    <!-- Updated Research Grid Section -->
+    <!-- ===== Recent Highlights / News ===== -->
+    <section id="highlights" class="highlights">
+      <div class="highlights-head">
+        <h2>Recent Highlights</h2>
+        <p>What's new in my research and academic journey</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-node"><i class="fas fa-user-graduate"></i></div>
+          <div class="tl-text">
+            <span class="tl-date">May 2026 · Madagascar→India→France</span>
+            <span class="tl-title">Successfully Defended My PhD</span>
+          </div>
+          <div class="tl-detail">
+            <p>Defended my thesis on modeling urban PM source contributions with low-cost sensors and emission inventories, built across three economies.</p>
+            <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-cleardoc-phd-activity-7466417923214155777-3Lbg" target="_blank">Read the story <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-node"><i class="fas fa-microphone-lines"></i></div>
+          <div class="tl-text">
+            <span class="tl-date">EGU 2026 · Vienna</span>
+            <span class="tl-title">Oral Presentation at EGU</span>
+          </div>
+          <div class="tl-detail">
+            <p>My first major conference talk at the European Geosciences Union, presenting HUGISS in the low-cost air quality sensors session.</p>
+            <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-egu26-airquality-activity-7458815726192164864-he8a" target="_blank">Read the story <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-node"><i class="fas fa-file-lines"></i></div>
+          <div class="tl-text">
+            <span class="tl-date">New Paper · 2026</span>
+            <span class="tl-title">HUGISS Approach Released</span>
+          </div>
+          <div class="tl-detail">
+            <p>A Hybrid Urban Gridded Inventory &amp; Sensor-based approach for source apportionment at the local scale.</p>
+            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6080570" target="_blank">View paper <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Grid Section -->
     <section id="research" class="research-grid">
       <div class="research-card surface-element" data-category="low-cost-sensors">
         <i class="fas fa-atom"></i><h3>Low Cost Sensors</h3><p>Next-gen environmental monitoring systems</p>
@@ -301,15 +383,20 @@
         <i class="fas fa-wind"></i><h3>Aerosols and Exposure</h3><p>Particulate emissions and behavior in urban environments</p>
       </div>
       <div class="research-card surface-element" data-category="air-quality">
-        <i class="fas fa-brain"></i><h3>Air Quality</h3><p>Monitoring and Modelling</p>
+        <i class="fas fa-brain"></i><h3>Air Quality</h3><p>Monitoring, Modelling & Source Apportionment</p>
       </div>
     </section>
 
-    <!-- Updated Publications Section -->
+    <!-- Publications Section -->
     <section id="publications">
       <h2>Publication List</h2>
       <button id="reset-filter" style="margin-top:20px;padding:10px 20px;background-color:var(--primary);color:#fff;border:none;border-radius:5px;cursor:pointer">Show All Publications</button>
       <ul class="publication-list">
+        <li class="publication-item surface-element" data-category="air-quality">
+          <h4>A Hybrid Urban Gridded Inventory &amp; Sensor-based Approach for Source Apportionment (HUGISS)<span class="badge-new">New</span></h4>
+          <p>SSRN Working Paper • 2026</p>
+          <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6080570" target="_blank">View Paper →</a>
+        </li>
         <li class="publication-item surface-element" data-category="air-quality">
           <h4>Analysis of seasonal and spatial distribution of particulate matters and gaseous pollutants around an open cast coal mining area of Odisha, India</h4>
           <p>Environmental Science and Pollution Research • 2023</p>
@@ -330,15 +417,11 @@
           <p>Atmospheric Environment: X • 2025</p>
           <a href="https://www.sciencedirect.com/science/article/pii/S2590162125000218?via%3Dihub" target="_blank">View Paper →</a>
         </li>
-          <li class="publication-item surface-element" data-category="air-quality">
-  <h4>
-    A sectoral model for territorial emission inventory in a low income country - a case study from Madagascar
-  </h4>
-  <p>Atmospheric Environment: X • 2025</p>
-  <a href="https://www.sciencedirect.com/science/article/pii/S2590162125000899" target="_blank">
-    View Paper →
-  </a>
-</li>
+        <li class="publication-item surface-element" data-category="air-quality">
+          <h4>A sectoral model for territorial emission inventory in a low income country - a case study from Madagascar</h4>
+          <p>Atmospheric Environment: X • 2025</p>
+          <a href="https://www.sciencedirect.com/science/article/pii/S2590162125000899" target="_blank">View Paper →</a>
+        </li>
         <li class="publication-item surface-element" data-category="aerosols-exposure">
           <h4>Enumerating and Modelling the Seasonal alterations of Surface Urban Heat and Cool Island: A Case Study over Indian Cities</h4>
           <p>Urban Science • 2023</p>
@@ -347,7 +430,7 @@
       </ul>
     </section>
 
-    <!-- ===== Enhanced Co-Author Network ===== -->
+    <!-- ===== Co-Author Network ===== -->
     <section id="coauthors" class="coauthor-wrap surface-element">
       <div class="coauthor-header">
         <h2 class="coauthor-title"><i class="fas fa-project-diagram"></i> Co-Author Network</h2>
@@ -440,7 +523,6 @@
       if (collapsibleSection) {
         const trigger = collapsibleSection.querySelector('.trigger');
         const content = collapsibleSection.querySelector('.content');
-        const arrow = collapsibleSection.querySelector('.blinking-arrow');
         trigger.addEventListener('click', () => {
           collapsibleSection.classList.toggle('expanded');
           if (collapsibleSection.classList.contains('expanded')) {
@@ -453,7 +535,7 @@
     })();
 
     /* ===========================
-       Enhanced Co-Author Network (D3.js)
+       Co-Author Network (D3.js)
        =========================== */
     const papers = [
       { id:"Article1", title:"Urban Science — SUH/Cool Island", url:"https://www.mdpi.com/2413-8851/7/2/38", theme:"waste-urban",
@@ -465,7 +547,11 @@
       { id:"Article4", title:"Indoor Environments — Cooking particles & LCS", url:"https://www.sciencedirect.com/science/article/pii/S2950362024000055", theme:"lcs-exposure",
         authors:["Rubal Dhiman","Rajat Sharma","Akshat Jain","Anirudha Ambekar","Thaseem Thajudeen","Sarath K. Guttikunda"] },
       { id:"Article5", title:"Atmos. Environment: X — LCS & calibration", url:"https://www.sciencedirect.com/science/article/pii/S2590162125000218", theme:"lcs-exposure",
-        authors:["Rajat Sharma","Andry Razakamanantsoa","Ashutosh Kumar","Thaseem Thajudeen","Agnès Jullien"] }
+        authors:["Rajat Sharma","Andry Razakamanantsoa","Ashutosh Kumar","Thaseem Thajudeen","Agnès Jullien"] },
+      { id:"Article6", title:"Atmos. Environment: X — Madagascar emission inventory", url:"https://www.sciencedirect.com/science/article/pii/S2590162125000899", theme:"air-mining",
+        authors:["Rajat Sharma","Andry Razakamanantsoa","Agnès Jullien","Erwann Rayssac"] },
+      { id:"Article7", title:"SSRN — HUGISS source apportionment", url:"https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6080570", theme:"air-mining",
+        authors:["Rajat Sharma","Andry Razakamanantsoa","Agnès Jullien","Erwann Rayssac"] }
     ];
     const themeColor = { "lcs-exposure":"#0f766e", "air-mining":"#7c3aed", "waste-urban":"#ea580c" };
 
@@ -514,7 +600,7 @@
       const g = svg.append('g');
       svg.call(d3.zoom().scaleExtent([0.6,3]).on('zoom', ev => g.attr('transform', ev.transform)));
 
-      const hullLayer = g.append('g'); // behind lines/nodes
+      const hullLayer = g.append('g');
 
       const maxW = d3.max(links, d=>d.weight) || 1;
       const linkWidth = d3.scaleLinear().domain([1,maxW]).range([1.5,7]);
@@ -525,7 +611,6 @@
         .selectAll('line').data(links).join('line')
         .attr('class','edge').attr('stroke-width', d=>linkWidth(d.weight))
         .style('stroke', d => {
-          // Color by most common theme in shared papers
           const themes = [...d.papers].map(id => papers.find(p => p.id === id).theme);
           const themeCounts = themes.reduce((acc, t) => { acc[t] = (acc[t] || 0) + 1; return acc; }, {});
           const maxTheme = Object.keys(themeCounts).reduce((a, b) => themeCounts[a] > themeCounts[b] ? a : b);
@@ -577,7 +662,6 @@
         drawHulls();
       }
 
-      // Enhanced Themed convex hulls with animations
       function drawHulls(){
         const groups = d3.groups(nodes.filter(n=>!n.isRajat), d=>d.themePrimary);
         const hulls = groups.map(([theme, arr])=>{
@@ -617,14 +701,11 @@
         });
       });
 
-      // New: Highlight author and their cluster on node click
       function highlightAuthorCluster(author) {
         const authorPapers = papers.filter(p => p.authors.includes(author.name));
         const clusterAuthors = new Set();
         authorPapers.forEach(p => p.authors.forEach(a => clusterAuthors.add(a)));
         highlightAuthors(Array.from(clusterAuthors), true);
-        // Pulse the central node
-        node.filter(d => d.id === author.id).transition().duration(500).attr('r', nodeR(author.size) * 1.5).transition().attr('r', nodeR(d.size));
       }
 
       function highlightAuthors(authors, persist = false){
@@ -634,7 +715,6 @@
         link.transition().duration(300).attr('opacity', d => (set.has(d.source.id) && set.has(d.target.id)) ? 1 : 0.05)
             .attr('stroke-width', d => (set.has(d.source.id) && set.has(d.target.id)) ? linkWidth(d.weight) * 1.5 : 0.5)
             .attr('class', d => (set.has(d.source.id) && set.has(d.target.id)) ? 'edge edge-highlight' : 'edge');
-        // Highlight hulls for themes in the authors
         const themes = [...new Set(authors.filter(a => a !== 'Rajat Sharma').map(a => nodes.find(n => n.id === a).themePrimary))];
         hullLayer.selectAll('.theme-hull').transition().duration(300)
           .attr('opacity', d => themes.includes(d.theme) ? 1 : 0.1)
@@ -647,7 +727,6 @@
         hullLayer.selectAll('.theme-hull').transition().duration(300).attr('opacity',1).attr('class', 'theme-hull');
       }
 
-      // Enhanced Tooltip
       function showTip(ev,d){
         const list = Array.from(d.papers).map(id => papers.find(p => p.id === id).title).join('<br>');
         tip.innerHTML = `<strong>${d.name}</strong><br>${d.isRajat?'Central author':'Co-author'}<br><em>Collaborations:</em><br>${list||'—'}`;
@@ -664,14 +743,12 @@
       function dragged(event,d){ d.fx=event.x; d.fy=event.y; }
       function dragended(event,d){ if(!event.active) sim.alphaTarget(0); if(d.isRajat){ d.fx=center.x; d.fy=center.y; } else { d.fx=null; d.fy=null; } }
 
-      // Resize
       window.addEventListener('resize', ()=>{
         const w = wrap.clientWidth;
         svg.attr('width', w).attr('height', H);
         sim.force('center', d3.forceCenter(w/2, H/2)).alpha(0.25).restart();
       });
 
-      // Initial fade-in animation
       link.transition().delay((d,i)=>i*10).attr('stroke-opacity',0.6);
       node.transition().delay((d,i)=>i*50).attr('r', d=>nodeR(d.size)).style('opacity',1);
       labels.transition().delay((d,i)=>i*50).style('opacity',1);
