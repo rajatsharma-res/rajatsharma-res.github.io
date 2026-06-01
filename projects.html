@@ -1,33 +1,27 @@
-
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <title>Projects | Rajat Sharma</title>
+    <title>Projects | Dr. Rajat Sharma</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --bg: rgba(240, 242, 245, 0.9); /* Slightly transparent to show texture */
-            --surface: #e8ecef; /* Light, neutral gray-blue as a texture base */
-            --primary: #2a4066; /* Deep blue */
-            --secondary: #1e8759; /* Forest green */
-            --accent: #d4a017; /* Warm gold */
-            --text: #1a1c20; /* Near-black */
+            --bg: rgba(240, 242, 245, 0.9);
+            --surface: #e8ecef;
+            --primary: #2a4066;
+            --secondary: #1e8759;
+            --accent: #d4a017;
+            --text: #1a1c20;
             --shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
         body {
             background-color: var(--bg);
-            background-image: url('https://www.transparenttextures.com/patterns/clean-gray-paper.png'); /* Subtle paper texture for minimalist anime-inspired feel */
+            background-image: url('https://www.transparenttextures.com/patterns/clean-gray-paper.png');
             animation: subtleBackgroundMove 60s linear infinite;
             color: var(--text);
             line-height: 1.6;
@@ -35,80 +29,24 @@
             position: relative;
         }
 
-        @keyframes subtleBackgroundMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 100% 100%; }
-        }
+        @keyframes subtleBackgroundMove { 0% { background-position: 0 0; } 100% { background-position: 100% 100%; } }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: transparent; /* Ensure no separate background; inherits website's body background */
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; background: transparent; }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 0;
-            z-index: 1000;
-        }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; z-index: 1000; }
+        .nav { display: flex; gap: 2rem; }
+        .nav a { color: var(--text); text-decoration: none; position: relative; padding: 0.5rem 0; transition: var(--transition); }
+        .nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background: var(--primary); transition: var(--transition); }
+        .nav a:hover::after { width: 100%; }
 
-        .nav {
-            display: flex;
-            gap: 2rem;
-        }
+        .projects-intro { text-align: center; margin: 4rem 0; animation: fadeIn 1s ease-in-out; }
+        .projects-intro h2 { font-size: 3.5rem; color: var(--primary); }
+        .projects-intro p { font-size: 1.2rem; color: var(--text); opacity: 0.8; margin-top: 0.5rem; }
 
-        .nav a {
-            color: var(--text);
-            text-decoration: none;
-            position: relative;
-            padding: 0.5rem 0;
-            transition: var(--transition);
-        }
-
-        .nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        .nav a:hover::after {
-            width: 100%;
-        }
-
-        .projects-intro {
-            text-align: center;
-            margin: 4rem 0;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .projects-intro h2 {
-            font-size: 3.5rem;
-            color: var(--primary);
-        }
-
-        .projects-intro p {
-            font-size: 1.2rem;
-            color: var(--text);
-            opacity: 0.8;
-            margin-top: 0.5rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
 
         .project-card {
-            background: transparent; /* No separate background; uses website's body background */
+            background: transparent;
             padding: 2rem;
             border-radius: 10px;
             box-shadow: var(--shadow);
@@ -117,6 +55,7 @@
             opacity: 0;
             transform: translateY(50px);
             animation: fadeInUp 1s ease-out forwards;
+            position: relative;
         }
 
         .project-card:nth-child(1) { animation-delay: 0.1s; }
@@ -124,267 +63,59 @@
         .project-card:nth-child(3) { animation-delay: 0.3s; }
         .project-card:nth-child(4) { animation-delay: 0.4s; }
         .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+        .project-card:nth-child(7) { animation-delay: 0.7s; }
 
-        .project-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            transition: var(--transition);
-        }
+        .badge-new{position:absolute;top:1rem;right:1rem;z-index:5;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.2rem .6rem;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.2)}
 
-        .project-card:hover img {
-            transform: scale(1.05);
-        }
+        .project-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem; transition: var(--transition); }
+        .project-card:hover img { transform: scale(1.05); }
 
-        .project-card h3 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .project-card p {
-            color: var(--text);
-            opacity: 0.9;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .project-card .truncated-text {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .project-card .links {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .project-card a {
-            color: var(--primary);
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: var(--transition);
-        }
-
-        .project-card a:hover {
-            color: var(--secondary);
-            transform: translateX(5px);
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
+        .project-card h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .project-card p { color: var(--text); opacity: 0.9; margin-bottom: 1rem; line-height: 1.6; }
+        .project-card .truncated-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
+        .project-card .links { display: flex; justify-content: space-between; align-items: center; }
+        .project-card a { color: var(--primary); font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: var(--transition); }
+        .project-card a:hover { color: var(--secondary); transform: translateX(5px); }
+        .project-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); }
 
         /* Modal Styling */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000; opacity: 0; transition: opacity 0.4s ease; }
+        .modal.show { opacity: 1; }
+        .modal-content { background-color: #fff; padding: 2rem; border-radius: 10px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; transform: scale(0.9); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; }
+        .modal.show .modal-content { transform: scale(1); opacity: 1; }
+        .modal-content .close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.5em; cursor: pointer; color: var(--primary); transition: var(--transition); }
+        .modal-content .close:hover { color: var(--secondary); }
+        .modal-content h3 { font-size: 1.8rem; color: var(--primary); margin-bottom: 1rem; }
+        .modal-content p { font-size: 1em; color: var(--text); line-height: 1.6; }
 
-        .modal.show {
-            opacity: 1;
-        }
+        footer { display: flex; justify-content: space-between; align-items: center; padding: 4rem 0; border-top: 1px solid var(--primary); margin-top: 4rem; }
+        footer h3 { color: var(--primary); margin-bottom: 1rem; }
+        footer p, footer a { color: var(--text); opacity: 0.8; text-decoration: none; }
+        footer button { background: var(--primary); color: white; border: none; padding: 0.8rem 2rem; border-radius: 5px; cursor: pointer; transition: var(--transition); }
+        footer button:hover { background: var(--secondary); }
 
-        .modal-content {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 800px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-            transform: scale(0.9);
-            opacity: 0;
-            transition: transform 0.4s ease, opacity 0.4s ease;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
 
-        .modal.show .modal-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .modal-content .close {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: var(--primary);
-            transition: var(--transition);
-        }
-
-        .modal-content .close:hover {
-            color: var(--secondary);
-        }
-
-        .modal-content h3 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .modal-content p {
-            font-size: 1em;
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 4rem 0;
-            border-top: 1px solid var(--primary);
-            margin-top: 4rem;
-        }
-
-        footer h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        footer p, footer a {
-            color: var(--text);
-            opacity: 0.8;
-            text-decoration: none;
-        }
-
-        footer button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        footer button:hover {
-            background: var(--secondary);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Mobile-specific styles */
         @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 1rem 0;
-            }
-
-            .header h1 {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-            }
-
-            .nav {
-                display: none; /* Hide the nav by default on mobile */
-                flex-direction: column;
-                gap: 1rem;
-                width: 100%;
-            }
-
-            .nav.active {
-                display: flex; /* Show the nav when active */
-            }
-
-            .nav a {
-                padding: 0.5rem;
-                font-size: 1rem;
-            }
-
-            /* Hamburger menu */
-            .menu-toggle {
-                display: block; /* Show on mobile */
-                font-size: 1.5rem;
-                cursor: pointer;
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-            }
-
-            /* Projects intro */
-            .projects-intro h2 {
-                font-size: 2.5rem;
-            }
-
-            .projects-intro p {
-                font-size: 1rem;
-            }
-
-            /* Projects grid */
-            .projects-grid {
-                grid-template-columns: 1fr; /* Single column for mobile */
-                gap: 1rem;
-            }
-
-            .project-card {
-                padding: 1rem;
-            }
-
-            .project-card h3 {
-                font-size: 1.2rem;
-            }
-
-            .project-card p {
-                font-size: 0.9rem;
-            }
-
-            .project-card .links {
-                flex-direction: column;
-                gap: 0.5rem;
-                align-items: flex-start;
-            }
-
-            /* Footer */
-            footer {
-                flex-direction: column;
-                text-align: center;
-                padding: 2rem 0;
-            }
-
-            footer h3 {
-                font-size: 1.2rem;
-            }
-
-            footer p {
-                font-size: 0.9rem;
-            }
-
-            footer button {
-                width: 100%;
-                margin-top: 1rem;
-            }
+            .header { flex-direction: column; align-items: flex-start; padding: 1rem 0; }
+            .header h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+            .nav { display: none; flex-direction: column; gap: 1rem; width: 100%; }
+            .nav.active { display: flex; }
+            .nav a { padding: 0.5rem; font-size: 1rem; }
+            .menu-toggle { display: block; font-size: 1.5rem; cursor: pointer; position: absolute; top: 1rem; right: 1rem; }
+            .projects-intro h2 { font-size: 2.5rem; }
+            .projects-intro p { font-size: 1rem; }
+            .projects-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .project-card { padding: 1rem; }
+            .project-card h3 { font-size: 1.2rem; }
+            .project-card p { font-size: 0.9rem; }
+            .project-card .links { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+            footer { flex-direction: column; text-align: center; padding: 2rem 0; }
+            footer h3 { font-size: 1.2rem; }
+            footer p { font-size: 0.9rem; }
+            footer button { width: 100%; margin-top: 1rem; }
         }
     </style>
 </head>
@@ -393,10 +124,8 @@
 <div class="container">
 
     <header class="header">
-        <h1 style="font-size: 25px;">Rajat Sharma</h1>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
+        <h1 style="font-size: 25px;">Dr. Rajat Sharma</h1>
+        <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         <nav class="nav">
             <a href="index.html">Home</a>
             <a href="index.html#research">Research</a>
@@ -412,6 +141,33 @@
     </section>
 
     <section class="projects-grid">
+
+        <!-- PhD Defense -->
+        <div class="project-card">
+            <span class="badge-new">Latest</span>
+            <!-- 👇 CHANGE THE src BELOW to your own photo, e.g. images/phd-defense.jpg -->
+            <img src="images/phd.jpeg" alt="PhD Defense: 28 May 2026">
+            <h3>PhD Defense - 28 May 2026</h3>
+            <p class="truncated-text">Three continents, three different worlds: Madagascar (low-income), India (middle-income) and France (high-income). One question followed me everywhere - can low-cost air quality sensors actually tell people what they're breathing? On May 28th I successfully defended my PhD.</p>
+            <div class="links">
+                <a href="#" onclick="openPopup('defense')">Read More <i class="fas fa-arrow-right"></i></a>
+                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-cleardoc-phd-activity-7466417923214155777-3Lbg" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- EGU 2026 -->
+        <div class="project-card">
+            <span class="badge-new">New</span>
+            <!-- 👇 CHANGE THE src BELOW to your own photo, e.g. images/egu-2026.jpg -->
+            <img src="images/egu.jpeg" alt="EGU 2026: Oral Presentation">
+            <h3>EGU 2026 - Oral Presentation</h3>
+            <p class="truncated-text">I gave my first big conference talk at the European Geosciences Union (EGU) 2026. A big room - professors, researchers, people who've spent decades on this - but somewhere in the middle I stopped being nervous, because I genuinely believe in what we've built: HUGISS, connecting air quality sensors with emission inventories for source apportionment.</p>
+            <div class="links">
+                <a href="#" onclick="openPopup('egu')">Read More <i class="fas fa-arrow-right"></i></a>
+                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-egu26-airquality-activity-7458815726192164864-he8a" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
         <!-- DUDE Initiative -->
         <div class="project-card">
             <img src="images/1726324848647.jfif" alt="DUDE Initiative">
@@ -463,13 +219,14 @@
             <img src="images/WhatsApp Image 2025-07-06 at 3.21.42 PM.jpeg" alt="MT180 Pitch">
             <h3>MT180</h3>
             <p class="truncated-text">🚀 One stage. Two bold ideas. One unforgettable week in Paris.
-🎓 Kicked things off with my MT180 thesis pitch — 180 seconds to distill months of research into something punchy and public-facing.
- Sharing a quick snippet below — hope it sparks your curiosity!</p>
+🎓 Kicked things off with my MT180 thesis pitch - 180 seconds to distill months of research into something punchy and public-facing.
+ Sharing a quick snippet below - hope it sparks your curiosity!</p>
             <div class="links">
                 <a href="#" onclick="openPopup('MT180 Pitch')">Read More <i class="fas fa-arrow-right"></i></a>
                 <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-innovation-entrepreneurship-activity-7347620211220488193-i2Kz?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
+
     </section>
 
     <!-- Popup Modals -->
@@ -498,13 +255,11 @@
 </div>
 
 <script>
-    // Toggle mobile menu
     function toggleMenu() {
         const nav = document.querySelector('.nav');
         nav.classList.toggle('active');
     }
 
-    // Popup functionality
     function openPopup(project) {
         const modal = document.getElementById("popup-modal");
         const modalTitle = document.getElementById("modal-title");
@@ -512,9 +267,26 @@
 
         let title, content;
         switch (project) {
+            case 'defense':
+                title = "PhD Defense - 28 May 2026";
+                content = `🌍 Three continents. Three different worlds: Madagascar (low-income), India (middle-income), and France (high-income). One question followed me everywhere: can low-cost air quality sensors actually tell people what they're breathing?<br><br>
+                On May 28th, I successfully defended my PhD 🎓 answering that question. <strong>Thesis title:</strong> "Modeling Urban PM Source Contributions Using Integrated Low-Cost Air Quality Sensors and Emission Inventories Across Diverse Environments." The core shift of this work was moving from passive monitoring to active interpretation - turning raw sensor data into meaningful insights about pollution sources.<br><br>
+                The research came in three parts:<br>
+                <strong>1. Sensor Reliability</strong> - methods to know exactly when to trust (and when not to trust) low-cost sensors across vastly different climates and environments.<br>
+                <strong>2. Data Scarcity & Economic Weighting</strong> - robust frameworks built from the ground up for resource-limited settings.<br>
+                <strong>3. HUGISS Model</strong> - a new hybrid approach fusing emission inventories with low-cost sensor networks to enable source apportionment using affordable technology.<br><br>
+                🙏 Deep thanks to my supervisors Dr. Andry Rico Razakamanantsoa and Dr. Agnes Jullien, along with Erwann Rayssac, and to Virginie Etienne, Cerise Randon and the entire CLEARDoc team. Grateful to MADATLAS Université de Fianarantsoa, IIT Goa and the Indian Institute of Tropical Meteorology Pune for their support during my international mobility periods, and to my Doctoral Committee for their valuable feedback. And to Laboratoire GIE, Université Gustave Eiffel, AtmoTrack, GERS and CLEARDoc for making it possible. ✨`;
+                break;
+            case 'egu':
+                title = "EGU 2026 - Oral Presentation";
+                content = `I gave my first big conference talk at the European Geosciences Union (EGU) 2026 this week. I was nervous - it's a big room: professors, researchers, people who've spent decades on this. But somewhere in the middle of it I stopped being nervous, because I realised I genuinely believe in what we've built.<br><br>
+                We've been trying to answer a simple question that turns out to be really hard: source apportionment through air quality sensors. Air quality sensors tell you the air is bad. Emission inventories tell you what's being emitted. But they've never really been connected - not in a way that gives you actual numbers at the local scale. That's what <strong>HUGISS</strong> (A Hybrid Urban Gridded Inventory &amp; Sensor-based Approach for Source Apportionment) does. Seeing people whose work I've read for years genuinely engage with it was something I'll carry for a long time.<br><br>
+                I'm especially grateful to the session conveners (Sebastian Diez, Nicole Cowell, Miriam Chacón Mateos, Kwabena Fosu-Amankwah) of "Low-cost air quality sensors: challenges, opportunities, and collaborative strategies across the world," and to session chairs Francis Pope and Nuria Castell for the engaging exchange during my presentation.<br><br>
+                Thank you to my supervisors Andry Rico Razakamanantsoa and Agnes Jullien, and co-author Erwann Rayssac - this is as much yours as mine 🙏. And to Laboratoire GIE, Université Gustave Eiffel, AtmoTrack, GERS, CLEARDoc and Allin-Wayra for making it possible. ✨`;
+                break;
             case 'dude':
                 title = "DUDE Initiative";
-                content = "A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior.Proud to have represented The 𝗗𝗨𝗗𝗘 𝗜𝗻𝗶𝘁𝗶𝗮𝘁𝗶𝘃𝗲 (c𝗶𝘁𝗲𝗻-D𝗿𝗶𝘃𝗲𝗻, U𝗽𝘀𝗰𝗮𝗹𝗮𝗯𝗹𝗲, 𝗮𝗻𝗱 D𝗶𝗴𝗶𝘁𝗮𝗹 E𝗰𝗼𝗰𝗼𝗰𝗶𝘁𝗶𝗲𝘀) alongside an amazing team. 🌍💡 Victoria Cotella, Faiz Iqbal and Luka. 𝗗𝗨𝗗𝗘 is about using tech and data to make sustainable living not just possible, but rewarding. 🌱 ";
+                content = "A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior. Proud to have represented The DUDE Initiative (citizen-Driven, Upscalable, and Digital Ecocities) alongside an amazing team - Victoria Cotella, Faiz Iqbal and Luka. DUDE is about using tech and data to make sustainable living not just possible, but rewarding. 🌱";
                 break;
             case 'madagascar':
                 title = "Madagascar Mobility Project";
@@ -532,13 +304,13 @@
                 content = `💡 Can air talk? We made it scream.
 Meet NICAIR – our idea born during the entrepreneurship bootcamp at Université Gustave Eiffel: smart sensors, real-time data, and citizen power to fight air pollution.
 From “what if?” to “why not?”, it was a week of wild ideas, sharp minds, and big ambition.
-Huge thanks to hashtag #CLEARDoc, our mentors (Amandine Bugnicourt, PhD, Guillaume Berteloot, Alexandre Huu Tam Nguyen, Milad Moazzam, PhD), and everyone who helped turn chaos into concept. `;
+Huge thanks to #CLEARDoc, our mentors (Amandine Bugnicourt, PhD, Guillaume Berteloot, Alexandre Huu Tam Nguyen, Milad Moazzam, PhD), and everyone who helped turn chaos into concept.`;
                 break;
             case 'MT180 Pitch':
                 title = "MT180 Pitch";
                 content = `🚀 One stage. Two bold ideas. One unforgettable week in Paris.
-🎓 Kicked things off with my MT180 thesis pitch — 180 seconds to distill months of research into something punchy and public-facing.
- Sharing a quick snippet below — hope it sparks your curiosity!`;
+🎓 Kicked things off with my MT180 thesis pitch - 180 seconds to distill months of research into something punchy and public-facing.
+ Sharing a quick snippet below - hope it sparks your curiosity!`;
                 break;
         }
 
@@ -554,12 +326,9 @@ Huge thanks to hashtag #CLEARDoc, our mentors (Amandine Bugnicourt, PhD, Guillau
         setTimeout(() => modal.style.display = "none", 400);
     }
 
-    // Close modal if clicked outside the content
     window.onclick = function(event) {
         const modal = document.getElementById("popup-modal");
-        if (event.target === modal) {
-            closePopup();
-        }
+        if (event.target === modal) { closePopup(); }
     };
 </script>
 
