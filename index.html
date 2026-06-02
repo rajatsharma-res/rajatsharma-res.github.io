@@ -22,6 +22,9 @@
       --transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --display: 'Fraunces', Georgia, serif;
+      --t-lcs: #0f766e;
+      --t-air: #7c3aed;
+      --t-waste: #ea580c;
     }
 
     /* ===== Motion-safety: respect reduced motion ===== */
@@ -80,10 +83,36 @@
     @keyframes gradientBackground { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
     .hero-content{max-width:600px; position:relative; z-index:2}
     .hero h1{font-size:3.5rem;margin-bottom:1rem;color:var(--primary)}
-    .hero h2{font-family:var(--display); font-weight:600; font-size:3.4rem;margin-bottom:.6rem;color:var(--primary); letter-spacing:-.02em; line-height:1.05}
-    .hero h2 .wave{display:inline-block; transform-origin:70% 70%; animation:wave 2.6s ease-in-out infinite; }
-    @keyframes wave{0%,60%,100%{transform:rotate(0)}10%{transform:rotate(14deg)}20%{transform:rotate(-8deg)}30%{transform:rotate(14deg)}40%{transform:rotate(-4deg)}50%{transform:rotate(10deg)}}
+    .hero h2{font-family:var(--display); font-weight:600; font-size:3.4rem;margin-bottom:.6rem;color:var(--primary); letter-spacing:-.02em; line-height:1.05; display:inline-flex; align-items:center; gap:.35rem; flex-wrap:wrap}
     .hero p{font-size:1.2rem;color:var(--text);margin-bottom:2rem;}
+
+    /* ===== Hero research accent: sensor reading -> particles -> dispersion wave (9s loop) ===== */
+    .research-anim{position:relative;display:inline-block;width:72px;height:56px;vertical-align:middle;flex:0 0 auto}
+    .ra-sensor{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:16px;height:16px;display:flex;align-items:center;justify-content:center}
+    .ra-sensor .core{width:13px;height:13px;border-radius:50%;background:var(--secondary);opacity:0;animation:raCoreLife 9s ease-in-out infinite}
+    .ra-sensor .ring{position:absolute;width:13px;height:13px;border-radius:50%;border:2px solid var(--secondary);opacity:0;animation:raRingPing 9s ease-out infinite}
+    .ra-sensor .ring:nth-child(2){border-color:var(--accent);animation-delay:.5s}
+    .ra-sensor .ring:nth-child(3){border-color:var(--primary);animation-delay:1s}
+    @keyframes raCoreLife{0%{opacity:0;transform:scale(.4)}6%{opacity:1;transform:scale(1)}30%{opacity:1;transform:scale(1)}38%{opacity:0;transform:scale(.6)}100%{opacity:0}}
+    @keyframes raRingPing{0%{opacity:0;transform:scale(1)}5%{opacity:.8}28%{opacity:0;transform:scale(3.2)}100%{opacity:0;transform:scale(3.2)}}
+    .ra-pm{position:absolute;left:8px;border-radius:50%;opacity:0}
+    .ra-pm.a{width:8px;height:8px;background:var(--secondary);top:34px;animation:raRise1 9s ease-in-out infinite}
+    .ra-pm.b{width:6px;height:6px;background:var(--accent);top:38px;left:14px;animation:raRise2 9s ease-in-out infinite}
+    .ra-pm.c{width:10px;height:10px;background:var(--primary);top:30px;left:6px;animation:raRise3 9s ease-in-out infinite}
+    .ra-pm.d{width:5px;height:5px;background:var(--secondary);top:36px;left:20px;animation:raRise2 9s ease-in-out infinite}
+    .ra-pm.e{width:7px;height:7px;background:var(--accent);top:32px;left:24px;animation:raRise1 9s ease-in-out infinite}
+    @keyframes raRise1{0%,33%{opacity:0;transform:translate(0,0)}40%{opacity:.95}60%{opacity:.5}66%,100%{opacity:0;transform:translate(34px,-28px)}}
+    @keyframes raRise2{0%,35%{opacity:0;transform:translate(0,0)}42%{opacity:.9}60%{opacity:.45}66%,100%{opacity:0;transform:translate(24px,-34px)}}
+    @keyframes raRise3{0%,34%{opacity:0;transform:translate(0,0)}41%{opacity:.95}60%{opacity:.5}66%,100%{opacity:0;transform:translate(40px,-22px)}}
+    .ra-wave{position:absolute;left:0;top:50%;transform:translateY(-50%);width:72px;height:40px}
+    .ra-wave path{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:140;stroke-dashoffset:140;opacity:0;animation:raWaveDraw 9s ease-in-out infinite}
+    .ra-wave .w2{animation-delay:.35s}
+    .ra-wave .w3{animation-delay:.7s}
+    @keyframes raWaveDraw{0%,66%{stroke-dashoffset:140;opacity:0}72%{opacity:1}88%{opacity:1;stroke-dashoffset:0}100%{stroke-dashoffset:-140;opacity:0}}
+    @media(prefers-reduced-motion:reduce){
+      .ra-sensor .core{opacity:1;animation:none}
+      .ra-sensor .ring,.ra-pm,.ra-wave path{animation:none;opacity:0}
+    }
     .intro-small { position: relative; padding-left: 0; margin-bottom: 1rem; font-style:italic; opacity:.85; }
 
     .hero-button{position:relative;overflow:hidden}
@@ -314,43 +343,75 @@
     .loader-bar span{display:block;height:100%;width:40%;border-radius:999px;background:linear-gradient(90deg,var(--primary),var(--accent));animation:loadSlide 1.2s ease-in-out infinite}
     @keyframes loadSlide{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
 
-    /* ===== Co-author network ===== */
-    .coauthor-wrap{background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(232,236,239,.8));border-radius:18px;box-shadow:var(--shadow);padding:1.6rem;margin:3.5rem 0;position:relative}
-    .coauthor-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.85rem; flex-wrap:wrap}
-    .coauthor-title{font-family:var(--display);font-size:1.7rem;font-weight:600;color:var(--primary);margin:0; display:flex; align-items:center; gap:.6rem}
-    .coauthor-title i{font-size:1.3rem; color:var(--secondary)}
-    .coauthor-legend{display:flex;flex-wrap:wrap;gap:.5rem .75rem;align-items:center;font-size:.9rem}
-    .coauthor-legend span.badge{display:inline-flex;align-items:center;gap:.4rem;background:#fff;border:1px solid #e2e8f0;padding:.25rem .55rem;border-radius:999px; transition:var(--transition)}
-    .coauthor-legend span.badge:hover{transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.08)}
-    .badge .dot{width:.8rem;height:.8rem;border-radius:999px;display:inline-block}
+    /* =====================================================
+       Co-Author Orbit  (redesigned)
+       ===================================================== */
+    .orbit-wrap{
+      position:relative;border-radius:24px;padding:2rem clamp(1rem,3vw,2.5rem) 2.4rem;margin:3.5rem 0;
+      background:radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.85), rgba(232,236,239,.55) 60%, rgba(232,236,239,.3) 100%);
+      box-shadow:var(--shadow);overflow:hidden;border:1px solid rgba(42,64,102,.08);
+    }
+    .orbit-wrap::before{
+      content:'';position:absolute;inset:0;pointer-events:none;
+      background:url('https://www.transparenttextures.com/patterns/natural-paper.png');opacity:.06;
+    }
+    .orbit-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.4rem;position:relative;z-index:2}
+    .orbit-head h2{font-family:var(--display);font-weight:600;color:var(--primary);font-size:2rem;letter-spacing:-.01em;line-height:1.1}
+    .orbit-sub{color:var(--text);opacity:.6;font-size:.9rem;margin-top:.15rem}
 
-    .coauthor-layout{display:grid;grid-template-columns:1fr 280px;gap:1rem;align-items:stretch}
-    @media(max-width:900px){.coauthor-layout{grid-template-columns:1fr}}
-    #coauthor-graph{width:100%;height:560px;border-radius:14px;background:radial-gradient(ellipse at top,rgba(255,255,255,.85),rgba(245,247,250,.85));overflow:hidden;position:relative}
+    .orbit-legend{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;justify-content:flex-end}
+    .lg-chip{display:inline-flex;align-items:center;gap:.45rem;background:#fff;border:1px solid #e2e8f0;
+      padding:.3rem .7rem;border-radius:999px;font-size:.78rem;font-weight:600;color:#475569;cursor:pointer;
+      transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out),background .3s ease,opacity .3s ease;user-select:none}
+    .lg-chip:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.08)}
+    .lg-chip.muted{opacity:.4}
+    .lg-chip .dot{width:.7rem;height:.7rem;border-radius:50%}
 
-    .coauthor-side{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:1rem;box-shadow:0 8px 20px rgba(0,0,0,.04)}
-    .side-title{font-family:var(--display);font-size:1.05rem;margin:0 0 .5rem;color:#334155;font-weight:600}
-    .paper-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.4rem}
-    .paper-list li{border:1px solid #e2e8f0;border-radius:10px;padding:.5rem .6rem;display:flex;flex-direction:column;gap:.25rem;background:#fafbfc;cursor:pointer;transition:transform .22s var(--ease-out), box-shadow .22s ease, background .22s ease}
-    .paper-list li:hover{transform:translateY(-2px) translateX(2px);box-shadow:0 8px 20px rgba(0,0,0,.07);background:#fff}
-    .paper-list li.active{outline:2px solid var(--accent);background:#fffef7}
-    .paper-title{font-weight:600;font-size:.92rem;color:#0f172a}
-    .paper-meta{font-size:.8rem;color:#475569}
-    .legend-caption{font-size:.85rem;color:#6b7280;margin:.5rem 0 0}
+    .orbit-stage{position:relative;width:100%;z-index:1}
+    #orbit-svg{width:100%;height:auto;display:block;overflow:visible}
 
-    .node-label{font:12px 'Inter',sans-serif;fill:#243b53;pointer-events:none;user-select:none}
-    .ca-tooltip{position:absolute;pointer-events:none;z-index:50;background:#111827;color:#fff;font-size:.85rem;line-height:1.25;padding:.45rem .6rem;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.2);transform:translate(-50%, calc(-100% - 12px));opacity:0;transition:opacity .2s ease; max-width:240px}
-    .ca-tooltip::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid #111827}
-    .theme-hull{fill-opacity:.15;stroke-width:2.5;stroke-opacity:.4;transition:fill-opacity 0.4s ease, stroke-opacity 0.4s ease}
-    .theme-hull:hover{fill-opacity:.25;stroke-opacity:.6}
-    .edge{stroke-linecap:round;transition:stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease}
-    .node{transition:fill 0.3s ease, r 0.3s ease, opacity 0.3s ease; cursor: pointer}
-    .node:hover{filter: drop-shadow(0 0 6px rgba(0,0,0,0.35))}
-    .node.is-rajat{animation:rajatPulse 3s ease-in-out infinite}
-    @keyframes rajatPulse{0%,100%{filter:drop-shadow(0 0 0 rgba(29,78,216,0))}50%{filter:drop-shadow(0 0 10px rgba(29,78,216,.55))}}
-    .hull-highlight{fill-opacity:.3 !important; stroke-opacity:.8 !important; stroke-width:3 !important; animation: pulseHull 2s ease-in-out infinite}
-    @keyframes pulseHull{0%,100%{fill-opacity:.15; stroke-opacity:.4} 50%{fill-opacity:.25; stroke-opacity:.6}}
-    .edge-highlight{stroke: var(--accent) !important; opacity:1 !important}
+    .ring{fill:none;stroke:rgba(42,64,102,.14);stroke-width:1;stroke-dasharray:2 6}
+    .spoke{stroke:rgba(42,64,102,.08);stroke-width:1}
+    .arc{fill:none;stroke-linecap:round;opacity:0;transition:opacity .4s ease,stroke-width .4s ease}
+    .arc.show{opacity:.5}
+
+    .author-g{cursor:pointer}
+    .author-dot{stroke:#fff;stroke-width:2.5;transition:r .4s var(--ease-out),filter .35s ease,opacity .35s ease}
+    .author-g:hover .author-dot{filter:drop-shadow(0 4px 10px rgba(0,0,0,.28))}
+    .author-label{font:600 12px 'Inter',sans-serif;fill:#334155;pointer-events:none;transition:opacity .35s ease,fill .3s ease}
+    .center-dot{fill:var(--primary);stroke:#fff;stroke-width:3.5;filter:drop-shadow(0 6px 16px rgba(42,64,102,.45))}
+    .center-pulse{fill:none;stroke:var(--primary);stroke-width:1.5;opacity:.35;transform-origin:center;transform-box:fill-box;animation:ringPulse 3.6s ease-out infinite}
+    @keyframes ringPulse{0%{transform:scale(.9);opacity:.45}70%{opacity:0}100%{transform:scale(2.1);opacity:0}}
+    .center-label{font:700 14px 'Fraunces',serif;fill:#fff;text-anchor:middle;pointer-events:none}
+    .center-sub{font:500 9px 'Inter',sans-serif;fill:rgba(255,255,255,.85);text-anchor:middle;pointer-events:none;letter-spacing:.08em}
+
+    .dimmed{opacity:.12 !important}
+
+    @media(prefers-reduced-motion:reduce){.center-pulse{animation:none}}
+
+    .paper-strip{display:flex;gap:.85rem;overflow-x:auto;padding:.4rem .2rem 1rem;margin-top:1.4rem;
+      scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+    .paper-strip::-webkit-scrollbar{height:7px}
+    .paper-strip::-webkit-scrollbar-thumb{background:rgba(42,64,102,.25);border-radius:999px}
+    .paper-card{flex:0 0 248px;scroll-snap-align:start;background:#fff;border:1px solid #e6eaee;
+      border-radius:14px;padding:1rem 1.1rem;position:relative;overflow:hidden;cursor:pointer;
+      transition:transform .4s var(--ease-out),box-shadow .4s var(--ease-out),border-color .3s ease}
+    .paper-card::before{content:'';position:absolute;left:0;top:0;width:100%;height:4px;background:var(--bar)}
+    .paper-card:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(0,0,0,.13);border-color:transparent}
+    .paper-card.active{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent),0 14px 30px rgba(0,0,0,.12)}
+    .pc-year{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;font-weight:800;letter-spacing:.05em;color:#fff;background:var(--bar);padding:.18rem .55rem;border-radius:999px}
+    .pc-title{font-family:var(--display);font-weight:600;color:var(--primary);font-size:.96rem;line-height:1.3;margin:.6rem 0 .5rem}
+    .pc-authors{font-size:.76rem;color:#64748b;line-height:1.45}
+    .pc-open{margin-top:.6rem;font-size:.74rem;font-weight:700;color:var(--secondary);display:inline-flex;align-items:center;gap:5px;opacity:0;transform:translateY(4px);transition:.35s var(--ease-out)}
+    .paper-card:hover .pc-open,.paper-card.active .pc-open{opacity:1;transform:none}
+
+    .orbit-tip{position:absolute;pointer-events:none;z-index:50;background:#0f172a;color:#fff;font-size:.82rem;
+      line-height:1.35;padding:.5rem .65rem;border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.28);
+      transform:translate(-50%,calc(-100% - 12px));opacity:0;transition:opacity .2s ease;max-width:230px}
+    .orbit-tip::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);
+      border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid #0f172a}
+    .orbit-tip strong{font-family:var(--display)}
+    .orbit-hint{text-align:center;font-size:.78rem;color:#94a3b8;margin-top:.2rem;font-style:italic}
 
     /* ===== Collapsible hero section ===== */
     .collapsible-section { position: relative; margin-bottom: 2rem; }
@@ -399,7 +460,21 @@
       <span class="orb o1"></span>
       <span class="orb o2"></span>
       <div class="hero-content">
-        <h2 style="font-size:36px">Hey, I'm Rajat <span class="wave">👋</span></h2>
+        <h2 style="font-size:36px">Hey, I'm Rajat
+          <span class="research-anim" aria-hidden="true">
+            <span class="ra-sensor">
+              <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+              <span class="core"></span>
+            </span>
+            <span class="ra-pm a"></span><span class="ra-pm b"></span><span class="ra-pm c"></span>
+            <span class="ra-pm d"></span><span class="ra-pm e"></span>
+            <svg class="ra-wave" viewBox="0 0 72 40">
+              <path class="w1" stroke="var(--secondary)" d="M2 26 Q18 8 36 22 T70 16"/>
+              <path class="w2" stroke="var(--accent)" d="M2 30 Q18 14 36 26 T70 20"/>
+              <path class="w3" stroke="var(--primary)" d="M2 22 Q18 4 36 18 T70 12"/>
+            </svg>
+          </span>
+        </h2>
         <p class="intro-small" style="font-size:1.2rem;color:var(--text);">Have a good time!</p>
         <div class="collapsible-section">
           <div class="trigger">
@@ -610,29 +685,24 @@
       </div>
     </section>
 
-    <!-- ===== Co-Author Network ===== -->
-    <section id="coauthors" class="coauthor-wrap surface-element reveal">
-      <div class="coauthor-header">
-        <h2 class="coauthor-title"><i class="fas fa-project-diagram"></i> Co-Author Network</h2>
-        <div class="coauthor-legend" aria-hidden="true">
-          <span class="badge"><span class="dot" style="background:#1d4ed8"></span> Rajat Sharma</span>
-          <span class="badge"><span class="dot" style="background:#0f766e"></span> Low-Cost Sensors / Exposure</span>
-          <span class="badge"><span class="dot" style="background:#7c3aed"></span> Air Quality / Mining</span>
-          <span class="badge"><span class="dot" style="background:#ea580c"></span> Waste / Urban</span>
+    <!-- ===== Co-Author Orbit (redesigned) ===== -->
+    <section id="coauthors" class="orbit-wrap reveal">
+      <div class="orbit-head">
+        <div>
+          <span class="section-eyebrow">Collaboration map</span>
+          <h2>Co-Author Orbit</h2>
+          <p class="orbit-sub">Everyone I've published with, circling a shared body of work.</p>
         </div>
+        <div class="orbit-legend" id="orbit-legend"></div>
       </div>
 
-      <div class="coauthor-layout">
-        <div id="coauthor-graph" role="img" aria-label="Force-directed graph of Rajat Sharma's co-author network"></div>
-        <aside class="coauthor-side">
-          <h3 class="side-title">Papers</h3>
-          <ul id="paper-list" class="paper-list"></ul>
-          <p class="legend-caption">Thicker lines = more shared papers. Hulls pulse on hover.</p>
-          <p class="legend-caption">Hover a paper to highlight its authors. Click to lock. Drag nodes!</p>
-        </aside>
+      <div class="orbit-stage">
+        <svg id="orbit-svg" viewBox="0 0 900 600" role="img" aria-label="Radial map of Rajat Sharma's co-authors grouped by research theme"></svg>
+        <div id="orbit-tip" class="orbit-tip" aria-hidden="true"></div>
       </div>
+      <p class="orbit-hint">Hover a name to trace shared papers · tap a theme to filter · cards below open each paper</p>
 
-      <div id="ca-tip" class="ca-tooltip" aria-hidden="true"></div>
+      <div class="paper-strip" id="paper-strip"></div>
     </section>
 
     <footer class="footer" id="contact">
@@ -651,9 +721,6 @@
       </div>
     </footer>
   </div>
-
-  <!-- D3 -->
-  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 
   <script>
     // Loader hide
@@ -764,222 +831,195 @@
       }));
     })();
 
-    /* ===========================
-       Co-Author Network (D3.js)
-       =========================== */
-    const papers = [
-      { id:"Article1", title:"Urban Science — SUH/Cool Island", url:"https://www.mdpi.com/2413-8851/7/2/38", theme:"waste-urban",
-        authors:["Vinayak Bhanage","Sneha Kulkarni","Rajat Sharma","Han Soo Lee","Shirishkumar Gedam"] },
-      { id:"Article2", title:"ESPR — Air quality near mining", url:"https://link.springer.com/article/10.1007/s11356-022-25034-w", theme:"air-mining",
-        authors:["Rajat Sharma","Ashutosh Kumar"] },
-      { id:"Article3", title:"Waste Management — Tourism waste (Himalayas)", url:"https://www.sciencedirect.com/science/article/abs/pii/S0956053X23003306", theme:"waste-urban",
-        authors:["Rajat Sharma","Ashutosh Kumar"] },
-      { id:"Article4", title:"Indoor Environments — Cooking particles & LCS", url:"https://www.sciencedirect.com/science/article/pii/S2950362024000055", theme:"lcs-exposure",
-        authors:["Rubal Dhiman","Rajat Sharma","Akshat Jain","Anirudha Ambekar","Thaseem Thajudeen","Sarath K. Guttikunda"] },
-      { id:"Article5", title:"Atmos. Environment: X — LCS & calibration", url:"https://www.sciencedirect.com/science/article/pii/S2590162125000218", theme:"lcs-exposure",
-        authors:["Rajat Sharma","Andry Razakamanantsoa","Ashutosh Kumar","Thaseem Thajudeen","Agnès Jullien"] },
-      { id:"Article6", title:"Atmos. Environment: X — Madagascar emission inventory", url:"https://www.sciencedirect.com/science/article/pii/S2590162125000899", theme:"air-mining",
-        authors:["Rajat Sharma","Andry Razakamanantsoa","Agnès Jullien","Erwann Rayssac"] },
-      { id:"Article7", title:"SSRN — HUGISS source apportionment", url:"https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6080570", theme:"air-mining",
-        authors:["Rajat Sharma","Andry Razakamanantsoa","Agnès Jullien","Erwann Rayssac"] }
-    ];
-    const themeColor = { "lcs-exposure":"#0f766e", "air-mining":"#7c3aed", "waste-urban":"#ea580c" };
+    /* =========================================================
+       Co-Author Orbit — calm radial map (no physics, no jitter)
+       ========================================================= */
+    (function initOrbit(){
+      const papers = [
+        { id:"Article1", year:2023, title:"Surface Urban Heat & Cool Island", url:"https://www.mdpi.com/2413-8851/7/2/38", theme:"waste",
+          authors:["Vinayak Bhanage","Sneha Kulkarni","Rajat Sharma","Han Soo Lee","Shirishkumar Gedam"] },
+        { id:"Article2", year:2023, title:"Air quality near coal mining", url:"https://link.springer.com/article/10.1007/s11356-022-25034-w", theme:"air",
+          authors:["Rajat Sharma","Ashutosh Kumar"] },
+        { id:"Article3", year:2023, title:"Tourism waste in the Himalayas", url:"https://www.sciencedirect.com/science/article/abs/pii/S0956053X23003306", theme:"waste",
+          authors:["Rajat Sharma","Ashutosh Kumar"] },
+        { id:"Article4", year:2024, title:"Cooking particles & low-cost sensors", url:"https://www.sciencedirect.com/science/article/pii/S2950362024000055", theme:"lcs",
+          authors:["Rubal Dhiman","Rajat Sharma","Akshat Jain","Anirudha Ambekar","Thaseem Thajudeen","Sarath K. Guttikunda"] },
+        { id:"Article5", year:2025, title:"Low-cost PM sensors & ML calibration", url:"https://www.sciencedirect.com/science/article/pii/S2590162125000218?via%3Dihub", theme:"lcs",
+          authors:["Rajat Sharma","Andry Razakamanantsoa","Ashutosh Kumar","Thaseem Thajudeen","Agnès Jullien"] },
+        { id:"Article6", year:2025, title:"Madagascar emission inventory", url:"https://www.sciencedirect.com/science/article/pii/S2590162125000899", theme:"air",
+          authors:["Rajat Sharma","Andry Razakamanantsoa","Agnès Jullien","Erwann Rayssac"] },
+        { id:"Article7", year:2026, title:"HUGISS source apportionment", url:"https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6080570", theme:"air",
+          authors:["Rajat Sharma","Andry Razakamanantsoa","Agnès Jullien","Erwann Rayssac"] }
+      ];
+      const THEME = {
+        lcs:   { color:"#0f766e", label:"Low-Cost Sensors / Exposure" },
+        air:   { color:"#7c3aed", label:"Air Quality / Inventory" },
+        waste: { color:"#ea580c", label:"Waste / Urban" }
+      };
+      const SELF = "Rajat Sharma";
+      const THEME_ORDER = ["lcs","air","waste"];
 
-    const authorMap = new Map();
-    papers.forEach(p => p.authors.forEach(a => {
-      if(!authorMap.has(a)) authorMap.set(a,{ id:a, name:a, papers:new Set(), themePrimary:p.theme, size:8 });
-      authorMap.get(a).papers.add(p.id);
-    }));
-    const nodes = Array.from(authorMap.values()).map(n => {
-      if(n.name === "Rajat Sharma"){ n.isRajat = true; n.size = 18; }
-      return n;
-    });
+      // build author records (excluding the central author)
+      const authorMap = new Map();
+      papers.forEach(p => p.authors.forEach(a => {
+        if (a === SELF) return;
+        if (!authorMap.has(a)) authorMap.set(a, { name:a, papers:[], themes:{} });
+        const rec = authorMap.get(a);
+        rec.papers.push(p.id);
+        rec.themes[p.theme] = (rec.themes[p.theme]||0)+1;
+      }));
+      authorMap.forEach(rec=>{ rec.theme = Object.keys(rec.themes).reduce((a,b)=> rec.themes[a]>=rec.themes[b]?a:b); });
 
-    const keyFor = (a,b)=> a<b ? `${a}|${b}` : `${b}|${a}`;
-    const edgeMap = new Map();
-    papers.forEach(p=>{
-      for(let i=0;i<p.authors.length;i++){
-        for(let j=i+1;j<p.authors.length;j++){
-          const a=p.authors[i], b=p.authors[j], k=keyFor(a,b);
-          if(!edgeMap.has(k)) edgeMap.set(k,{source:a,target:b,weight:0,papers:new Set()});
-          const e=edgeMap.get(k); e.weight++; e.papers.add(p.id);
-        }
-      }
-    });
-    const links = Array.from(edgeMap.values());
+      const grouped = THEME_ORDER.map(t => ({
+        theme:t,
+        authors:[...authorMap.values()].filter(a=>a.theme===t)
+                  .sort((a,b)=> b.papers.length - a.papers.length || a.name.localeCompare(b.name))
+      }));
 
-    const paperListEl = document.getElementById('paper-list');
-    papers.forEach(p=>{
-      const li = document.createElement('li');
-      li.setAttribute('data-paper-id', p.id);
-      li.innerHTML = `<span class="paper-title">${p.id}: ${p.title}</span>
-                      <span class="paper-meta">${p.authors.join(', ')}</span>`;
-      li.title = "Double-click to open paper";
-      li.addEventListener('dblclick', ()=> window.open(p.url,'_blank'));
-      paperListEl.appendChild(li);
-    });
-
-    (function initCoAuthorGraph(){
-      const wrap = document.getElementById('coauthor-graph');
-      const tip  = document.getElementById('ca-tip');
-      const W = wrap.clientWidth, H = 560;
-      const svg = d3.select(wrap).append('svg').attr('width',W).attr('height',H);
-      const g = svg.append('g');
-      svg.call(d3.zoom().scaleExtent([0.6,3]).on('zoom', ev => g.attr('transform', ev.transform)));
-
-      const hullLayer = g.append('g');
-
-      const maxW = d3.max(links, d=>d.weight) || 1;
-      const linkWidth = d3.scaleLinear().domain([1,maxW]).range([1.5,7]);
-      const linkColor = d3.scaleOrdinal().domain(['lcs-exposure','air-mining','waste-urban']).range(['#0f766e','#7c3aed','#ea580c']);
-
-      const link = g.append('g')
-        .attr('class','links')
-        .selectAll('line').data(links).join('line')
-        .attr('class','edge').attr('stroke-width', d=>linkWidth(d.weight))
-        .style('stroke', d => {
-          const themes = [...d.papers].map(id => papers.find(p => p.id === id).theme);
-          const themeCounts = themes.reduce((acc, t) => { acc[t] = (acc[t] || 0) + 1; return acc; }, {});
-          const maxTheme = Object.keys(themeCounts).reduce((a, b) => themeCounts[a] > themeCounts[b] ? a : b);
-          return linkColor(maxTheme) || '#94a3b8';
-        })
-        .attr('stroke-opacity',0);
-
-      const nodeR = d3.scaleLinear().domain([6,20]).range([6,20]);
-      const node = g.append('g').selectAll('circle').data(nodes).join('circle')
-        .attr('class', d => d.isRajat ? 'node is-rajat' : 'node').attr('r', 0)
-        .attr('fill', d=> d.isRajat ? '#1d4ed8' : (themeColor[d.themePrimary]||'#0ea5e9'))
-        .attr('stroke','#fff').attr('stroke-width',2.5)
-        .on('mouseover', (ev,d)=> showTip(ev,d))
-        .on('mousemove', ev=> moveTip(ev))
-        .on('mouseout', hideTip)
-        .on('click', (ev,d) => highlightAuthorCluster(d))
-        .call(d3.drag().on('start',dragstarted).on('drag',dragged).on('end',dragended));
-
-      const labels = g.append('g').selectAll('text').data(nodes).join('text')
-        .attr('class','node-label').attr('text-anchor','middle')
-        .attr('dy', d=> d.isRajat ? -18 : -12)
-        .style('font-weight', d=> d.isRajat ? 800 : 500)
-        .style('fill', d=> d.isRajat ? '#0f172a' : '#334155')
-        .style('opacity',0)
-        .text(d=> d.name)
-        .on('mouseover', (ev,d)=> showTip(ev,d))
-        .on('mousemove', ev=> moveTip(ev))
-        .on('mouseout', hideTip)
-        .on('click', (ev,d) => highlightAuthorCluster(d));
-
-      const sim = d3.forceSimulation(nodes)
-        .force('link', d3.forceLink(links).id(d=>d.id).distance(d=>140 - (d.weight-1)*15).strength(.4))
-        .force('charge', d3.forceManyBody().strength(-450))
-        .force('center', d3.forceCenter(W/2, H/2))
-        .force('collision', d3.forceCollide().radius(d => nodeR(d.size)+15))
-        .alpha(1).alphaDecay(0.0228)
-        .velocityDecay(0.6)
-        .on('tick', ticked)
-        .on('end', drawHulls);
-
-      const center = {x:W/2,y:H/2};
-      nodes.forEach(n=>{ if(n.isRajat){ n.fx=center.x; n.fy=center.y; } });
-
-      function ticked(){
-        link.attr('x1', d=>d.source.x).attr('y1', d=>d.source.y)
-            .attr('x2', d=>d.target.x).attr('y2', d=>d.target.y);
-        node.attr('cx', d=>d.x=Math.max(20, Math.min(W-20, d.x)))
-            .attr('cy', d=>d.y=Math.max(20, Math.min(H-20, d.y)));
-        labels.attr('x', d=>d.x).attr('y', d=>d.y - (d.isRajat ? nodeR(d.size)+8 : nodeR(d.size)+6));
-        drawHulls();
-      }
-
-      function drawHulls(){
-        const groups = d3.groups(nodes.filter(n=>!n.isRajat), d=>d.themePrimary);
-        const hulls = groups.map(([theme, arr])=>{
-          const pts = arr.map(n=>[n.x,n.y]);
-          const hull = d3.polygonHull(pts);
-          return {theme, hull};
-        }).filter(h=>h.hull);
-
-        const hullSel = hullLayer.selectAll('path').data(hulls, d=>d.theme);
-        hullSel.join(
-          enter => enter.append('path')
-            .attr('class','theme-hull')
-            .attr('d', d => 'M'+d.hull.join('L')+'Z')
-            .attr('fill', d => themeColor[d.theme] || '#94a3b8')
-            .attr('stroke', d => themeColor[d.theme] || '#94a3b8')
-            .on('mouseover', function(ev, d) { d3.select(this).classed('hull-highlight', true); })
-            .on('mouseout', function(ev, d) { d3.select(this).classed('hull-highlight', false); }),
-          update => update.transition().duration(500)
-            .attr('d', d => 'M'+d.hull.join('L')+'Z')
-        );
-      }
-
-      const paperLis = document.querySelectorAll('#paper-list li');
-      let lockedPaper = null;
-      paperLis.forEach(li=>{
-        const pid = li.getAttribute('data-paper-id');
-        const authors = papers.find(p=>p.id===pid).authors;
-        li.addEventListener('mouseenter', ()=> { if(!lockedPaper) highlightAuthors(authors, true); });
-        li.addEventListener('mouseleave', ()=> { if(!lockedPaper) clearHighlight(); });
-        li.addEventListener('click', ()=>{
-          if(lockedPaper === pid){ lockedPaper = null; li.classList.remove('active'); clearHighlight(); }
-          else {
-            document.querySelectorAll('#paper-list li.active').forEach(el=>el.classList.remove('active'));
-            lockedPaper = pid; li.classList.add('active'); highlightAuthors(authors, true);
-          }
+      // deterministic radial placement into theme sectors
+      const VW=900, VH=600, CX=VW/2, CY=VH/2, R1=150, R2=250;
+      const totalAuthors=[...authorMap.values()].length;
+      let angleCursor = -Math.PI/2;
+      const GAP = 0.30;
+      const usable = (Math.PI*2) - GAP*grouped.filter(g=>g.authors.length).length;
+      const placed = [];
+      grouped.forEach(group=>{
+        const n=group.authors.length; if(!n) return;
+        const sector = usable * (n/totalAuthors);
+        group.authors.forEach((a,i)=>{
+          const frac = n===1 ? 0.5 : i/(n-1);
+          const ang = angleCursor + sector*frac;
+          const ring = (n>3 && i%2===1) ? R2 : R1;
+          placed.push({ ...a, x: CX + Math.cos(ang)*ring, y: CY + Math.sin(ang)*ring, ang, ring });
         });
+        angleCursor += sector + GAP;
       });
 
-      function highlightAuthorCluster(author) {
-        const authorPapers = papers.filter(p => p.authors.includes(author.name));
-        const clusterAuthors = new Set();
-        authorPapers.forEach(p => p.authors.forEach(a => clusterAuthors.add(a)));
-        highlightAuthors(Array.from(clusterAuthors), true);
-      }
+      const svg = document.getElementById('orbit-svg');
+      const NS="http://www.w3.org/2000/svg";
+      const el=(tag,attrs={})=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;};
 
-      function highlightAuthors(authors, persist = false){
-        const set = new Set(authors);
-        node.transition().duration(300).attr('opacity', d => set.has(d.id)?1:0.1).attr('r', d => set.has(d.id) ? nodeR(d.size) * 1.2 : nodeR(d.size));
-        labels.transition().duration(300).attr('opacity', d => set.has(d.id)?1:0.1);
-        link.transition().duration(300).attr('opacity', d => (set.has(d.source.id) && set.has(d.target.id)) ? 1 : 0.05)
-            .attr('stroke-width', d => (set.has(d.source.id) && set.has(d.target.id)) ? linkWidth(d.weight) * 1.5 : 0.5)
-            .attr('class', d => (set.has(d.source.id) && set.has(d.target.id)) ? 'edge edge-highlight' : 'edge');
-        const themes = [...new Set(authors.filter(a => a !== 'Rajat Sharma').map(a => nodes.find(n => n.id === a).themePrimary))];
-        hullLayer.selectAll('.theme-hull').transition().duration(300)
-          .attr('opacity', d => themes.includes(d.theme) ? 1 : 0.1)
-          .attr('class', d => themes.includes(d.theme) ? 'theme-hull hull-highlight' : 'theme-hull');
-      }
-      function clearHighlight(){
-        node.transition().duration(300).attr('opacity',1).attr('r', d => nodeR(d.size));
-        labels.transition().duration(300).attr('opacity',1);
-        link.transition().duration(300).attr('opacity',0.6).attr('stroke-width', d=>linkWidth(d.weight)).attr('class', 'edge');
-        hullLayer.selectAll('.theme-hull').transition().duration(300).attr('opacity',1).attr('class', 'theme-hull');
-      }
+      [R1,R2].forEach(r=> svg.appendChild(el('circle',{class:'ring',cx:CX,cy:CY,r})));
+      placed.forEach(p=> svg.appendChild(el('line',{class:'spoke',x1:CX,y1:CY,x2:p.x,y2:p.y})));
 
-      function showTip(ev,d){
-        const list = Array.from(d.papers).map(id => papers.find(p => p.id === id).title).join('<br>');
-        tip.innerHTML = `<strong>${d.name}</strong><br>${d.isRajat?'Central author':'Co-author'}<br><em>Collaborations:</em><br>${list||'—'}`;
-        tip.style.opacity=1; moveTip(ev);
-      }
-      function moveTip(ev){
-        const rect = wrap.getBoundingClientRect();
-        tip.style.left = (ev.clientX - rect.left) + 'px';
-        tip.style.top  = (ev.clientY - rect.top - 10) + 'px';
-      }
-      function hideTip(){ tip.style.opacity=0; }
-
-      function dragstarted(event,d){ if(!event.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; }
-      function dragged(event,d){ d.fx=event.x; d.fy=event.y; }
-      function dragended(event,d){ if(!event.active) sim.alphaTarget(0); if(d.isRajat){ d.fx=center.x; d.fy=center.y; } else { d.fx=null; d.fy=null; } }
-
-      window.addEventListener('resize', ()=>{
-        const w = wrap.clientWidth;
-        svg.attr('width', w).attr('height', H);
-        sim.force('center', d3.forceCenter(w/2, H/2)).alpha(0.25).restart();
+      const arcLayer = el('g'); svg.appendChild(arcLayer);
+      const arcs = new Map();
+      placed.forEach(p=>{
+        const mx=(CX+p.x)/2, my=(CY+p.y)/2;
+        const dx=p.x-CX, dy=p.y-CY, len=Math.hypot(dx,dy)||1;
+        const off=22, ox=-dy/len*off, oy=dx/len*off;
+        const d=`M${CX},${CY} Q${mx+ox},${my+oy} ${p.x},${p.y}`;
+        const a=el('path',{class:'arc',d, stroke:THEME[p.theme].color, 'stroke-width':2});
+        arcLayer.appendChild(a); arcs.set(p.name,a);
       });
 
-      // staggered entrance
-      link.transition().delay((d,i)=>250+i*40).duration(600).attr('stroke-opacity',0.6);
-      node.transition().delay((d,i)=>i*60).duration(650).ease(d3.easeBackOut).attr('r', d=>nodeR(d.size));
-      labels.transition().delay((d,i)=>200+i*60).duration(500).style('opacity',1);
+      const nodeLayer = el('g'); svg.appendChild(nodeLayer);
+      placed.forEach(p=>{
+        const g=el('g',{class:'author-g','data-name':p.name,'data-theme':p.theme});
+        const r = 7 + Math.min(p.papers.length-1,3)*2.2;
+        g.appendChild(el('circle',{class:'author-dot',cx:p.x,cy:p.y,r,fill:THEME[p.theme].color}));
+        const dx=p.x-CX, dy=p.y-CY, len=Math.hypot(dx,dy)||1;
+        const lx=p.x + dx/len*(r+9), ly=p.y + dy/len*(r+9);
+        const anchor = dx>20?'start':dx<-20?'end':'middle';
+        const t=el('text',{class:'author-label',x:lx,y:ly+4,'text-anchor':anchor});
+        const parts=p.name.split(' ');
+        t.textContent = parts.length>1 ? `${parts[0][0]}. ${parts.slice(1).join(' ')}` : p.name;
+        g.appendChild(t);
+        nodeLayer.appendChild(g);
+        g.addEventListener('mouseenter',()=>hoverAuthor(p));
+        g.addEventListener('mouseleave',clearHover);
+      });
+
+      // center node
+      const c=el('g');
+      c.appendChild(el('circle',{class:'center-pulse',cx:CX,cy:CY,r:30}));
+      c.appendChild(el('circle',{class:'center-dot',cx:CX,cy:CY,r:34}));
+      const cl=el('text',{class:'center-label',x:CX,y:CY+1}); cl.textContent="Rajat"; c.appendChild(cl);
+      const cs=el('text',{class:'center-sub',x:CX,y:CY+15}); cs.textContent="SHARMA"; c.appendChild(cs);
+      svg.appendChild(c);
+
+      // legend
+      const legend=document.getElementById('orbit-legend');
+      const themeMuted={lcs:false,air:false,waste:false};
+      THEME_ORDER.forEach(t=>{
+        const chip=document.createElement('div');
+        chip.className='lg-chip'; chip.dataset.theme=t;
+        chip.innerHTML=`<span class="dot" style="background:${THEME[t].color}"></span>${THEME[t].label}`;
+        chip.addEventListener('click',()=>toggleTheme(t,chip));
+        legend.appendChild(chip);
+      });
+
+      // paper strip
+      const strip=document.getElementById('paper-strip');
+      papers.slice().sort((a,b)=>b.year-a.year).forEach(p=>{
+        const card=document.createElement('div');
+        card.className='paper-card'; card.dataset.id=p.id; card.dataset.theme=p.theme;
+        card.style.setProperty('--bar',THEME[p.theme].color);
+        card.innerHTML=`
+          <span class="pc-year">${p.year}</span>
+          <div class="pc-title">${p.title}</div>
+          <div class="pc-authors">${p.authors.map(a=> a===SELF?`<b style="color:var(--primary)">${a}</b>`:a).join(' · ')}</div>
+          <span class="pc-open">Open paper <i class="fas fa-arrow-up-right-from-square"></i></span>`;
+        card.addEventListener('mouseenter',()=>hoverPaper(p));
+        card.addEventListener('mouseleave',clearHover);
+        card.addEventListener('click',()=>window.open(p.url,'_blank'));
+        strip.appendChild(card);
+      });
+
+      const tip=document.getElementById('orbit-tip');
+      const stage=document.querySelector('.orbit-stage');
+
+      function hoverAuthor(p){
+        const set=new Set([p.name]);
+        const myPapers = papers.filter(pp=>pp.authors.includes(p.name));
+        myPapers.forEach(pp=>pp.authors.forEach(a=>set.add(a)));
+        applyHighlight(set, myPapers.map(pp=>pp.id));
+        showTip(p.x,p.y,`<strong>${p.name}</strong><br>${p.papers.length} paper${p.papers.length>1?'s':''} with Rajat`);
+      }
+      function hoverPaper(p){ applyHighlight(new Set(p.authors), [p.id]); }
+      function applyHighlight(authorSet, paperIds){
+        document.querySelectorAll('.author-g').forEach(g=> g.classList.toggle('dimmed', !authorSet.has(g.dataset.name)));
+        arcs.forEach((a,name)=>{
+          const on=authorSet.has(name);
+          a.classList.toggle('show',on);
+          a.setAttribute('stroke-width', on?3.2:2);
+          a.style.opacity = on?'':'0';
+        });
+        document.querySelectorAll('.paper-card').forEach(card=> card.classList.toggle('active', paperIds.includes(card.dataset.id)));
+      }
+      function clearHover(){
+        document.querySelectorAll('.author-g').forEach(g=>g.classList.remove('dimmed'));
+        arcs.forEach(a=>{a.classList.remove('show');a.style.opacity='0';a.setAttribute('stroke-width',2);});
+        document.querySelectorAll('.paper-card').forEach(c=>c.classList.remove('active'));
+        hideTip();
+      }
+      function toggleTheme(t,chip){
+        themeMuted[t]=!themeMuted[t]; chip.classList.toggle('muted',themeMuted[t]);
+        document.querySelectorAll('.author-g').forEach(g=> g.classList.toggle('dimmed', themeMuted[g.dataset.theme]));
+        document.querySelectorAll('.paper-card').forEach(c=>{ c.style.display = themeMuted[c.dataset.theme] ? 'none':''; });
+      }
+      function showTip(x,y,html){
+        const rect=svg.getBoundingClientRect();
+        const sx=rect.left + (x/VW)*rect.width;
+        const sy=rect.top + (y/VH)*rect.height;
+        const sr=stage.getBoundingClientRect();
+        tip.style.left=(sx-sr.left)+'px'; tip.style.top=(sy-sr.top)+'px';
+        tip.innerHTML=html; tip.style.opacity=1;
+      }
+      function hideTip(){tip.style.opacity=0;}
+
+      // staggered entrance once section scrolls into view
+      const reveal = ()=>{
+        document.querySelectorAll('.author-g').forEach((g,i)=>{
+          g.style.opacity=0; g.style.transform='scale(.6)'; g.style.transformOrigin='center';
+          g.style.transition='opacity .5s var(--ease-out), transform .5s var(--ease-out)';
+          setTimeout(()=>{g.style.opacity=1;g.style.transform='scale(1)';}, 120+i*70);
+        });
+      };
+      if('IntersectionObserver' in window){
+        const io=new IntersectionObserver((ents)=>{ents.forEach(e=>{ if(e.isIntersecting){ reveal(); io.disconnect(); }});},{threshold:.18});
+        io.observe(svg);
+      } else { reveal(); }
     })();
   </script>
 </body>
