@@ -1,359 +1,568 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Projects | Dr. Rajat Sharma</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Projects | Dr. Rajat Sharma</title>
+    <meta name="description" content="Projects and activities of Dr. Rajat Sharma — air quality research, low-cost sensors, source apportionment, and science outreach across Madagascar, India and France.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
         :root {
-            --bg: rgba(240, 242, 245, 0.9);
-            --surface: #e8ecef;
-            --primary: #2a4066;
+            --bg: #f4f6f8;
+            --surface: #ffffff;
+            --primary: #1f3a5f;
             --secondary: #1e8759;
             --accent: #d4a017;
             --text: #1a1c20;
-            --shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --muted: #5a6470;
+            --line: rgba(31, 58, 95, 0.12);
+            --shadow-sm: 0 4px 16px rgba(20, 30, 50, 0.06);
+            --shadow-md: 0 12px 32px rgba(20, 30, 50, 0.10);
+            --shadow-lg: 0 24px 56px rgba(20, 30, 50, 0.16);
+            --radius: 16px;
+            --transition: 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+            --maxw: 1200px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg);
-            background-image: url('https://www.transparenttextures.com/patterns/clean-gray-paper.png');
-            animation: subtleBackgroundMove 60s linear infinite;
+            font-family: 'Outfit', system-ui, sans-serif;
+            background:
+                radial-gradient(1200px 600px at 85% -10%, rgba(30, 135, 89, 0.06), transparent 60%),
+                radial-gradient(1000px 500px at -10% 110%, rgba(31, 58, 95, 0.06), transparent 60%),
+                var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            position: relative;
         }
 
-        @keyframes subtleBackgroundMove { 0% { background-position: 0 0; } 100% { background-position: 100% 100%; } }
+        a { color: inherit; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; background: transparent; }
+        .container { max-width: var(--maxw); margin: 0 auto; padding: 0 1.5rem; }
 
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; z-index: 1000; }
-        .nav { display: flex; gap: 2rem; }
-        .nav a { color: var(--text); text-decoration: none; position: relative; padding: 0.5rem 0; transition: var(--transition); }
-        .nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background: var(--primary); transition: var(--transition); }
-        .nav a:hover::after { width: 100%; }
+        /* ---------- Header ---------- */
+        .header {
+            position: sticky; top: 0; z-index: 900;
+            backdrop-filter: blur(12px);
+            background: rgba(244, 246, 248, 0.78);
+            border-bottom: 1px solid var(--line);
+        }
+        .header-inner {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 1.5rem; max-width: var(--maxw); margin: 0 auto;
+        }
+        .brand {
+            font-family: 'Fraunces', serif; font-weight: 600;
+            font-size: 1.35rem; color: var(--primary); letter-spacing: -0.01em;
+            text-decoration: none;
+        }
+        .brand span { color: var(--secondary); }
+        .nav { display: flex; gap: 2rem; align-items: center; }
+        .nav a {
+            color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 500;
+            position: relative; padding: 0.35rem 0; opacity: 0.85; transition: var(--transition);
+        }
+        .nav a:hover { opacity: 1; }
+        .nav a::after {
+            content: ''; position: absolute; left: 0; bottom: -2px; height: 2px; width: 0;
+            background: var(--secondary); transition: var(--transition);
+        }
+        .nav a:hover::after, .nav a[aria-current="page"]::after { width: 100%; }
+        .nav a[aria-current="page"] { opacity: 1; color: var(--primary); }
 
-        .projects-intro { text-align: center; margin: 4rem 0; animation: fadeIn 1s ease-in-out; }
-        .projects-intro h2 { font-size: 3.5rem; color: var(--primary); }
-        .projects-intro p { font-size: 1.2rem; color: var(--text); opacity: 0.8; margin-top: 0.5rem; }
+        .menu-toggle {
+            display: none; background: none; border: none; cursor: pointer;
+            font-size: 1.4rem; color: var(--primary); padding: 0.25rem 0.5rem;
+        }
 
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        /* ---------- Intro ---------- */
+        .projects-intro { text-align: center; padding: 5rem 0 2rem; }
+        .eyebrow {
+            display: inline-block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--secondary); margin-bottom: 1rem;
+        }
+        .projects-intro h1 {
+            font-family: 'Fraunces', serif; font-weight: 700;
+            font-size: clamp(2.4rem, 6vw, 4rem); color: var(--primary);
+            line-height: 1.05; letter-spacing: -0.02em;
+        }
+        .projects-intro p {
+            font-size: 1.1rem; color: var(--muted); margin: 1rem auto 0; max-width: 46ch;
+        }
+
+        /* ---------- Filters ---------- */
+        .filters {
+            display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center;
+            margin: 2rem 0 3rem;
+        }
+        .filter-btn {
+            font-family: inherit; font-size: 0.9rem; font-weight: 500; cursor: pointer;
+            padding: 0.5rem 1.1rem; border-radius: 999px; border: 1px solid var(--line);
+            background: var(--surface); color: var(--muted); transition: var(--transition);
+        }
+        .filter-btn:hover { color: var(--primary); border-color: var(--primary); }
+        .filter-btn[aria-pressed="true"] {
+            background: var(--primary); color: #fff; border-color: var(--primary);
+        }
+
+        /* ---------- Grid ---------- */
+        .projects-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.75rem; padding-bottom: 4rem;
+        }
 
         .project-card {
-            background: transparent;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+            box-shadow: var(--shadow-sm); overflow: hidden; position: relative;
+            display: flex; flex-direction: column;
+            opacity: 0; transform: translateY(28px);
+            transition: transform var(--transition), box-shadow var(--transition),
+                        opacity 600ms ease, border-color var(--transition);
+        }
+        .project-card.visible { opacity: 1; transform: translateY(0); }
+        .project-card:hover {
+            transform: translateY(-6px); box-shadow: var(--shadow-lg);
+            border-color: rgba(31, 58, 95, 0.25);
+        }
+        .project-card.is-hiding { display: none; }
+
+        .badge {
+            position: absolute; top: 1rem; right: 1rem; z-index: 5;
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+            color: #fff; padding: 0.28rem 0.7rem; border-radius: 999px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+        }
+        .badge-latest { background: var(--secondary); }
+        .badge-new { background: var(--accent); }
+
+        .card-media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #e7ebef; }
+        .card-media img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 500ms cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .project-card:hover .card-media img { transform: scale(1.06); }
+
+        .card-body { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
+        .card-tag {
+            font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--secondary); margin-bottom: 0.5rem;
+        }
+        .project-card h3 {
+            font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.3rem;
+            color: var(--primary); line-height: 1.2; margin-bottom: 0.6rem; letter-spacing: -0.01em;
+        }
+        .project-card .excerpt {
+            color: var(--muted); font-size: 0.95rem; margin-bottom: 1.25rem;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
             overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 1s ease-out forwards;
-            position: relative;
+        }
+        .card-links { display: flex; gap: 1.25rem; align-items: center; margin-top: auto; flex-wrap: wrap; }
+        .card-links a, .card-links button {
+            font-family: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+            color: var(--primary); background: none; border: none; padding: 0;
+            display: inline-flex; align-items: center; gap: 0.4rem; transition: var(--transition);
+        }
+        .card-links a:hover, .card-links button:hover { color: var(--secondary); gap: 0.65rem; }
+        .card-links i { font-size: 0.8rem; }
+
+        /* ---------- Modal ---------- */
+        .modal {
+            display: none; position: fixed; inset: 0; z-index: 1000;
+            background: rgba(15, 23, 38, 0.55); backdrop-filter: blur(3px);
+            justify-content: center; align-items: center; padding: 1.5rem;
+            opacity: 0; transition: opacity 320ms ease;
+        }
+        .modal.show { opacity: 1; }
+        .modal-content {
+            background: var(--surface); border-radius: var(--radius); padding: 2.5rem;
+            max-width: 760px; width: 100%; max-height: 82vh; overflow-y: auto;
+            position: relative; box-shadow: var(--shadow-lg);
+            transform: translateY(24px) scale(0.98); opacity: 0;
+            transition: transform 360ms cubic-bezier(0.22, 0.61, 0.36, 1), opacity 360ms ease;
+        }
+        .modal.show .modal-content { transform: translateY(0) scale(1); opacity: 1; }
+        .modal-content .close {
+            position: absolute; top: 1.1rem; right: 1.3rem; font-size: 1.6rem; line-height: 1;
+            background: none; border: none; cursor: pointer; color: var(--muted);
+            transition: var(--transition);
+        }
+        .modal-content .close:hover { color: var(--secondary); transform: rotate(90deg); }
+        .modal-content h3 {
+            font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.7rem;
+            color: var(--primary); margin-bottom: 1.2rem; padding-right: 2rem; letter-spacing: -0.01em;
+        }
+        .modal-content p { color: var(--text); font-size: 1rem; }
+        .modal-content strong { color: var(--primary); }
+
+        /* ---------- Footer ---------- */
+        footer {
+            border-top: 1px solid var(--line); margin-top: 2rem;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+            padding: 3.5rem 0 4rem;
+        }
+        footer h3 {
+            font-family: 'Fraunces', serif; color: var(--primary); margin-bottom: 0.9rem; font-size: 1.2rem;
+        }
+        footer p, footer a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+        footer a:hover { color: var(--secondary); }
+        footer .links a { display: inline-block; margin-bottom: 0.4rem; }
+        .cv-btn {
+            display: inline-block; margin-top: 1rem; background: var(--primary); color: #fff;
+            border: none; padding: 0.75rem 1.8rem; border-radius: 999px; cursor: pointer;
+            font-family: inherit; font-weight: 600; font-size: 0.95rem; transition: var(--transition);
+        }
+        .cv-btn:hover { background: var(--secondary); transform: translateY(-2px); }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 768px) {
+            .nav {
+                position: fixed; inset: 0 0 auto 0; top: 61px;
+                flex-direction: column; align-items: flex-start; gap: 0;
+                background: var(--surface); border-bottom: 1px solid var(--line);
+                padding: 0; max-height: 0; overflow: hidden; transition: max-height var(--transition);
+            }
+            .nav.active { max-height: 360px; }
+            .nav a { width: 100%; padding: 0.9rem 1.5rem; border-bottom: 1px solid var(--line); }
+            .menu-toggle { display: inline-block; }
+            .projects-intro { padding: 3rem 0 1.5rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            footer { grid-template-columns: 1fr; gap: 2.5rem; text-align: left; }
+            .modal-content { padding: 1.75rem; }
         }
 
-        .project-card:nth-child(1) { animation-delay: 0.1s; }
-        .project-card:nth-child(2) { animation-delay: 0.2s; }
-        .project-card:nth-child(3) { animation-delay: 0.3s; }
-        .project-card:nth-child(4) { animation-delay: 0.4s; }
-        .project-card:nth-child(5) { animation-delay: 0.5s; }
-        .project-card:nth-child(6) { animation-delay: 0.6s; }
-        .project-card:nth-child(7) { animation-delay: 0.7s; }
-        .project-card:nth-child(8) { animation-delay: 0.8s; }
-
-        .badge-new{position:absolute;top:1rem;right:1rem;z-index:5;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.2rem .6rem;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.2)}
-
-        .project-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem; transition: var(--transition); }
-        .project-card:hover img { transform: scale(1.05); }
-
-        .project-card h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
-        .project-card p { color: var(--text); opacity: 0.9; margin-bottom: 1rem; line-height: 1.6; }
-        .project-card .truncated-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
-        .project-card .links { display: flex; justify-content: space-between; align-items: center; }
-        .project-card a { color: var(--primary); font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: var(--transition); }
-        .project-card a:hover { color: var(--secondary); transform: translateX(5px); }
-        .project-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); }
-
-        /* Modal Styling */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000; opacity: 0; transition: opacity 0.4s ease; }
-        .modal.show { opacity: 1; }
-        .modal-content { background-color: #fff; padding: 2rem; border-radius: 10px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; transform: scale(0.9); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; }
-        .modal.show .modal-content { transform: scale(1); opacity: 1; }
-        .modal-content .close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.5em; cursor: pointer; color: var(--primary); transition: var(--transition); }
-        .modal-content .close:hover { color: var(--secondary); }
-        .modal-content h3 { font-size: 1.8rem; color: var(--primary); margin-bottom: 1rem; }
-        .modal-content p { font-size: 1em; color: var(--text); line-height: 1.6; }
-
-        footer { display: flex; justify-content: space-between; align-items: center; padding: 4rem 0; border-top: 1px solid var(--primary); margin-top: 4rem; }
-        footer h3 { color: var(--primary); margin-bottom: 1rem; }
-        footer p, footer a { color: var(--text); opacity: 0.8; text-decoration: none; }
-        footer button { background: var(--primary); color: white; border: none; padding: 0.8rem 2rem; border-radius: 5px; cursor: pointer; transition: var(--transition); }
-        footer button:hover { background: var(--secondary); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-
-        @media (max-width: 768px) {
-            .header { flex-direction: column; align-items: flex-start; padding: 1rem 0; }
-            .header h1 { font-size: 1.5rem; margin-bottom: 1rem; }
-            .nav { display: none; flex-direction: column; gap: 1rem; width: 100%; }
-            .nav.active { display: flex; }
-            .nav a { padding: 0.5rem; font-size: 1rem; }
-            .menu-toggle { display: block; font-size: 1.5rem; cursor: pointer; position: absolute; top: 1rem; right: 1rem; }
-            .projects-intro h2 { font-size: 2.5rem; }
-            .projects-intro p { font-size: 1rem; }
-            .projects-grid { grid-template-columns: 1fr; gap: 1rem; }
-            .project-card { padding: 1rem; }
-            .project-card h3 { font-size: 1.2rem; }
-            .project-card p { font-size: 0.9rem; }
-            .project-card .links { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
-            footer { flex-direction: column; text-align: center; padding: 2rem 0; }
-            footer h3 { font-size: 1.2rem; }
-            footer p { font-size: 0.9rem; }
-            footer button { width: 100%; margin-top: 1rem; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .project-card { opacity: 1; transform: none; }
+            html { scroll-behavior: auto; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-
     <header class="header">
-        <h1 style="font-size: 25px;">Dr. Rajat Sharma</h1>
-        <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-        <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="index.html#research">Research</a>
-            <a href="index.html#publications">Publications</a>
-            <a href="projects.html">Projects</a>
-            <a href="index.html#contact">Contact</a>
-        </nav>
+        <div class="header-inner">
+            <a class="brand" href="index.html">Dr. Rajat <span>Sharma</span></a>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" onclick="toggleMenu(this)">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav" id="primary-nav">
+                <a href="index.html">Home</a>
+                <a href="index.html#research">Research</a>
+                <a href="index.html#publications">Publications</a>
+                <a href="projects.html" aria-current="page">Projects</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+        </div>
     </header>
 
-    <section class="projects-intro">
-        <h2>Projects</h2>
-        <p>Explore my additional activities and projects </p>
-    </section>
+    <main class="container">
 
-    <section class="projects-grid">
+        <section class="projects-intro">
+            <span class="eyebrow">Portfolio</span>
+            <h1>Projects &amp; Activities</h1>
+            <p>From PhD research to public outreach — exploring air quality across three continents.</p>
+        </section>
 
-        <!-- PhD Defense -->
-        <div class="project-card">
-            <span class="badge-new">Latest</span>
-            <!-- 👇 CHANGE THE src BELOW to your own photo, e.g. images/phd-defense.jpg -->
-            <img src="images/phd.jpeg" alt="PhD Defense — 28 May 2026">
-            <h3>PhD Defense — 28 May 2026</h3>
-            <p class="truncated-text">Three continents, three different worlds: Madagascar (low-income), India (middle-income) and France (high-income). One question followed me everywhere — can low-cost air quality sensors actually tell people what they're breathing? On May 28th I successfully defended my PhD.</p>
-            <div class="links">
-                <a href="#" onclick="openPopup('defense')">Read More <i class="fas fa-arrow-right"></i></a>
-                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-cleardoc-phd-activity-7466417923214155777-3Lbg" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
-            </div>
+        <div class="filters" role="group" aria-label="Filter projects by category">
+            <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-btn" data-filter="research" aria-pressed="false">Research</button>
+            <button class="filter-btn" data-filter="conference" aria-pressed="false">Conferences</button>
+            <button class="filter-btn" data-filter="outreach" aria-pressed="false">Outreach</button>
+            <button class="filter-btn" data-filter="entrepreneurship" aria-pressed="false">Entrepreneurship</button>
         </div>
 
-        <!-- EGU 2026 -->
-        <div class="project-card">
-            <span class="badge-new">New</span>
-            <!-- 👇 CHANGE THE src BELOW to your own photo, e.g. images/egu-2026.jpg -->
-            <img src="images/egu.jpeg" alt="EGU 2026 — Oral Presentation">
-            <h3>EGU 2026 — Oral Presentation</h3>
-            <p class="truncated-text">I gave my first big conference talk at the European Geosciences Union (EGU) 2026. A big room — professors, researchers, people who've spent decades on this — but somewhere in the middle I stopped being nervous, because I genuinely believe in what we've built: HUGISS, connecting air quality sensors with emission inventories for source apportionment.</p>
-            <div class="links">
-                <a href="#" onclick="openPopup('egu')">Read More <i class="fas fa-arrow-right"></i></a>
-                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-egu26-airquality-activity-7458815726192164864-he8a" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
+        <section class="projects-grid" id="grid">
 
-        <!-- Science is Wonderful! 2026 -->
-        <div class="project-card">
-            <!-- 👇 CHANGE THE src BELOW to your own photo, e.g. images/science-wonderful.jpg -->
-            <img src="images/1773982553086.jfif" alt="Science is Wonderful! 2026 - Air Detectives booth">
-            <h3>Science is Wonderful! 2026</h3>
-            <p class="truncated-text">What happens when you take air pollution science out of the lab and into people's hands? At Science is Wonderful! (Marie Skłodowska-Curie Actions, European Commission), we turned air quality research into an interactive "Air Detectives" experience where visitors built their own cities and saw their choices change the air in real time.</p>
-            <div class="links">
-                <a href="#" onclick="openPopup('sciencewonderful')">Read More <i class="fas fa-arrow-right"></i></a>
-                <a href="https://marie-sklodowska-curie-actions.ec.europa.eu/science-is-wonderful" target="_blank">Event <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
+            <!-- PhD Defense -->
+            <article class="project-card" data-category="research">
+                <span class="badge badge-latest">Latest</span>
+                <div class="card-media">
+                    <!-- 👇 CHANGE src to your photo, e.g. images/phd-defense.jpg -->
+                    <img src="images/phd.jpeg" alt="Dr. Rajat Sharma at his PhD defense, 28 May 2026" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Research</span>
+                    <h3>PhD Defense — 28 May 2026</h3>
+                    <p class="excerpt">Three continents, three different worlds: Madagascar (low-income), India (middle-income) and France (high-income). One question followed me everywhere — can low-cost air quality sensors actually tell people what they're breathing? On May 28th I successfully defended my PhD.</p>
+                    <div class="card-links">
+                        <button type="button" onclick="openPopup('defense')">Read more <i class="fas fa-arrow-right"></i></button>
+                        <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-cleardoc-phd-activity-7466417923214155777-3Lbg" target="_blank" rel="noopener">LinkedIn <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </article>
 
-        <!-- DUDE Initiative -->
-        <div class="project-card">
-            <img src="images/1726324848647.jfif" alt="DUDE Initiative">
-            <h3>DUDE Initiative</h3>
-            <p class="truncated-text"> EU TalentOn Competition! 🚀 Proud to have represented The 𝗗𝘂𝗱𝗲 𝗜𝗻𝗶𝘁𝗶𝗮𝘁𝗶𝘃𝗲 (c𝗶𝘁𝗶𝘇𝗲𝗻-D𝗿𝗶𝘃𝗲𝗻, U𝗽𝘀𝗰𝗮𝗹𝗮𝗯𝗹𝗲, 𝗮𝗻𝗱 D𝗶𝗴𝗶𝘁𝗮𝗹 E𝗰𝗼𝗰𝗶𝘁𝗶𝗲𝘀) alongside an amazing team. 🌍💡 
-.</p>
-            <div class="links">
-                <a href="#" onclick="openPopup('dude')">Read More <i class="fas fa-arrow-right"></i></a>
-                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-innovation-climatetech-activity-7240731230432890880-OeyR?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">More <i class="fas fa-arrow-right"></i></a>
-                <a href="https://www.linkedin.com/posts/eu-talenton_brightyoungminds-talenton-eutalenton2024-ugcPost-7241422798001258497-RHLJ?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">Peek <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
+            <!-- EGU 2026 -->
+            <article class="project-card" data-category="conference">
+                <span class="badge badge-new">New</span>
+                <div class="card-media">
+                    <!-- 👇 CHANGE src to your photo, e.g. images/egu-2026.jpg -->
+                    <img src="images/egu.jpeg" alt="Oral presentation at EGU 2026" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Conference</span>
+                    <h3>EGU 2026 — Oral Presentation</h3>
+                    <p class="excerpt">I gave my first big conference talk at the European Geosciences Union (EGU) 2026. A big room — professors, researchers, people who've spent decades on this — but somewhere in the middle I stopped being nervous, because I genuinely believe in what we've built: HUGISS, connecting air quality sensors with emission inventories for source apportionment.</p>
+                    <div class="card-links">
+                        <button type="button" onclick="openPopup('egu')">Read more <i class="fas fa-arrow-right"></i></button>
+                        <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-egu26-airquality-activity-7458815726192164864-he8a" target="_blank" rel="noopener">LinkedIn <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </article>
 
-        <!-- Madagascar Mobility Project -->
-        <div class="project-card">
-            <img src="images/1718628240852.jfif" alt="Madagascar Emission Inventory">
-            <h3>Madagascar Mobility Project</h3>
-            <p class="truncated-text">Culmination of an international project for my Ph.D. thesis, titled "Air Quality Evolution at the Local Scale in the Absence of a Calibration Reference Point." This ambitious endeavor was made possible through funding from the Department of GIE-GERS at Université Gustave Eiffel, the CLEAR-Doc COFUND, Université de Fianarantsoa, and Madatlas Madagascar.</p>
-            <div class="links">
-                <a href="#" onclick="openPopup('madagascar')">Read More <i class="fas fa-arrow-right"></i></a>
-                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-activity-7208449319253741568-jfPc?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
+            <!-- Science is Wonderful! 2026 -->
+            <article class="project-card" data-category="outreach">
+                <div class="card-media">
+                    <!-- 👇 CHANGE src to your photo, e.g. images/science-wonderful.jpg -->
+                    <img src="images/1773982553086.jfif" alt="Air Detectives booth at Science is Wonderful! 2026" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Outreach</span>
+                    <h3>Science is Wonderful! 2026</h3>
+                    <p class="excerpt">What happens when you take air pollution science out of the lab and into people's hands? At Science is Wonderful! (Marie Skłodowska-Curie Actions, European Commission), we turned air quality research into an interactive "Air Detectives" experience where visitors built their own cities and saw their choices change the air in real time.</p>
+                    <div class="card-links">
+                        <button type="button" onclick="openPopup('sciencewonderful')">Read more <i class="fas fa-arrow-right"></i></button>
+                        <a href="https://marie-sklodowska-curie-actions.ec.europa.eu/science-is-wonderful" target="_blank" rel="noopener">Event <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </article>
 
-        <!-- InCITIES Program -->
-        <div class="project-card">
-            <img src="images/1714509098299.jfif" alt="Sensor Calibration">
-            <h3>InCITIES Program</h3>
-            <p class="truncated-text">Sharing the Journey of my InCITIES Program! Reflecting on this incredible journey fills me with excitement! Alongside a truly inspiring cohort, we delved deep into crucial topics such as sustainable mobility, urban planning, air quality, and transportation infrastructure resilience.</p>
-            <div class="links">
-                <a href="#" onclick="openPopup('incities')">Read More <i class="fas fa-arrow-right"></i></a>
-                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_sharing-the-journey-of-my-incities-program-activity-7191300309850226688-t5Ti?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
+            <!-- DUDE Initiative -->
+            <article class="project-card" data-category="entrepreneurship">
+                <div class="card-media">
+                    <img src="images/1726324848647.jfif" alt="The DUDE Initiative at the EU TalentOn competition" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Entrepreneurship</span>
+                    <h3>DUDE Initiative</h3>
+                    <p class="excerpt">EU TalentOn Competition! 🚀 Proud to have represented The Dude Initiative (citizen-Driven, Upscalable, and Digital Ecocities) alongside an amazing team. 🌍💡</p>
+                    <div class="card-links">
+                        <button type="button" onclick="openPopup('dude')">Read more <i class="fas fa-arrow-right"></i></button>
+                        <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-innovation-climatetech-activity-7240731230432890880-OeyR" target="_blank" rel="noopener">Post <i class="fas fa-arrow-up-right-from-square"></i></a>
+                        <a href="https://www.linkedin.com/posts/eu-talenton_brightyoungminds-talenton-eutalenton2024-ugcPost-7241422798001258497-RHLJ" target="_blank" rel="noopener">Event <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </article>
 
-        <!-- CLEAR-Doc Entrepreneurship Bootcamp -->
-        <div class="project-card">
-            <img src="images/WhatsApp Image 2025-07-06 at 3.21.42 PM (1).jpeg" alt="CLEAR-Doc Entrepreneurship Bootcamp">
-            <h3>CLEAR-Doc Entrepreneurship Bootcamp</h3>
-            <p class="truncated-text">Showcasing entrepreneurial innovation through the CLEAR-Doc program, transforming PhD research into startup ventures focused on sustainability and air quality solutions.</p>
-            <div class="links">
-                <a href="#" onclick="openPopup('CLEAR-Doc Entrepreneurship Bootcamp')">Read More <i class="fas fa-arrow-right"></i></a>
-                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-entrepreneurship-phdtostartup-activity-7347619225936572416-VSnH?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
+            <!-- Madagascar Mobility Project -->
+            <article class="project-card" data-category="research">
+                <div class="card-media">
+                    <img src="images/1718628240852.jfif" alt="Madagascar emission inventory fieldwork" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Research</span>
+                    <h3>Madagascar Mobility Project</h3>
+                    <p class="excerpt">Culmination of an international project for my Ph.D. thesis, titled "Air Quality Evolution at the Local Scale in the Absence of a Calibration Reference Point." This ambitious endeavor was made possible through funding from GIE-GERS at Université Gustave Eiffel, the CLEAR-Doc COFUND, Université de Fianarantsoa, and Madatlas Madagascar.</p>
+                    <div class="card-links">
+                        <button type="button" onclick="openPopup('madagascar')">Read more <i class="fas fa-arrow-right"></i></button>
+                        <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-activity-7208449319253741568-jfPc" target="_blank" rel="noopener">LinkedIn <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </article>
 
-        <!-- MT180 Pitch -->
-        <div class="project-card">
-            <img src="images/WhatsApp Image 2025-07-06 at 3.21.42 PM.jpeg" alt="MT180 Pitch">
-            <h3>MT180</h3>
-            <p class="truncated-text">🚀 One stage. Two bold ideas. One unforgettable week in Paris.
-🎓 Kicked things off with my MT180 thesis pitch — 180 seconds to distill months of research into something punchy and public-facing.
- Sharing a quick snippet below — hope it sparks your curiosity!</p>
-            <div class="links">
-                <a href="#" onclick="openPopup('MT180 Pitch')">Read More <i class="fas fa-arrow-right"></i></a>
-                <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-innovation-entrepreneurship-activity-7347620211220488193-i2Kz?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy0TTABJfjoN-Ye6BGv_AX-AiFSAXAzXxk" target="_blank">Learn More <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
+            <!-- InCITIES Program -->
+            <article class="project-card" data-category="outreach">
+                <div class="card-media">
+                    <img src="images/1714509098299.jfif" alt="InCITIES program sensor calibration work" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Outreach</span>
+                    <h3>InCITIES Program</h3>
+                    <p class="excerpt">Sharing the journey of my InCITIES Program! Alongside a truly inspiring cohort, we delved deep into crucial topics such as sustainable mobility, urban planning, air quality, and transportation infrastructure resilience.</p>
+                    <div class="card-links">
+                        <button type="button" onclick="openPopup('incities')">Read more <i class="fas fa-arrow-right"></i></button>
+                        <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_sharing-the-journey-of-my-incities-program-activity-7191300309850226688-t5Ti" target="_blank" rel="noopener">LinkedIn <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </article>
 
-    </section>
+            <!-- CLEAR-Doc Entrepreneurship Bootcamp -->
+            <article class="project-card" data-category="entrepreneurship">
+                <div class="card-media">
+                    <img src="images/WhatsApp Image 2025-07-06 at 3.21.42 PM (1).jpeg" alt="CLEAR-Doc entrepreneurship bootcamp" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Entrepreneurship</span>
+                    <h3>CLEAR-Doc Entrepreneurship Bootcamp</h3>
+                    <p class="excerpt">Showcasing entrepreneurial innovation through the CLEAR-Doc program, transforming PhD research into startup ventures focused on sustainability and air quality solutions.</p>
+                    <div class="card-links">
+                        <button type="button" onclick="openPopup('bootcamp')">Read more <i class="fas fa-arrow-right"></i></button>
+                        <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-entrepreneurship-phdtostartup-activity-7347619225936572416-VSnH" target="_blank" rel="noopener">LinkedIn <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </article>
 
-    <!-- Popup Modals -->
-    <div id="popup-modal" class="modal">
+            <!-- MT180 Pitch -->
+            <article class="project-card" data-category="conference">
+                <div class="card-media">
+                    <img src="images/WhatsApp Image 2025-07-06 at 3.21.42 PM.jpeg" alt="MT180 three-minute thesis pitch in Paris" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Conference</span>
+                    <h3>MT180 Pitch</h3>
+                    <p class="excerpt">🚀 One stage. Two bold ideas. One unforgettable week in Paris. Kicked things off with my MT180 thesis pitch — 180 seconds to distill months of research into something punchy and public-facing.</p>
+                    <div class="card-links">
+                        <button type="button" onclick="openPopup('mt180')">Read more <i class="fas fa-arrow-right"></i></button>
+                        <a href="https://www.linkedin.com/posts/rajat-sharma-89421718b_cleardoc-innovation-entrepreneurship-activity-7347620211220488193-i2Kz" target="_blank" rel="noopener">LinkedIn <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="popup-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-content">
-            <span class="close" onclick="closePopup()">×</span>
+            <button class="close" aria-label="Close" onclick="closePopup()">&times;</button>
             <h3 id="modal-title"></h3>
             <p id="modal-content"></p>
         </div>
     </div>
 
-    <footer>
+    <footer class="container">
         <div>
             <h3>Connect</h3>
-            <p>rajat.sharma@univ-eiffel.fr</p>
-            <button>Download CV</button>
+            <p><a href="mailto:rajat.sharma@univ-eiffel.fr">rajat.sharma@univ-eiffel.fr</a></p>
+            <a class="cv-btn" href="#">Download CV</a>
         </div>
-        <div>
+        <div class="links">
             <h3>Network</h3>
-            <a href="https://scholar.google.com/citations?user=OKQOyz4AAAAJ&hl=en" target="_blank">Google Scholar</a><br>
-            <a href="https://www.linkedin.com/in/rajat-sharma-89421718b/" target="_blank">LinkedIn</a>
-            <p>Nantes campus, Allée des ponts et chausées - CS 5004, F-44344 Bouguenais Cedex, France</p>
+            <a href="https://scholar.google.com/citations?user=OKQOyz4AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a><br>
+            <a href="https://www.linkedin.com/in/rajat-sharma-89421718b/" target="_blank" rel="noopener">LinkedIn</a>
+            <p style="margin-top:0.8rem;">Nantes campus, Allée des ponts et chaussées — CS 5004, F-44344 Bouguenais Cedex, France</p>
         </div>
     </footer>
 
-</div>
+    <script>
+        // ---------- Mobile nav ----------
+        function toggleMenu(btn) {
+            const nav = document.getElementById('primary-nav');
+            const open = nav.classList.toggle('active');
+            btn.setAttribute('aria-expanded', open);
+        }
 
-<script>
-    function toggleMenu() {
-        const nav = document.querySelector('.nav');
-        nav.classList.toggle('active');
-    }
-
-    function openPopup(project) {
-        const modal = document.getElementById("popup-modal");
-        const modalTitle = document.getElementById("modal-title");
-        const modalContent = document.getElementById("modal-content");
-
-        let title, content;
-        switch (project) {
-            case 'defense':
-                title = "PhD Defense — 28 May 2026";
-                content = `🌍 Three continents. Three different worlds: Madagascar (low-income), India (middle-income), and France (high-income). One question followed me everywhere: can low-cost air quality sensors actually tell people what they're breathing?<br><br>
+        // ---------- Modal content ----------
+        const PROJECTS = {
+            defense: {
+                title: "PhD Defense — 28 May 2026",
+                content: `🌍 Three continents. Three different worlds: Madagascar (low-income), India (middle-income), and France (high-income). One question followed me everywhere: can low-cost air quality sensors actually tell people what they're breathing?<br><br>
                 On May 28th, I successfully defended my PhD 🎓 answering that question. <strong>Thesis title:</strong> "Modeling Urban PM Source Contributions Using Integrated Low-Cost Air Quality Sensors and Emission Inventories Across Diverse Environments." The core shift of this work was moving from passive monitoring to active interpretation — turning raw sensor data into meaningful insights about pollution sources.<br><br>
                 The research came in three parts:<br>
                 <strong>1. Sensor Reliability</strong> — methods to know exactly when to trust (and when not to trust) low-cost sensors across vastly different climates and environments.<br>
-                <strong>2. Data Scarcity & Economic Weighting</strong> — robust frameworks built from the ground up for resource-limited settings.<br>
+                <strong>2. Data Scarcity &amp; Economic Weighting</strong> — robust frameworks built from the ground up for resource-limited settings.<br>
                 <strong>3. HUGISS Model</strong> — a new hybrid approach fusing emission inventories with low-cost sensor networks to enable source apportionment using affordable technology.<br><br>
-                🙏 Deep thanks to my supervisors Dr. Andry Rico Razakamanantsoa and Dr. Agnes Jullien, along with Erwann Rayssac, and to Virginie Etienne, Cerise Randon and the entire CLEARDoc team. Grateful to MADATLAS Université de Fianarantsoa, IIT Goa and the Indian Institute of Tropical Meteorology Pune for their support during my international mobility periods, and to my Doctoral Committee for their valuable feedback. And to Laboratoire GIE, Université Gustave Eiffel, AtmoTrack, GERS and CLEARDoc for making it possible. ✨`;
-                break;
-            case 'egu':
-                title = "EGU 2026 — Oral Presentation";
-                content = `I gave my first big conference talk at the European Geosciences Union (EGU) 2026 this week. I was nervous — it's a big room: professors, researchers, people who've spent decades on this. But somewhere in the middle of it I stopped being nervous, because I realised I genuinely believe in what we've built.<br><br>
+                🙏 Deep thanks to my supervisors Dr. Andry Rico Razakamanantsoa and Dr. Agnes Jullien, along with Erwann Rayssac, and to Virginie Etienne, Cerise Randon and the entire CLEARDoc team. Grateful to MADATLAS Université de Fianarantsoa, IIT Goa and the Indian Institute of Tropical Meteorology Pune for their support during my international mobility periods, and to my Doctoral Committee for their valuable feedback. And to Laboratoire GIE, Université Gustave Eiffel, AtmoTrack, GERS and CLEARDoc for making it possible. ✨`
+            },
+            egu: {
+                title: "EGU 2026 — Oral Presentation",
+                content: `I gave my first big conference talk at the European Geosciences Union (EGU) 2026 this week. I was nervous — it's a big room: professors, researchers, people who've spent decades on this. But somewhere in the middle of it I stopped being nervous, because I realised I genuinely believe in what we've built.<br><br>
                 We've been trying to answer a simple question that turns out to be really hard: source apportionment through air quality sensors. Air quality sensors tell you the air is bad. Emission inventories tell you what's being emitted. But they've never really been connected — not in a way that gives you actual numbers at the local scale. That's what <strong>HUGISS</strong> (A Hybrid Urban Gridded Inventory &amp; Sensor-based Approach for Source Apportionment) does. Seeing people whose work I've read for years genuinely engage with it was something I'll carry for a long time.<br><br>
                 I'm especially grateful to the session conveners (Sebastian Diez, Nicole Cowell, Miriam Chacón Mateos, Kwabena Fosu-Amankwah) of "Low-cost air quality sensors: challenges, opportunities, and collaborative strategies across the world," and to session chairs Francis Pope and Nuria Castell for the engaging exchange during my presentation.<br><br>
-                Thank you to my supervisors Andry Rico Razakamanantsoa and Agnes Jullien, and co-author Erwann Rayssac — this is as much yours as mine 🙏. And to Laboratoire GIE, Université Gustave Eiffel, AtmoTrack, GERS, CLEARDoc and Allin-Wayra for making it possible. ✨`;
-                break;
-            case 'sciencewonderful':
-                title = "Science is Wonderful! 2026";
-                content = `<strong>What happens when you take air pollution science out of the lab and into people's hands?</strong> Curiosity beats complexity. Every time.<br><br>
+                Thank you to my supervisors Andry Rico Razakamanantsoa and Agnes Jullien, and co-author Erwann Rayssac — this is as much yours as mine 🙏. And to Laboratoire GIE, Université Gustave Eiffel, AtmoTrack, GERS, CLEARDoc and Allin-Wayra for making it possible. ✨`
+            },
+            sciencewonderful: {
+                title: "Science is Wonderful! 2026",
+                content: `<strong>What happens when you take air pollution science out of the lab and into people's hands?</strong> Curiosity beats complexity. Every time.<br><br>
                 At Science is Wonderful! (Marie Skłodowska-Curie Actions, European Commission), we turned air quality research into an interactive experience. Through our "Air Detectives" setup, participants built their own "cities" — making choices on transport, cooking, industries and waste — and instantly saw how those decisions affected air quality:<br><br>
                 &#8226; Lifestyle choices &rarr; measurable pollution changes<br>
                 &#8226; "Clean vs polluted lungs" in real time<br>
                 &#8226; Insights linked to data from Madagascar, India and Europe<br><br>
                 All measured using low-cost sensors (AtmoTrack) alongside reference-grade instruments. What stood out wasn't the technology — it was the curiosity and the questions. Science only creates impact when it connects with society.<br><br>
-                Proud to represent Université Gustave Eiffel, International | Université Gustave Eiffel and Laboratoire GIE (Univ Eiffel). Grateful to the organising team, and to an amazing team effort with Erwann Rayssac, Louis Baptist and Andry Rico Razakamanantsoa.`;
-                break;
-            case 'dude':
-                title = "DUDE Initiative";
-                content = "A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior. Proud to have represented The DUDE Initiative (citizen-Driven, Upscalable, and Digital Ecocities) alongside an amazing team — Victoria Cotella, Faiz Iqbal and Luka. DUDE is about using tech and data to make sustainable living not just possible, but rewarding. 🌱";
-                break;
-            case 'madagascar':
-                title = "Madagascar Mobility Project";
-                content = `Culmination of an international project for my Ph.D. thesis, titled "Air Quality Evolution at the Local Scale in the Absence of a Calibration Reference Point." This ambitious endeavor was made possible through funding from the Department of GIE-GERS at Université Gustave Eiffel, the CLEAR-Doc COFUND, Université de Fianarantsoa, and Madatlas Madagascar. <br><br>
-                Special thanks to Dr. Hasina Rakotonirainy, Dr. Hajalalaina Aimé Richard, my supervisors Andry Rico Razakamanantsoa and Agnes Jullien, and Erwann Rayssac for their support. We also thank Madatlas, the Municipality Office Fianarantsoa, Public Hospital Fianarantsoa, and Regional Transport Office Fianarantsoa for their contributions. The project's success was made possible by the dedication of student volunteers and the collaboration of various agencies.`;
-                break;
-            case 'incities':
-                title = "InCITIES Program";
-                content = `Sharing the Journey of my InCITIES Program! Reflecting on this incredible journey fills me with excitement! Alongside a truly inspiring cohort, we delved deep into crucial topics such as sustainable mobility, urban planning, air quality, and transportation infrastructure resilience. <br><br>
-                One major highlight for me was our hands-on approach to tackling real-world issues, particularly in enhancing sustainable mobility around St. Gorazde Elementary School and Kindergarten. Collaborating with Žilina's esteemed architecture bureau, we not only collected valuable data but also brainstormed innovative approaches to address the challenges at hand. <br><br>
-                I am profoundly grateful for the guidance and mentorship provided by Yannick Cornet, Tibor Petrov, Christina Georgouli, Lienka, Andry Rico RAZAKAMANANTSOA, Agnes JULLIEN, Virginie Etienne and GERS - Gustave Eiffel University, Laboratoire GIE (Univ Eiffel), Université Gustave Eiffel.`;
-                break;
-            case 'CLEAR-Doc Entrepreneurship Bootcamp':
-                title = "CLEAR-Doc Entrepreneurship Bootcamp";
-                content = `💡 Can air talk? We made it scream.
-Meet NICAIR – our idea born during the entrepreneurship bootcamp at Université Gustave Eiffel: smart sensors, real-time data, and citizen power to fight air pollution.
-From “what if?” to “why not?”, it was a week of wild ideas, sharp minds, and big ambition.
-Huge thanks to #CLEARDoc, our mentors (Amandine Bugnicourt, PhD, Guillaume Berteloot, Alexandre Huu Tam Nguyen, Milad Moazzam, PhD), and everyone who helped turn chaos into concept.`;
-                break;
-            case 'MT180 Pitch':
-                title = "MT180 Pitch";
-                content = `🚀 One stage. Two bold ideas. One unforgettable week in Paris.
-🎓 Kicked things off with my MT180 thesis pitch — 180 seconds to distill months of research into something punchy and public-facing.
- Sharing a quick snippet below — hope it sparks your curiosity!`;
-                break;
+                Proud to represent Université Gustave Eiffel, International | Université Gustave Eiffel and Laboratoire GIE (Univ Eiffel). Grateful to the organising team, and to an amazing team effort with Erwann Rayssac, Louis Baptist and Andry Rico Razakamanantsoa.`
+            },
+            dude: {
+                title: "DUDE Initiative",
+                content: `A citizen-driven platform merging real-time pollution data with habit incentives to encourage eco-friendly behavior. Proud to have represented The DUDE Initiative (citizen-Driven, Upscalable, and Digital Ecocities) alongside an amazing team — Victoria Cotella, Faiz Iqbal and Luka. DUDE is about using tech and data to make sustainable living not just possible, but rewarding. 🌱`
+            },
+            madagascar: {
+                title: "Madagascar Mobility Project",
+                content: `Culmination of an international project for my Ph.D. thesis, titled "Air Quality Evolution at the Local Scale in the Absence of a Calibration Reference Point." This ambitious endeavor was made possible through funding from the Department of GIE-GERS at Université Gustave Eiffel, the CLEAR-Doc COFUND, Université de Fianarantsoa, and Madatlas Madagascar.<br><br>
+                Special thanks to Dr. Hasina Rakotonirainy, Dr. Hajalalaina Aimé Richard, my supervisors Andry Rico Razakamanantsoa and Agnes Jullien, and Erwann Rayssac for their support. We also thank Madatlas, the Municipality Office Fianarantsoa, Public Hospital Fianarantsoa, and Regional Transport Office Fianarantsoa for their contributions. The project's success was made possible by the dedication of student volunteers and the collaboration of various agencies.`
+            },
+            incities: {
+                title: "InCITIES Program",
+                content: `Sharing the Journey of my InCITIES Program! Reflecting on this incredible journey fills me with excitement! Alongside a truly inspiring cohort, we delved deep into crucial topics such as sustainable mobility, urban planning, air quality, and transportation infrastructure resilience.<br><br>
+                One major highlight for me was our hands-on approach to tackling real-world issues, particularly in enhancing sustainable mobility around St. Gorazde Elementary School and Kindergarten. Collaborating with Žilina's esteemed architecture bureau, we not only collected valuable data but also brainstormed innovative approaches to address the challenges at hand.<br><br>
+                I am profoundly grateful for the guidance and mentorship provided by Yannick Cornet, Tibor Petrov, Christina Georgouli, Lienka, Andry Rico Razakamanantsoa, Agnes Jullien, Virginie Etienne and GERS - Gustave Eiffel University, Laboratoire GIE (Univ Eiffel), Université Gustave Eiffel.`
+            },
+            bootcamp: {
+                title: "CLEAR-Doc Entrepreneurship Bootcamp",
+                content: `💡 Can air talk? We made it scream.<br><br>
+                Meet NICAIR – our idea born during the entrepreneurship bootcamp at Université Gustave Eiffel: smart sensors, real-time data, and citizen power to fight air pollution.<br><br>
+                From "what if?" to "why not?", it was a week of wild ideas, sharp minds, and big ambition.<br><br>
+                Huge thanks to CLEARDoc, our mentors (Amandine Bugnicourt, PhD, Guillaume Berteloot, Alexandre Huu Tam Nguyen, Milad Moazzam, PhD), and everyone who helped turn chaos into concept.`
+            },
+            mt180: {
+                title: "MT180 Pitch",
+                content: `🚀 One stage. Two bold ideas. One unforgettable week in Paris.<br><br>
+                🎓 Kicked things off with my MT180 thesis pitch — 180 seconds to distill months of research into something punchy and public-facing.<br><br>
+                Sharing a quick snippet below — hope it sparks your curiosity!`
+            }
+        };
+
+        const modal = document.getElementById('popup-modal');
+        let lastFocused = null;
+
+        function openPopup(key) {
+            const data = PROJECTS[key];
+            if (!data) return;
+            lastFocused = document.activeElement;
+            document.getElementById('modal-title').innerHTML = data.title;
+            document.getElementById('modal-content').innerHTML = data.content;
+            modal.style.display = 'flex';
+            requestAnimationFrame(() => modal.classList.add('show'));
+            document.body.style.overflow = 'hidden';
+            modal.querySelector('.close').focus();
         }
 
-        modalTitle.innerHTML = title;
-        modalContent.innerHTML = content;
-        modal.style.display = "flex";
-        setTimeout(() => modal.classList.add('show'), 10);
-    }
+        function closePopup() {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+            setTimeout(() => { modal.style.display = 'none'; }, 360);
+            if (lastFocused) lastFocused.focus();
+        }
 
-    function closePopup() {
-        const modal = document.getElementById("popup-modal");
-        modal.classList.remove('show');
-        setTimeout(() => modal.style.display = "none", 400);
-    }
+        modal.addEventListener('click', e => { if (e.target === modal) closePopup(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && modal.classList.contains('show')) closePopup();
+        });
 
-    window.onclick = function(event) {
-        const modal = document.getElementById("popup-modal");
-        if (event.target === modal) { closePopup(); }
-    };
-</script>
+        // ---------- Filtering ----------
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.project-card');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.setAttribute('aria-pressed', 'false'));
+                btn.setAttribute('aria-pressed', 'true');
+                const f = btn.dataset.filter;
+                cards.forEach(card => {
+                    const show = f === 'all' || card.dataset.category === f;
+                    card.classList.toggle('is-hiding', !show);
+                });
+            });
+        });
 
+        // ---------- Scroll reveal ----------
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        cards.forEach(card => io.observe(card));
+    </script>
 </body>
 </html>
